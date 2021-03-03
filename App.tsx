@@ -9,6 +9,16 @@ import { useFonts } from "expo-font";
 import { ContextProvider } from "./src/context";
 import { Screens } from "./src/screens";
 import { YellowBox } from "react-native";
+import sushiData from "@sushiswap/sushi-data";
+import { default as network } from './web/network.json';
+
+// change SubGraph url depending on network id
+ethereum.request({ method: "eth_chainId" }).then(res => {
+    let chainId = Number(res)
+    sushiData.graphAPIEndpoints.exchange = network[chainId].subGraphExchangeUrl
+}).catch(err => {
+	console.log('err', err)
+})
 
 if (__DEV__) {
     YellowBox.ignoreWarnings(["Setting a timer", "VirtualizedLists should never be nested"]);

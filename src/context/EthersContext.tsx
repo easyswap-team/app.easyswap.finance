@@ -18,15 +18,6 @@ import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
 
 export type OnBlockListener = (block?: number) => void | Promise<void>;
 
-export const ALCHEMY_PROVIDER = new ethers.providers.AlchemyProvider(
-    1,
-    __DEV__ ? process.env.MAINNET_API_KEY : "Em65gXMcaJl7JF9ZxcMwa4r5TcrU8wZV"
-);
-export const KOVAN_PROVIDER = new ethers.providers.AlchemyProvider(
-    42,
-    __DEV__ ? process.env.KOVAN_API_KEY : "MOX3sLJxKwltJjW6XZ8aBtDpenq-18St"
-);
-
 export const EthersContext = React.createContext({
     ethereum: undefined as Ethereum | undefined,
     setEthereum: (_ethereum: Ethereum | undefined) => {},
@@ -76,7 +67,7 @@ export const EthersContextProvider = ({ children }) => {
         if (ethereum) {
             const web3 = new ethers.providers.Web3Provider(ethereum);
             const web3Signer = await web3.getSigner();
-            setProvider(ethereum.isMetaMask ? web3Signer.provider : ALCHEMY_PROVIDER);
+            setProvider(ethereum.isMetaMask ? web3Signer.provider : global.ALCHEMY_PROVIDER);
             setSigner(web3Signer);
         }
     }, [ethereum, chainId]);
@@ -114,7 +105,7 @@ export const EthersContextProvider = ({ children }) => {
 
     useAsyncEffect(async () => {
         if (provider && address) {
-            const ens = await ALCHEMY_PROVIDER.lookupAddress(address);
+            const ens = await global.ALCHEMY_PROVIDER.lookupAddress(address);
             setENSName(ens);
         }
     }, [provider, address]);
@@ -124,7 +115,7 @@ export const EthersContextProvider = ({ children }) => {
             try {
                 const list = await fetchTokens(address, customTokens);
                 const weth = list.find(t => isWETH(t));
-                const p = chainId === 1 ? provider : ALCHEMY_PROVIDER;
+                const p = chainId === 1 ? provider : global.ALCHEMY_PROVIDER;
                 if (list?.length > 0 && weth && p) {
                     const wethPriceUSD = Fraction.parse(String(await sushiData.weth.price()));
                     setTokens(

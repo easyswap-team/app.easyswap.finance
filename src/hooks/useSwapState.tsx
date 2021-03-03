@@ -75,7 +75,7 @@ const useSwapState: () => SwapState = () => {
             if (!block) {
                 setLoading(true);
             }
-            const p = chainId === 1 ? provider : ALCHEMY_PROVIDER;
+            const p = chainId === 1 ? provider : global.ALCHEMY_PROVIDER;
             if (state.fromToken && state.toToken && state.fromAmount && p) {
                 const amount = parseBalance(state.fromAmount, state.fromToken.decimals);
                 if (!amount.isZero()) {

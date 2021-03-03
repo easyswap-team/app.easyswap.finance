@@ -390,7 +390,7 @@ const LimitOrderControls = ({ state }: { state: SwapState }) => {
         async () => {
             if (state.fromToken && !isEmptyValue(state.fromAmount)) {
                 const fromAmount = parseBalance(state.fromAmount, state.fromToken.decimals);
-                const erc20 = getContract("ERC20", state.fromToken.address, ALCHEMY_PROVIDER);
+                const erc20 = getContract("ERC20", state.fromToken.address, global.ALCHEMY_PROVIDER);
                 const allowance = await erc20.allowance(address, SETTLEMENT);
                 setAllowed(ethers.BigNumber.from(allowance).gte(fromAmount));
             }
