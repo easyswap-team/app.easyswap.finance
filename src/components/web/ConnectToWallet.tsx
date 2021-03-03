@@ -9,6 +9,7 @@ import useColors from "../../hooks/useColors";
 import useTranslation from "../../hooks/useTranslation";
 import Button from "../Button";
 import WebFooter from "./WebFooter";
+import { default as network } from '../../../web/network.json';
 
 const ConnectWallet = () => {
     const { darkMode } = useContext(GlobalContext);
@@ -59,11 +60,12 @@ const ConnectButton = () => {
 const WalletConnectButton = () => {
     const { darkMode } = useContext(GlobalContext);
     const { primary } = useColors();
-    const { setEthereum } = useContext(EthersContext);
+    const { setEthereum, chainId } = useContext(EthersContext);
+
     const onPress = async () => {
         const ethereum = new WalletConnectProvider({
             rpc: {
-                1: "https://eth-mainnet.alchemyapi.io/v2/fF51JjrwO8qCZW13KRflYpqU_ZeOH1Er"
+                1: network[chainId].alchemyUrl
             }
         });
         await ethereum.enable();
