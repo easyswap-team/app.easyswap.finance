@@ -1,3 +1,4 @@
+import React, {useContext} from "react"
 import { FACTORY_ADDRESS as SUSHISWAP_FACTORY, Pair } from "@sushiswap/sdk";
 import sushiData from "@sushiswap/sushi-data";
 import { FACTORY_ADDRESS as UNISWAP_FACTORY } from "@uniswap/sdk";
@@ -5,7 +6,7 @@ import { ethers } from "ethers";
 import { LP_TOKEN_SCANNER, MASTER_CHEF, ORDER_BOOK, SETTLEMENT } from "../constants/contracts";
 import Fraction from "../constants/Fraction";
 import { ETH } from "../constants/tokens";
-import { ALCHEMY_PROVIDER, KOVAN_PROVIDER } from "../context/EthersContext";
+import { EthersContext } from "../context/EthersContext";
 import { Order, OrderStatus } from "../hooks/useSettlement";
 import LPToken from "../types/LPToken";
 import Token from "../types/Token";
@@ -35,7 +36,7 @@ export const fetchTokens = async (account: string, customTokens?: Token[]) => {
     return [
         {
             ...ETH,
-            balance: await global.ALCHEMY_PROVIDER.getBalance(account)
+            balance: await ALCHEMY_PROVIDER.getBalance(account)
         },
         ...tokens.map((token, i) => ({
             ...token,
@@ -263,7 +264,7 @@ export const findOrFetchToken = async (
             return token;
         }
     }
-    let meta = await global.ALCHEMY_PROVIDER.send("alchemy_getTokenMetadata", [address]);
+    let meta = await ALCHEMY_PROVIDER.send("alchemy_getTokenMetadata", [address]);
     if (!meta.name || meta.symbol || meta.decimals || meta.logoURI) {
         meta = await fetchTokenMeta(address, provider);
     }
@@ -329,7 +330,7 @@ const fetchTotalValue = async (token: Token, lpPair: Pair, weth: Token, wethPric
 };
 
 const fetchTokenBalances = async (account: string, addresses: string[]) => {
-    const balances = await global.ALCHEMY_PROVIDER.send("alchemy_getTokenBalances", [account, addresses]);
+    const balances = await ALCHEMY_PROVIDER.send("alchemy_getTokenBalances", [account, addresses]);
     return balances.tokenBalances.map(balance => balance.tokenBalance);
 };
 
@@ -341,7 +342,7 @@ export const fetchMyLimitOrders = async (
     tokens?: Token[],
     canceledHashes?: string[]
 ) => {
-    const orderBook = getContract("OrderBook", ORDER_BOOK, global.KOVAN_PROVIDER);
+    const orderBook = getContract("OrderBook", ORDER_BOOK, KOVAN_PROVIDER);
     const settlement = await getContract("Settlement", SETTLEMENT, provider);
     const maker = await signer.getAddress();
     const length = await orderBook.numberOfHashesOfMaker(maker);

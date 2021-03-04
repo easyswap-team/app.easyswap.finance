@@ -63,11 +63,10 @@ const WalletConnectButton = () => {
     const { setEthereum, chainId } = useContext(EthersContext);
 
     const onPress = async () => {
-        const ethereum = new WalletConnectProvider({
-            rpc: {
-                1: network[chainId].alchemyUrl
-            }
-        });
+        const rpc = {
+            [chainId]: network[chainId].alchemyUrl
+        }
+        const ethereum = new WalletConnectProvider({rpc});
         await ethereum.enable();
         // @ts-ignore
         setEthereum(ethereum);

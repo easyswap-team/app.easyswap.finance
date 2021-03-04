@@ -62,12 +62,14 @@ export const EthersContextProvider = ({ children }) => {
     const [customTokens, setCustomTokens] = useState<Token[]>([]);
     const [loadingTokens, setLoadingTokens] = useState(true);
 
+    const {ALCHEMY_PROVIDER} = global
+
     useAsyncEffect(async () => {
         // Mainnet
         if (ethereum) {
             const web3 = new ethers.providers.Web3Provider(ethereum);
             const web3Signer = await web3.getSigner();
-            setProvider(ethereum.isMetaMask ? web3Signer.provider : global.ALCHEMY_PROVIDER);
+            setProvider(ethereum.isMetaMask ? web3Signer.provider : ALCHEMY_PROVIDER);
             setSigner(web3Signer);
         }
     }, [ethereum, chainId]);
@@ -105,7 +107,7 @@ export const EthersContextProvider = ({ children }) => {
 
     useAsyncEffect(async () => {
         if (provider && address) {
-            const ens = await global.ALCHEMY_PROVIDER.lookupAddress(address);
+            const ens = await ALCHEMY_PROVIDER.lookupAddress(address);
             setENSName(ens);
         }
     }, [provider, address]);
@@ -115,7 +117,7 @@ export const EthersContextProvider = ({ children }) => {
             try {
                 const list = await fetchTokens(address, customTokens);
                 const weth = list.find(t => isWETH(t));
-                const p = chainId === 1 ? provider : global.ALCHEMY_PROVIDER;
+                const p = chainId === 1 ? provider : ALCHEMY_PROVIDER;
                 if (list?.length > 0 && weth && p) {
                     const wethPriceUSD = Fraction.parse(String(await sushiData.weth.price()));
                     setTokens(
