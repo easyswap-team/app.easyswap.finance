@@ -48,7 +48,6 @@ const SwapScreen = () => {
                 <BackgroundImage />
                 <Content>
                     <Title text={t("new-order")} />
-                    <Text light={true}>{t("new-order-desc")}</Text>
                     <Swap />
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
@@ -64,8 +63,6 @@ const Swap = () => {
     if (chainId !== 1 && chainId !== 42) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
-            <OrderTypeSelect state={state} />
-            <Border />
             <FromTokenSelect state={state} />
             <Border />
             <ToTokenSelect state={state} />
@@ -80,24 +77,6 @@ const Swap = () => {
             {!state.loading && !state.trade && <NoPairNotice state={state} />}
             <TradeInfo state={state} />
         </View>
-    );
-};
-
-const OrderTypeSelect = ({ state }: { state: SwapState }) => {
-    const t = useTranslation();
-    const options: Option[] = [
-        { key: "market", title: t("market-order"), description: t("market-order-desc") },
-        { key: "limit", title: t("limit-order"), description: t("limit-order-desc") }
-    ];
-    return (
-        <>
-            <Select
-                title={t("order-type")}
-                options={options}
-                option={options.find(option => option.key === state.orderType)}
-                setOption={option => state.setOrderType(option?.key as OrderType | undefined)}
-            />
-        </>
     );
 };
 

@@ -41,7 +41,7 @@ const useSwapState: () => SwapState = () => {
     const { calculateLimitOrderFee, calculateLimitOrderReturn } = useSettlement();
     const { createOrder } = useSettlement();
     const [loading, setLoading] = useState(true);
-    const [orderType, setOrderType] = useState<OrderType>();
+    const [orderType, setOrderType] = useState<OrderType>('market');
     const [trade, setTrade] = useState<Trade>();
     const [unsupported, setUnsupported] = useState(false);
     const [swapFee, setSwapFee] = useState("");
