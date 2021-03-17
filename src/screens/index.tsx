@@ -36,12 +36,13 @@ const WebScreens = () => {
     const { address } = useContext(EthersContext);
     const [menuExpanded, setMenuExpanded] = useState(false);
     const { background } = useColors();
+    const { darkMode } = useContext(GlobalContext);
     useEffect(() => {
         if (!address) setMenuExpanded(false);
     }, [address]);
     return (
         <Router>
-            <View style={{ flex: 1, backgroundColor: background }}>
+            <View style={{ flex: 1, background: background }}>
                 <Suspense fallback={<EmptyScreen />}>
                     <Switch>
                         <Route path={"/swap/my-orders"}>

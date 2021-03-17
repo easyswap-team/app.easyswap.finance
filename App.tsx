@@ -11,7 +11,6 @@ import { ContextProvider } from "./src/context";
 import { Screens } from "./src/screens";
 import { YellowBox } from "react-native";
 import sushiData from "@sushiswap/sushi-data";
-
 import { default as network } from './web/network.json';
 
 if (__DEV__) {

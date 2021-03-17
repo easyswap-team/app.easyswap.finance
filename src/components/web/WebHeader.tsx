@@ -12,6 +12,7 @@ import DarkModeSwitch from "../DarkModeSwitch";
 import FlexView from "../FlexView";
 import SvgLogoDark from "../svg/SvgLogoDark";
 import SvgLogoLight from "../svg/SvgLogoLight";
+import { IconMenu, IconMenuDark } from "../svg/Icons"
 import Text from "../Text";
 
 export interface WebHeaderProps {
@@ -57,7 +58,7 @@ export const Title = () => {
     return (
         <View style={{ alignSelf: "center" }}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
-                <SvgLogo width={259} height={45} style={{ marginTop: 8, marginLeft: -16 }} />
+                <SvgLogo width={127} height={28} style={{ marginTop: 8, marginLeft: -10 }} />
             </Link>
         </View>
     );
@@ -104,7 +105,9 @@ const MenuItem = ({ title, path }) => {
 
 const MenuIcon = ({ onExpand }) => {
     const { textDark } = useColors();
-    return <Icon type={"material-community"} name={"menu"} size={28} color={textDark} onPress={onExpand} />;
+    const { darkMode } = useContext(GlobalContext);
+    const MenuBtn = darkMode ? IconMenuDark : IconMenu;
+    return <MenuBtn width={24} height={10} style={{ alignSelf: 'center' }} color={textDark} onClick={onExpand} />;
 };
 
 const Status = () => {

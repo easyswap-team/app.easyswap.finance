@@ -21,12 +21,25 @@ const ConnectWallet = () => {
         : require("../../../assets/sushiswap.jpg");
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Image
-                source={source}
-                style={{ width: metaMask ? 223 : 200, height: metaMask ? 183 : 200, marginBottom: Spacing.normal }}
-            />
-            {window.ethereum && <ConnectButton />}
-            <WalletConnectButton />
+            <View style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: darkMode ? '#1F2127' : '#fff',
+                    width: '90%',
+                    maxWidth: '400px',
+                    maxHeight: '400px',
+                    marginTop: 80,
+                    borderRadius: 12,
+                    boxShadow: 'rgba(0, 0, 0, 0.4) 0px 20px 53px -20px',
+                }}>
+                <Image
+                    source={source}
+                    style={{ width: metaMask ? 148 : 200, height: metaMask ? 143 : 200, marginBottom: Spacing.normal }}
+                />
+                {window.ethereum && <ConnectButton />}
+                <WalletConnectButton />
+            </View>
             <WebFooter simple={true} />
         </View>
     );
@@ -48,11 +61,15 @@ const ConnectButton = () => {
     return (
         <Button
             size={"large"}
-            color={metaMask ? "#e2761b" : primary}
+            color={primary}
             onPress={onPress}
             title={metaMask ? "MetaMask" : t("connect")}
             containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
-            style={{ marginTop: Spacing.small, marginHorizontal: Spacing.normal }}
+            style={{
+                marginTop: Spacing.small, 
+                marginHorizontal: Spacing.normal,
+                borderRadius: '8px'
+            }}
         />
     );
 };
@@ -75,11 +92,15 @@ const WalletConnectButton = () => {
         <Button
             size={"large"}
             type={"outline"}
-            color={darkMode ? "white" : primary}
+            color={primary}
             onPress={onPress}
             title={"WalletConnect"}
             containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
-            style={{ marginTop: Spacing.small, marginHorizontal: Spacing.normal }}
+            style={{
+                marginTop: Spacing.small,
+                marginHorizontal: Spacing.normal,
+                borderRadius: '8px'
+            }}
         />
     );
 };
