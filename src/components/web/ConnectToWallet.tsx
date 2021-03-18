@@ -6,6 +6,7 @@ import { IS_DESKTOP, Spacing } from "../../constants/dimension";
 import { EthersContext } from "../../context/EthersContext";
 import { GlobalContext } from "../../context/GlobalContext";
 import useColors from "../../hooks/useColors";
+import useStyles from "../../hooks/useStyles";
 import useTranslation from "../../hooks/useTranslation";
 import Button from "../Button";
 import WebFooter from "./WebFooter";
@@ -13,6 +14,7 @@ import { default as network } from '../../../web/network.json';
 
 const ConnectWallet = () => {
     const { darkMode } = useContext(GlobalContext);
+    const { shadow } = useStyles();
     const metaMask = window.ethereum?.isMetaMask || false;
     const source = metaMask
         ? darkMode
@@ -29,9 +31,11 @@ const ConnectWallet = () => {
                     width: '90%',
                     maxWidth: '400px',
                     maxHeight: '400px',
+                    paddingTop: '20px',
+                    paddingBottom: '20px',
                     marginTop: 80,
                     borderRadius: 12,
-                    boxShadow: 'rgba(0, 0, 0, 0.4) 0px 20px 53px -20px',
+                    ...shadow()
                 }}>
                 <Image
                     source={source}
@@ -64,7 +68,7 @@ const ConnectButton = () => {
             color={primary}
             onPress={onPress}
             title={metaMask ? "MetaMask" : t("connect")}
-            containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
+            containerStyle={{ width: IS_DESKTOP ? 400 : "100%" }}
             style={{
                 marginTop: Spacing.small, 
                 marginHorizontal: Spacing.normal,
@@ -95,7 +99,7 @@ const WalletConnectButton = () => {
             color={primary}
             onPress={onPress}
             title={"WalletConnect"}
-            containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
+            containerStyle={{ width: IS_DESKTOP ? 400 : "100%" }}
             style={{
                 marginTop: Spacing.small,
                 marginHorizontal: Spacing.normal,

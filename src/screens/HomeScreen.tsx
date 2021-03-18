@@ -25,10 +25,12 @@ import useColors from "../hooks/useColors";
 import useHomeState, { HomeState } from "../hooks/useHomeState";
 import useLinker from "../hooks/useLinker";
 import useTranslation from "../hooks/useTranslation";
+import useStyles from "../hooks/useStyles";
 import LPTokenWithValue from "../types/LPTokenWithValue";
 import TokenWithValue from "../types/TokenWithValue";
 import { formatUSD } from "../utils";
 import Screen from "./Screen";
+import { PortfolioIcon, ExternalIcon } from '../components/svg/Icons'
 
 interface TokenItemProps {
     token: TokenWithValue;
@@ -43,21 +45,25 @@ interface LPTokenItemProps {
 const HomeScreen = () => {
     const t = useTranslation();
     const state = useHomeState();
+    const { borderDark } = useColors();
+    const { borderBottom } = useStyles();
     const { loadingTokens } = useContext(EthersContext);
     const loading = loadingTokens || state.loadingLPTokens || state.loadingPools;
     const totalValue = sum(state.tokens) + sum(state.lpTokens) + sum(state.pools);
     return (
         <Screen>
             <Container>
-                <BackgroundImage />
                 <Content style={{ paddingBottom: Spacing.huge }}>
-                    <Title text={t("total-value")} style={{ flex: 1, marginTop: Spacing.normal }} />
-                    <Title
-                        text={loading ? t("fetching") : formatUSD(totalValue, 4)}
-                        fontWeight={"light"}
-                        disabled={loading}
-                        style={{ fontSize: IS_DESKTOP ? 32 : 24 }}
-                    />
+                    <Title text={t("total-value")} style={{ flex: 1, paddingBottom: 15 }} />
+                    <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15, ...borderBottom()}}>
+                        <PortfolioIcon />
+                        <Title
+                            text={loading ? t("fetching") : formatUSD(totalValue, 4)}
+                            fontWeight={"light"}
+                            disabled={loading}
+                            style={{ fontSize: IS_DESKTOP ? 32 : 24, marginBottom: 0, marginLeft: 15 }}
+                        />
+                    </View>
                     <Home state={state} />
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
@@ -67,10 +73,12 @@ const HomeScreen = () => {
 };
 
 const Home = ({ state }: { state: HomeState }) => {
+    const { borderBottom } = useStyles();
+
     return (
         <View style={{ marginTop: IS_DESKTOP ? Spacing.large : Spacing.normal }}>
             <MyTokens state={state} />
-            <View style={{ height: Spacing.large }} />
+            <View style={{ height: Spacing.normal, ...borderBottom() }} />
             <MyLPTokens state={state} />
             <View style={{ height: Spacing.large }} />
             <Pools state={state} />
@@ -94,7 +102,7 @@ const MyLPTokens = ({ state }: { state: HomeState }) => {
     const t = useTranslation();
     const goToRemoveLiquidity = useLinker("/liquidity/remove", "RemoveLiquidity");
     return (
-        <View>
+        <View style={{marginTop: 20}}>
             <Heading text={t("liquidity")} buttonText={t("manage")} onPressButton={goToRemoveLiquidity} />
             {/* @ts-ignore */}
             <TokenList loading={state.loadingLPTokens} tokens={state.lpTokens} TokenItem={LPTokenItem} />
@@ -139,16 +147,16 @@ const TokenList = (props: {
             keyExtractor={item => item.address}
             data={data}
             renderItem={renderItem}
-            ItemSeparatorComponent={() => <Border small={true} />}
         />
     );
 };
 
 const EmptyList = () => {
     const t = useTranslation();
+    const { border } = useStyles()
     return (
-        <View style={{ margin: Spacing.normal }}>
-            <Text disabled={true} style={{ textAlign: "center", width: "100%" }}>
+        <View style={{ width: '100%', paddingTop: 20, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, ...border() }}>
+            <Text style={{ textAlign: "center", width: "100%" }}>
                 {t("you-dont-have-assets")}
             </Text>
         </View>
@@ -156,21 +164,22 @@ const EmptyList = () => {
 };
 
 const TokenItem = (props: TokenItemProps) => {
+    const { tokenBg } = useColors();
     return (
-        <FlexView style={{ alignItems: "center", paddingHorizontal: Spacing.tiny, paddingVertical: 4 }}>
+        <FlexView style={{ alignItems: "center", marginBottom: 5, paddingBottom: 20, paddingTop: 20, paddingLeft: 10, paddingRight: 10, background: tokenBg, borderRadius: 8 }}>
             <TokenLogo token={props.token} disabled={props.disabled} />
             <View>
-                <TokenPrice token={props.token} disabled={props.disabled} style={{ marginLeft: Spacing.small }} />
+                <TokenPrice token={props.token} disabled={props.disabled} style={{ marginLeft: Spacing.small, paddingBottom: 5 }} />
                 <TokenName token={props.token} disabled={props.disabled} />
             </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <TokenValue token={props.token} disabled={props.disabled} />
+                <TokenValue token={props.token} disabled={props.disabled} style={{paddingBottom: 5}} />
                 <FlexView>
                     <TokenAmount token={props.token} disabled={props.disabled} />
                     {IS_DESKTOP && <TokenSymbol token={props.token} disabled={props.disabled} />}
                 </FlexView>
             </View>
-            <ExternalIcon path={"/tokens/" + props.token.address} />
+            <ExternalBtn path={"/tokens/" + props.token.address} />
         </FlexView>
     );
 };
@@ -189,23 +198,18 @@ const LPTokenItem = (props: LPTokenItemProps) => {
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>
             </View>
-            <ExternalIcon path={"/pairs/" + props.token.address} />
+            <ExternalBtn path={"/pairs/" + props.token.address} />
         </FlexView>
     );
 };
 
-const ExternalIcon = ({ path }) => {
+const ExternalBtn = ({ path }) => {
     const { textDark, disabled } = useColors();
     const onPress = () => window.open("https://sushiswapanalytics.com/" + path.toLowerCase(), "_blank");
     const isETH = path.endsWith(ethers.constants.AddressZero);
     return (
         <TouchableHighlight onPress={onPress} disabled={isETH}>
-            <Icon
-                type={"evilicon"}
-                name={"external-link"}
-                color={isETH ? disabled : textDark}
-                style={{ marginLeft: Spacing.tiny }}
-            />
+            <ExternalIcon style={{ marginLeft: Spacing.small }} />
         </TouchableHighlight>
     );
 };

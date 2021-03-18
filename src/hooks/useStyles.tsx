@@ -15,17 +15,20 @@ const useStyles = () => {
         }),
         []
     );
-    const shadow = () =>
-        ({
-            borderRadius: Spacing.tiny,
-            elevation: Spacing.small,
-            shadowColor,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.5,
-            shadowRadius: 4,
-            overflow: "visible"
-        } as ViewStyle);
-    return { border, shadow };
+    
+    const shadow = () => ({
+        borderRadius: Spacing.tiny,
+        elevation: Spacing.small,
+        shadowColor,
+        shadowOffset: { width: 0, height: 25 },
+        shadowOpacity: 0.1,
+        shadowRadius: 30,
+        overflow: "visible"
+    } as ViewStyle);
+
+    const borderBottom = () => ({borderBottom: `1px solid ${borderDark}`})
+
+    return { border, shadow, borderBottom };
 };
 
 export default useStyles;

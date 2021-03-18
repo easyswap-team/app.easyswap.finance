@@ -2,7 +2,7 @@
 import "./globals";
 import React, {useContext, useEffect} from "react";
 
-import { OpenSans_300Light, OpenSans_400Regular, OpenSans_600SemiBold } from "@expo-google-fonts/open-sans";
+import { Rubik_300Light, Rubik_400Regular, Rubik_500Medium, Rubik_700Bold } from "@expo-google-fonts/rubik";
 import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 
@@ -60,9 +60,10 @@ const App = () => {
     })
 
     const [fontsLoaded] = useFonts({
-        light: OpenSans_300Light,
-        regular: OpenSans_400Regular,
-        bold: OpenSans_600SemiBold
+        light: Rubik_300Light,
+        regular: Rubik_400Regular,
+        medium: Rubik_500Medium,
+        bold: Rubik_700Bold
     });
 
     if (!fontsLoaded && !global.ALCHEMY_PROVIDER) {
