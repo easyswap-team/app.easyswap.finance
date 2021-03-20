@@ -1,10 +1,10 @@
 {
     "1": {
         "alchemyUrl": "http://localhost:8546",
-        "subGraphExchangeUrl": "https://api.thegraph.com/subgraphs/name/sushiswap/exchange"
+        "subGraphExchangeUrl": "http://localhost:8546/graphql"
     },
     "42": {
         "alchemyUrl": "http://localhost:8546",
-        "subGraphExchangeUrl": "https://api.thegraph.com/subgraphs/name/sushiswap/exchange"
+        "subGraphExchangeUrl": "http://localhost:8546/graphql"
     }
 }
