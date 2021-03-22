@@ -1,9 +1,8 @@
 import React, {useContext} from "react"
-import { FACTORY_ADDRESS as SUSHISWAP_FACTORY, Pair } from "@sushiswap/sdk";
+import { Pair } from "@sushiswap/sdk";
 import sushiData from "@sushiswap/sushi-data";
-import { FACTORY_ADDRESS as UNISWAP_FACTORY } from "@uniswap/sdk";
 import { ethers } from "ethers";
-import { LP_TOKEN_SCANNER, MASTER_CHEF, ORDER_BOOK, SETTLEMENT } from "../constants/contracts";
+import { ORDER_BOOK, SETTLEMENT } from "../constants/contracts";
 import Fraction from "../constants/Fraction";
 import { ETH } from "../constants/tokens";
 import { EthersContext } from "../context/EthersContext";
@@ -22,10 +21,14 @@ import {
     pow10
 } from "./index";
 
+const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
+const MASTER_CHEF = "0x373c198d653d6FB916ebcf09af0AD979818ddDEB";
+const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
+
 const blocksPerDay = 6500;
 
 export const fetchTokens = async (account: string, customTokens?: Token[]) => {
-    const response = await fetch("https://lite.sushi.com/tokens.json");
+    const response = await fetch("tokens.json");
     const json = await response.json();
     const tokens = [...json.tokens, ...(customTokens || [])];
 

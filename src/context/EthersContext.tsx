@@ -12,7 +12,7 @@ import useSDK from "../hooks/useSDK";
 import Ethereum from "../types/Ethereum";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
-import { getContract, isWETH } from "../utils";
+import { getContract, WETH, isWETH } from "../utils";
 import { logTransaction } from "../utils/analytics-utils";
 import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
 

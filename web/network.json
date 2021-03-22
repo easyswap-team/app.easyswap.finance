@@ -6,5 +6,9 @@
     "42": {
         "alchemyUrl": "http://localhost:8546",
         "subGraphExchangeUrl": "http://localhost:8546/graphql"
+    },
+    "97": {
+        "alchemyUrl": "http://localhost:8546",
+        "subGraphExchangeUrl": "http://localhost:8546/graphql"
     }
 }

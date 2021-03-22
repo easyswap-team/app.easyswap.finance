@@ -1,16 +1,16 @@
 [
   {
-    "address": "0x06da0fd433C1A5d7a4faa01111c044910A184553",
+    "address": "0xBEE09E500219e29989e8C32EB129465FF30b0de9",
     "decimals": 18,
     "symbol": "WETH-USDT LP",
     "tokenA": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
     },
     "tokenB": {
-      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "address": "0x688ce8a97d5f1193261DB2271f542193D1dFd866",
       "symbol": "USDT",
       "decimals": 6,
       "logoURI": "https://static.alchemyapi.io/images/assets/825.png"
@@ -27,7 +27,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/3408.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -44,7 +44,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/4943.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -61,7 +61,7 @@
       "logoURI": null
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -78,7 +78,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/5692.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -95,7 +95,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/2239.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -112,7 +112,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/2586.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -129,7 +129,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/5617.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -146,7 +146,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/1975.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -163,7 +163,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/4679.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -174,7 +174,7 @@
     "decimals": 18,
     "symbol": "WETH-AMPL LP",
     "tokenA": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -197,7 +197,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/5864.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -208,13 +208,13 @@
     "decimals": 18,
     "symbol": "SUSHI-WETH LP",
     "tokenA": {
-      "address": "0x6B3595068778DD592e39A122f4f5a5cF09C90fE2",
+      "address": "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e",
       "symbol": "SUSHI",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/6758.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -231,7 +231,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/2539.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -265,7 +265,7 @@
       "logoURI": "https://lite.sushi.com/images/tokens/SRM.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -282,7 +282,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/6657.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -293,7 +293,7 @@
     "decimals": 18,
     "symbol": "WETH-CRV LP",
     "tokenA": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -316,7 +316,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/7083.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -333,7 +333,7 @@
       "logoURI": "https://lite.sushi.com/images/tokens/xSUSHI.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -367,7 +367,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/3717.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -384,7 +384,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/6193.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -395,7 +395,7 @@
     "decimals": 18,
     "symbol": "WETH-MEME LP",
     "tokenA": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -418,7 +418,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/5939.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -435,7 +435,7 @@
       "logoURI": null
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
@@ -469,7 +469,7 @@
       "logoURI": "https://static.alchemyapi.io/images/assets/3635.png"
     },
     "tokenB": {
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       "symbol": "WETH",
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
