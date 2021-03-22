@@ -46,7 +46,7 @@ const WebHeader: FC<WebHeaderProps> = props => {
                     paddingHorizontal: Spacing.normal
                 }}>
                 <Title />
-                {IS_DESKTOP ? <Menu /> : <MenuIcon onExpand={props.onExpandMenu} />}
+                {IS_DESKTOP ? <Menu /> : <MenuIcon openMenu={props.openMenu} />}
             </FlexView>
         </View>
     );
@@ -103,11 +103,11 @@ const MenuItem = ({ title, path }) => {
     );
 };
 
-const MenuIcon = ({ onExpand }) => {
+const MenuIcon = ({ openMenu }) => {
     const { textDark } = useColors();
     const { darkMode } = useContext(GlobalContext);
     const MenuBtn = darkMode ? IconMenuDark : IconMenu;
-    return <MenuBtn width={24} height={10} style={{ alignSelf: 'center' }} color={textDark} onClick={onExpand} />;
+    return <MenuBtn width={24} height={10} style={{ alignSelf: 'center' }} color={textDark} onClick={openMenu} />;
 };
 
 const Status = () => {

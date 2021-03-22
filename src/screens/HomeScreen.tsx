@@ -52,11 +52,6 @@ const HomeScreen = ({navigation}) => {
     const loading = loadingTokens || state.loadingLPTokens || state.loadingPools;
     const totalValue = sum(state.tokens) + sum(state.lpTokens) + sum(state.pools);
 
-    // setTimeout(() => {
-    //     console.log(navigation)
-    //     navigation.openDrawer();
-    // }, 2000)
-
     return (
         <Screen>
             <Container>

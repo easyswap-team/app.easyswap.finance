@@ -71,7 +71,6 @@ const TokenSelect: FC<TokenSelectProps> = props => {
                     padding: '20px',
                     borderRadius: 8
                 }}
-                onClick={() => {props.modalSettings.closeModal()}}
             >
                 <CloseModalIcon style={{alignSelf: 'flex-end'}} fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
                 <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
