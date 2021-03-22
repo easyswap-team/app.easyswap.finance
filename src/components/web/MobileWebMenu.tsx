@@ -25,7 +25,7 @@ const MobileWebMenu = ({ closeMenu }) => {
     const t = useTranslation();
     const { accent } = useColors();
     return (
-        <TouchableWithoutFeedback style={{ height: "100%" }} onPress={closeMenu}>
+        <TouchableWithoutFeedback style={{ height: "100%" }} onPress={() => closeMenu()}>
             <View
                 style={{
                     height: "100%",
@@ -41,16 +41,19 @@ const MobileWebMenu = ({ closeMenu }) => {
                     <CloseButton onPress={closeMenu} />
                 </View>
                 <View style={{
-                    alignItems: "flex-end",
+                    alignItems: "flex-start",
                     borderBottom: '1px solid #ffffff33',
                     borderTop: '1px solid #ffffff33',
                     padding: '30px 0 30px 30px',
                     paddingTop: 30,
                     paddingBottom: 30,
                     paddingLeft: 30,
+                    width: '100%'
                 }}
                 >
-                    <Status />
+                    <View style={{width: '100%', alignItems: 'center'}}>
+                        <Status style={{alignSelf: 'center'}} />
+                    </View>
                     <View style={{ height: Spacing.large }} />
                     <MobileWebMenuItem title={t("menu.home")} path={"/"} name='home' />
                     <MobileWebMenuItem title={t("menu.swap")} path={"/swap"} name='swap' />

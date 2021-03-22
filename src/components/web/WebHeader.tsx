@@ -75,8 +75,6 @@ const Menu = () => {
             <MenuItem title={t("menu.home")} path={"/"} />
             <MenuItem title={t("menu.swap")} path={"/swap"} />
             <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
-            <MenuItem title={t("menu.migrate")} path={"/migrate"} />
-            <MenuItem title={t("menu.stake")} path={"/staking"} />
             <MenuItem title={t("menu.farm")} path={"/farming"} />
             <DarkModeSwitch style={{ marginLeft: Spacing.small }} />
             <Status />

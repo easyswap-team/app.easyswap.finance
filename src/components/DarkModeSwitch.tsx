@@ -3,7 +3,8 @@ import { TouchableHighlight, View } from "react-native";
 
 import { GlobalContext } from "../context/GlobalContext";
 import useColors from "../hooks/useColors";
-import {MoonIcon, SunIcon} from "./svg/Icons";
+import SvgMoon from "./svg/SvgMoon";
+import SvgSun from "./svg/SvgSun";
 
 const DarkModeSwitch = props => {
     const { darkMode, setDarkMode } = useContext(GlobalContext);
@@ -15,9 +16,9 @@ const DarkModeSwitch = props => {
         <View style={props.style}>
             <TouchableHighlight activeOpacity={0.7} underlayColor={overlay} onPress={onPress}>
                 {darkMode ? (
-                    <MoonIcon width={24} height={24} style={{ margin: 3 }} />
+                    <SvgMoon width={24} height={24} style={{ margin: 3 }} />
                 ) : (
-                    <SunIcon width={30} height={30} />
+                    <SvgSun width={30} height={30} />
                 )}
             </TouchableHighlight>
         </View>

@@ -74,7 +74,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
             >
                 <CloseModalIcon style={{alignSelf: 'flex-end'}} fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
                 <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
-                <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} />
+                <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
             </View>
         </Modal>
     );
@@ -84,6 +84,7 @@ const TokenList = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
+    closeModal?: any;
 }) => {
     const { loadingTokens, tokens } = useContext(EthersContext);
     const renderItem = useCallback(
@@ -95,6 +96,7 @@ const TokenList = (props: {
                     selected={false}
                     onSelectToken={props.onSelectToken}
                     disabled={props.disabled?.(item)}
+                    closeModal={props.closeModal}
                 />
             );
         },
@@ -131,9 +133,11 @@ const TokenItem = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: boolean;
     selectable?: boolean;
+    closeModal?: any;
 }) => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
+        props.closeModal()
     }, [props.onSelectToken, props.token]);
     return (
         <Selectable
