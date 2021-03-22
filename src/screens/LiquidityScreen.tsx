@@ -63,7 +63,7 @@ const LiquidityScreen = () => {
 const AddLiquidity = () => {
     const { chainId } = useContext(EthersContext);
     const state = useAddLiquidityState();
-    if (chainId !== 1) return <ChangeNetwork />;
+    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             {/*<ModeSelect state={state} />*/}

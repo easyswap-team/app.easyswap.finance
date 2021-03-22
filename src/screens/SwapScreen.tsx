@@ -60,7 +60,7 @@ const SwapScreen = () => {
 const Swap = () => {
     const { chainId } = useContext(EthersContext);
     const state = useSwapState();
-    if (chainId !== 1 && chainId !== 42) return <ChangeNetwork />;
+    if (chainId !== 1 && chainId !== 42 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             <FromTokenSelect state={state} />

@@ -3,17 +3,16 @@ import { WETH } from "../utils";
 import { ChainId, Currency, ETHER, Fetcher, Pair, Token} from "@sushiswap/sdk";
 import { ethers } from "ethers";
 
-const WBTC = new Token(ChainId.MAINNET, "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599", 8, "WBTC", "Wrapped BTC");
-const DAI = new Token(ChainId.MAINNET, "0x6B175474E89094C44Da98b954EedeAC495271d0F", 18, "DAI", "Dai Stablecoin");
-const USDC = new Token(ChainId.MAINNET, "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", 6, "USDC", "USD//C");
-const USDT = new Token(ChainId.MAINNET, "0x688ce8a97d5f1193261DB2271f542193D1dFd866", 6, "USDT", "Tether USD");
-const SUSHI = new Token(ChainId.MAINNET, "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e", 18, "SUSHI", "SushiToken");
-const YAM = new Token(ChainId.MAINNET, "0x0e2298E3B3390e3b945a5456fBf59eCc3f55DA16", 18, "YAM", "YAM");
-const AMPL = new Token(ChainId.MAINNET, "0xD46bA6D942050d489DBd938a2C909A5d5039A161", 9, "AMPL", "Ampleforth");
 
-const BASES_TO_CHECK_TRADES_AGAINST = [WETH[ChainId.MAINNET], WBTC, DAI, USDC, USDT, SUSHI, YAM];
+const USDT = new Token(ChainId.MAINNET, "0x688ce8a97d5f1193261DB2271f542193D1dFd866", 18, "USDT", "Tether USD");
+const SUSHI = new Token(ChainId.MAINNET, "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e", 18, "SUSHI", "SushiToken");
+const BTCB = new Token(ChainId.MAINNET, "0xBC23fCAD2c5E279c65Fc1DA5B181305bb2d1bAB7", 18, "BTCB", "BTCB Token");
+const BBETH = new Token(ChainId.MAINNET, "0xA936573f548fDd74B06F2E2A613Af274bDFa8169", 18, "BBETH", "BBETH Token");
+const BUSD = new Token(ChainId.MAINNET, "0x3382f1eb52d3caa32e281eac539C48Bb0a3D6290", 18, "BUSD", "BUSD Token");
+
+const BASES_TO_CHECK_TRADES_AGAINST = [WETH[ChainId.MAINNET], USDT, SUSHI, BTCB, BBETH, BUSD];
 const CUSTOM_BASES = {
-    [AMPL.address]: [DAI, WETH[ChainId.MAINNET], WBTC]
+    [BUSD.address]: [USDT, WETH[ChainId.MAINNET], BTCB]
 };
 
 function wrappedCurrency(currency: Currency | undefined): Token | undefined {
