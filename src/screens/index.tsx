@@ -85,7 +85,7 @@ const WebScreens = () => {
 
     return (
         <Router>
-            <View style={{ flex: 1, background: background }}>
+            <View style={{ flex: 1, background: background, overflow: 'hidden' }}>
                 <Drawer
                     ref={drawer}
                     side='right'
