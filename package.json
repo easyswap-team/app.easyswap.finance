@@ -8,8 +8,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "deploy": "bash ./scripts/deploy:web.sh",
-    "predeploy": "bash ./scripts/build:web.sh",
-    "postinstall": "node scripts/hack.js"
+    "predeploy": "bash ./scripts/build:web.sh"
   },
   "dependencies": {
     "@codler/react-native-keyboard-aware-scroll-view": "^1.0.1",
