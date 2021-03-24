@@ -17,6 +17,7 @@ const TokenItem = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: boolean;
     selectable?: boolean;
+    onClick?: any;
 }) => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
@@ -32,6 +33,7 @@ const TokenItem = (props: {
                 padding: 20,
                 borderRadius: 8
             }}
+            onClick={() => {props.onClick()}}
         >
             <TokenLogo token={props.token} disabled={props.disabled} />
             <View>
