@@ -101,6 +101,7 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
                         selected={false}
                         onSelectToken={() => {}}
                         disabled={false}
+                        onClick={() => {setExpanded(true)}}
                     />
                 : 
                     <View
@@ -149,13 +150,14 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
         <View>
             <Heading text={t("token-to-buy")} />
             {
-                state.toToken ? 
+                state.toToken ?
                     <TokenItem
                         key={state.toToken.address}
                         token={state.toToken}
                         selected={false}
                         onSelectToken={() => {}}
                         disabled={false}
+                        onClick={() => {setExpanded(true)}}
                     />
                 : 
                     <View

@@ -123,6 +123,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                         selected={false}
                         onSelectToken={() => {}}
                         disabled={false}
+                        onClick={() => {setExpanded(true)}}
                     />
                 : 
                     <View
@@ -172,6 +173,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                         selected={false}
                         onSelectToken={() => {}}
                         disabled={false}
+                        onClick={() => {setExpanded(true)}}
                     />
                 : 
                     <View
