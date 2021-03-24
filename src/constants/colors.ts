@@ -31,16 +31,16 @@ export const Colors = {
         header: "transparent",
         submenu: "#00000020",
         background: "linear-gradient(135deg, rgba(32,34,41,1) 0%,rgba(40,47,65,1) 50%,rgba(32,34,41,1) 100%)",
-        backgroundLight: "#0D0E20",
+        backgroundLight: "#1F2127",
         border: "#ffffff33",
-        borderDark: "#666666",
-        textDark: "#d5d1cc",
-        textMedium: "#cccccc",
-        textLight: "#aaaaaa",
+        borderDark: "#ffffff1a",
+        textDark: "#fff",
+        textMedium: "#fff",
+        textLight: "#aaaaaab3",
         disabled: "#aaaaaa80",
         shadow: "#03080c",
         placeholder: "#666666",
         overlay: "#000000c0",
-        tokenBg: '#dfe8f466'
+        tokenBg: '#2A2C32'
     }
 };

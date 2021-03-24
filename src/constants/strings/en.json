@@ -19,7 +19,7 @@
   "liquidity": "Liquidity",
   "farms": "Farms",
   "you-dont-have-assets": "You don't have any matching asset.",
-  "new-order": "New Order",
+  "new-order": "Exchange",
   "new-order-desc": "Swap now or place a limit order with a desired price.",
   "order-type": "Order Type",
   "market-order": "Market Order",

@@ -3,7 +3,6 @@ import { FlatList, Platform, TouchableHighlight, View } from "react-native";
 import { Icon } from "react-native-elements";
 
 import { ethers } from "ethers";
-import BackgroundImage from "../components/BackgroundImage";
 import Border from "../components/Border";
 import Container from "../components/Container";
 import Content from "../components/Content";
@@ -21,6 +20,7 @@ import TokenValue from "../components/TokenValue";
 import WebFooter from "../components/web/WebFooter";
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
+import { GlobalContext } from "../context/GlobalContext";
 import useColors from "../hooks/useColors";
 import useHomeState, { HomeState } from "../hooks/useHomeState";
 import useLinker from "../hooks/useLinker";
@@ -30,7 +30,7 @@ import LPTokenWithValue from "../types/LPTokenWithValue";
 import TokenWithValue from "../types/TokenWithValue";
 import { formatUSD } from "../utils";
 import Screen from "./Screen";
-import { PortfolioIcon, ExternalIcon } from '../components/svg/Icons'
+import { PortfolioIcon, PortfolioDarkIcon, ExternalIcon } from '../components/svg/Icons'
 
 interface TokenItemProps {
     token: TokenWithValue;
@@ -42,21 +42,28 @@ interface LPTokenItemProps {
     disabled?: boolean;
 }
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const t = useTranslation();
     const state = useHomeState();
     const { borderDark } = useColors();
     const { borderBottom } = useStyles();
     const { loadingTokens } = useContext(EthersContext);
+    const { darkMode } = useContext(GlobalContext);
     const loading = loadingTokens || state.loadingLPTokens || state.loadingPools;
     const totalValue = sum(state.tokens) + sum(state.lpTokens) + sum(state.pools);
+
+    // setTimeout(() => {
+    //     console.log(navigation)
+    //     navigation.openDrawer();
+    // }, 2000)
+
     return (
         <Screen>
             <Container>
                 <Content style={{ paddingBottom: Spacing.huge }}>
                     <Title text={t("total-value")} style={{ flex: 1, paddingBottom: 15 }} />
                     <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15, ...borderBottom()}}>
-                        <PortfolioIcon />
+                        {darkMode ? <PortfolioDarkIcon /> : <PortfolioIcon />}
                         <Title
                             text={loading ? t("fetching") : formatUSD(totalValue, 4)}
                             fontWeight={"light"}

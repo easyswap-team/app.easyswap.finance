@@ -7,11 +7,11 @@ import useColors from "./useColors";
 const useStyles = () => {
     const { shadow: shadowColor, borderDark } = useColors();
     const border = useCallback(
-        (attrs?: { color?: string; radius?: number }) => ({
+        (attrs?: { color?: string; radius?: number; padding?: string }) => ({
             borderColor: attrs?.color || borderDark,
             borderWidth: 1,
             borderRadius: attrs?.radius || 8,
-            padding: Spacing.small
+            padding: attrs?.padding ? Spacing[attrs.padding] : Spacing.small
         }),
         []
     );

@@ -3,7 +3,6 @@ import { FlatList, Platform, View } from "react-native";
 
 import moment from "moment";
 import useAsyncEffect from "use-async-effect";
-import BackgroundImage from "../components/BackgroundImage";
 import Button from "../components/Button";
 import ChangeNetwork from "../components/ChangeNetwork";
 import Container from "../components/Container";
@@ -38,8 +37,8 @@ const MyLimitOrdersScreen = () => {
     const t = useTranslation();
     return (
         <Screen>
+            <SwapSubMenu />
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("my-orders")} />
                     <Text light={true}>{t("my-orders-desc")}</Text>
@@ -47,7 +46,6 @@ const MyLimitOrdersScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <SwapSubMenu />
         </Screen>
     );
 };
