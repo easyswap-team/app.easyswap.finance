@@ -23,7 +23,7 @@ import {
 // tslint:disable-next-line:max-func-body-length
 const MobileWebMenu = ({ closeMenu }) => {
     const t = useTranslation();
-    const { accent } = useColors();
+    const { accent, whiteLight } = useColors();
     return (
         <TouchableWithoutFeedback style={{ height: "100%" }} onPress={() => closeMenu()}>
             <View
@@ -37,7 +37,7 @@ const MobileWebMenu = ({ closeMenu }) => {
                     zIndex: 99999999
                 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center', marginTop: Spacing.small }}>
-                    <Text style={{marginRight: 10, opacity: .5}}>Close menu</Text>
+                    <Text style={{marginRight: 10, opacity: .5, color: whiteLight}}>Close menu</Text>
                     <CloseButton onPress={closeMenu} />
                 </View>
                 <View style={{
@@ -62,7 +62,7 @@ const MobileWebMenu = ({ closeMenu }) => {
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
                     <DarkModeSwitch style={{ marginBottom: 4 }} />
-                    <Text style={{marginLeft: 10, opacity: .5}}>Change mode</Text>
+                    <Text style={{marginLeft: 10, opacity: .5, color: whiteLight}}>Change mode</Text>
                 </View>
             </View>
         </TouchableWithoutFeedback>
@@ -70,12 +70,12 @@ const MobileWebMenu = ({ closeMenu }) => {
 };
 
 const CloseButton = ({ onPress }) => {
-    const { textDark } = useColors();
-    return <Icon type={"material-community"} name={"close"} color={textDark} size={32} onPress={onPress} />;
+    const { textDark, white } = useColors();
+    return <Icon type={"material-community"} name={"close"} color={white} size={32} onPress={onPress} />;
 };
 
 const MobileWebMenuItem = ({ title, path, name }) => {
-    const { textDark, textLight } = useColors();
+    const { textDark, textLight, white, whiteLight } = useColors();
     const match = useRouteMatch(path);
     const active = match?.path?.startsWith(path);
     const MenuIcon = name === 'home' ? HomeIcon
@@ -83,6 +83,7 @@ const MobileWebMenuItem = ({ title, path, name }) => {
         : name === 'liquidity' ? LiqudityIcon
         : name === 'farm' ? FarmIcon 
         : null
+
     return (
         <Link to={path} style={{display: 'flex', alignItems: 'center', textDecoration: "none", marginBottom: Spacing.small, marginTop: Spacing.small }}>
             <MenuIcon opacity={active ? 1 : 0.4} />
@@ -90,7 +91,7 @@ const MobileWebMenuItem = ({ title, path, name }) => {
                 style={{
                     fontFamily: "regular",
                     fontSize: 24,
-                    color: active ? textDark : textLight,
+                    color: active ? white : whiteLight,
                     paddingLeft: 15
                 }}>
                 {title}
@@ -101,13 +102,13 @@ const MobileWebMenuItem = ({ title, path, name }) => {
 
 const Status = () => {
     const t = useTranslation();
-    const { textLight, textMedium, green, accent } = useColors();
+    const { textLight, textMedium, green, accent, whiteLight } = useColors();
     const { ethereum, chainId, address, ensName } = useContext(EthersContext);
     const connected = address;
     const title = connected
         ? ensName || address!.substring(0, 6) + "..." + address!.substring(address!.length - 4, address!.length)
         : t("menu.not-connected");
-    const color = connected ? green : textLight;
+    const color = connected ? green : whiteLight;
     const onPress = () => {
         ethereum?.disconnect?.();
     };
@@ -115,7 +116,7 @@ const Status = () => {
         <View>
             <FlexView style={{ marginBottom: Spacing.tiny, alignItems: 'center' }}>
                 <View style={{ backgroundColor: color, width: 12, height: 12, borderRadius: 12}} />
-                <Text style={{ fontSize: 18, color: connected ? textMedium : textLight, marginLeft: 8 }}>{title}</Text>
+                <Text style={{ fontSize: 18, color: connected ? textMedium : whiteLight, marginLeft: 8 }}>{title}</Text>
             </FlexView>
             {ethereum?.isWalletConnect && (
                 <Text

@@ -16,11 +16,7 @@ const ConnectWallet = () => {
     const { darkMode } = useContext(GlobalContext);
     const { shadow } = useStyles();
     const metaMask = window.ethereum?.isMetaMask || false;
-    const source = metaMask
-        ? darkMode
-            ? require("../../../assets/metamask-dark.png")
-            : require("../../../assets/metamask.png")
-        : require("../../../assets/sushiswap.jpg");
+    const source = darkMode ? require("../../../assets/metamask-dark.png") : require("../../../assets/metamask.png")
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <View style={{
@@ -39,7 +35,7 @@ const ConnectWallet = () => {
                 }}>
                 <Image
                     source={source}
-                    style={{ width: metaMask ? 148 : 200, height: metaMask ? 143 : 200, marginBottom: Spacing.normal }}
+                    style={{ width: 148, height: 143, marginBottom: Spacing.normal }}
                 />
                 {window.ethereum && <ConnectButton />}
                 <WalletConnectButton />

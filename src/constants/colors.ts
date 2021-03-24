@@ -1,6 +1,7 @@
 export const Colors = {
     common: {
         white: "#ffffff",
+        whiteLight: '#ffffff80',
         transparent: "#ffffff00",
         primary: "#4373EE",
         secondary: "#27B0E6",
