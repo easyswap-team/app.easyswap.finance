@@ -4,7 +4,6 @@ import { Platform, View } from "react-native";
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
 import ApproveButton from "../components/ApproveButton";
-import BackgroundImage from "../components/BackgroundImage";
 import Border from "../components/Border";
 import Button from "../components/Button";
 import ChangeNetwork from "../components/ChangeNetwork";
@@ -44,8 +43,8 @@ const FarmingScreen = () => {
     const t = useTranslation();
     return (
         <Screen>
+            <FarmingSubMenu />
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("plant-lp-tokens")} />
                     <Text light={true}>{t("plant-lp-tokens-desc")}</Text>
@@ -53,7 +52,6 @@ const FarmingScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <FarmingSubMenu />
         </Screen>
     );
 };

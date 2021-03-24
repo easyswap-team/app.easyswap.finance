@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Image, TouchableHighlight, View } from "react-native";
 import { useHistory, useLocation } from "react-router-dom";
@@ -21,25 +22,25 @@ const FLAGS = {
 
 const ALCHEMY_URL = "https://dashboard.alchemyapi.io/signup?referral=429fb682-0d85-40ab-ad88-daf847cf7c63";
 
-const WebFooter = ({ simple = false }) => {
+const WebFooter = ({ simple = true }) => {
     const onPressAlchemy = useLinker(ALCHEMY_URL, "", "_blank");
     return (
         <View style={{ width: "100%", padding: Spacing.normal, alignItems: "center" }}>
-            {!simple && (
+            {simple && (
                 <>
                     <SocialIcons />
-                    <TouchableHighlight onPress={onPressAlchemy}>
+                    {/* <TouchableHighlight onPress={onPressAlchemy}>
                         <Image
                             source={require("../../../assets/alchemy.png")}
                             style={{ width: 188, height: 40, marginTop: Spacing.tiny }}
                         />
-                    </TouchableHighlight>
+                    </TouchableHighlight> */}
                 </>
             )}
-            <Text note={true} style={{ marginTop: Spacing.tiny }}>
-                Built with ❤️ by SushiSwap (v{Constants.manifest.version})
+            <Text note={true} style={{ marginTop: Spacing.normal, fontSize: 16 }}>
+                Easyswap © 2021 {/** Constants.manifest.version **/}
             </Text>
-            <FlexView style={{ marginTop: Spacing.small }}>
+            <FlexView style={{ marginTop: Spacing.normal }}>
                 <Flag name={"us"} locale={"en"} />
                 <Flag name={"es"} locale={"es"} />
                 <Flag name={"fr"} locale={"fr"} />

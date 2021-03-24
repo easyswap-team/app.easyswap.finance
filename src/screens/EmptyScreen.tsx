@@ -1,6 +1,5 @@
 import React from "react";
 
-import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import Content from "../components/Content";
 import Title from "../components/Title";
@@ -13,7 +12,6 @@ const EmptyScreen = () => {
     return (
         <Screen>
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("loading")} />
                 </Content>

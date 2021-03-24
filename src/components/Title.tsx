@@ -16,7 +16,7 @@ const Title: FC<TitleProps> = props => {
         <Text
             fontWeight={props.fontWeight || "bold"}
             disabled={props.disabled}
-            style={[{ marginBottom: Spacing.tiny, fontSize: IS_DESKTOP ? 40 : 28 }, props.style]}>
+            style={[{ marginBottom: Spacing.tiny, fontSize: IS_DESKTOP ? 40 : 24 }, props.style]}>
             {props.text}
         </Text>
     );

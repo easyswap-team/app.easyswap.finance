@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { Icon, SocialIcon as NativeSocialIcon, SocialIconProps } from "react-native-elements";
+import {
+    TwitterIconLight,
+    TelegramIconLight,
+    GithubIconLight,
+    TwitterIconDark,
+    TelegramIconDark,
+    GithubIconDark
+} from './svg/Icons'
 
 import { GlobalContext } from "../context/GlobalContext";
 import useColors from "../hooks/useColors";
@@ -12,42 +19,15 @@ const SocialIcons = () => {
     const onPressTwitter = useLinker("https://twitter.com/sushiswap", "", "_blank");
     const onPressGithub = useLinker("https://github.com/sushiswap", "", "_blank");
     const onPressDiscord = useLinker("https://discord.gg/YS8xH7E", "", "_blank");
+    const GithubIcon = darkMode ? GithubIconDark : GithubIconLight
+    const TwitterIcon = darkMode ? TwitterIconDark : TwitterIconLight
+    const TelegramIcon = darkMode ? TelegramIconDark : TelegramIconLight
     return (
-        <FlexView style={{ width: "100%", justifyContent: "center" }}>
-            <SocialIcon type="github-alt" onPress={onPressGithub} />
-            <SocialIcon type="twitter" onPress={onPressTwitter} />
-            <Icon
-                type={"material-community"}
-                name={"discord"}
-                raised={true}
-                reverse={true}
-                color={background}
-                reverseColor={darkMode ? "white" : "#7289da"}
-                style={{ backgroundColor: background }}
-                containerStyle={{
-                    borderWidth: 1,
-                    borderColor: darkMode ? "white" : textLight
-                }}
-                onPress={onPressDiscord}
-            />
+        <FlexView style={{ width: "200px", justifyContent: "space-around", marginTop: 30 }}>
+            <GithubIcon onPress={onPressGithub} />
+            <TwitterIcon onPress={onPressTwitter} />
+            <TelegramIcon onPress={onPressDiscord} />
         </FlexView>
-    );
-};
-
-const SocialIcon = (props: SocialIconProps) => {
-    const { darkMode } = useContext(GlobalContext);
-    const { background, textLight } = useColors();
-    return (
-        <NativeSocialIcon
-            {...props}
-            light={!darkMode}
-            iconColor={darkMode ? "white" : undefined}
-            style={{
-                backgroundColor: background,
-                borderWidth: 1,
-                borderColor: darkMode ? "white" : textLight
-            }}
-        />
     );
 };
 

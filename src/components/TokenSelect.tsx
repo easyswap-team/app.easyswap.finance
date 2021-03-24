@@ -3,8 +3,10 @@ import { FlatList, View, ViewStyle } from "react-native";
 
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
+import { GlobalContext } from "../context/GlobalContext";
 import useDelayedEffect from "../hooks/useDelayedEffect";
 import useTranslation from "../hooks/useTranslation";
+import useColors from "../hooks/useColors";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
 import CloseIcon from "./CloseIcon";
@@ -22,6 +24,8 @@ import TokenPrice from "./TokenPrice";
 import TokenSearch from "./TokenSearch";
 import TokenSymbol from "./TokenSymbol";
 import TokenValue from "./TokenValue";
+import Modal from "modal-react-native-web";
+import { CloseModalIcon } from './svg/Icons'
 
 export interface TokenSelectProps {
     title: string;
@@ -30,6 +34,7 @@ export interface TokenSelectProps {
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
     style?: ViewStyle;
+    modalSettings?: any;
 }
 
 const TokenSelect: FC<TokenSelectProps> = props => {
@@ -53,14 +58,25 @@ const TokenSelect: FC<TokenSelectProps> = props => {
     };
     useEffect(() => setSearch(""), [props.symbol]);
     useDelayedEffect(() => setQuery(search.trim().toLowerCase()), 300, [search]);
+    const { backgroundLight } = useColors();
+    const { darkMode } = useContext(GlobalContext);
+
     return (
-        <View style={props.style}>
-            <Expandable title={props.title} expanded={!props.symbol} onExpand={() => props.onChangeSymbol("")}>
+        <Modal {...props.modalSettings}>
+            <View style={{
+                    height: "90%",
+                    alignItems: "center",
+                    alignSelf: 'center',
+                    backgroundColor: backgroundLight,
+                    padding: '20px',
+                    borderRadius: 8
+                }}
+            >
+                <CloseModalIcon style={{alignSelf: 'flex-end'}} fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
                 <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
-                <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} />
-            </Expandable>
-            {token && <TokenItem token={token} selected={true} onSelectToken={onUnselectToken} selectable={true} />}
-        </View>
+                <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
+            </View>
+        </Modal>
     );
 };
 
@@ -68,6 +84,7 @@ const TokenList = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
+    closeModal?: any;
 }) => {
     const { loadingTokens, tokens } = useContext(EthersContext);
     const renderItem = useCallback(
@@ -79,6 +96,7 @@ const TokenList = (props: {
                     selected={false}
                     onSelectToken={props.onSelectToken}
                     disabled={props.disabled?.(item)}
+                    closeModal={props.closeModal}
                 />
             );
         },
@@ -115,9 +133,11 @@ const TokenItem = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: boolean;
     selectable?: boolean;
+    closeModal?: any;
 }) => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
+        props.closeModal()
     }, [props.onSelectToken, props.token]);
     return (
         <Selectable

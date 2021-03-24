@@ -8,7 +8,7 @@ import useStyles from "../hooks/useStyles";
 
 const InfoBox = (props: PropsWithChildren<ViewProps>) => {
     const { darkMode } = useContext(GlobalContext);
-    const { backgroundLight, borderDark } = useColors();
+    const { backgroundLight, borderDark, tokenBg } = useColors();
     const { border } = useStyles();
     return (
         <View
@@ -16,9 +16,8 @@ const InfoBox = (props: PropsWithChildren<ViewProps>) => {
             style={[
                 {
                     ...border({ color: darkMode ? borderDark : backgroundLight }),
-                    backgroundColor: backgroundLight,
-                    marginTop: Spacing.normal + Spacing.small,
-                    padding: Spacing.small + Spacing.tiny
+                    backgroundColor: tokenBg,
+                    padding: Spacing.small
                 },
                 props.style
             ]}

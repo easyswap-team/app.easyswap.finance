@@ -7,25 +7,28 @@ import useColors from "./useColors";
 const useStyles = () => {
     const { shadow: shadowColor, borderDark } = useColors();
     const border = useCallback(
-        (attrs?: { color?: string; radius?: number }) => ({
+        (attrs?: { color?: string; radius?: number; padding?: string }) => ({
             borderColor: attrs?.color || borderDark,
             borderWidth: 1,
             borderRadius: attrs?.radius || 8,
-            padding: Spacing.small
+            padding: attrs?.padding ? Spacing[attrs.padding] : Spacing.small
         }),
         []
     );
-    const shadow = () =>
-        ({
-            borderRadius: Spacing.tiny,
-            elevation: Spacing.small,
-            shadowColor,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.5,
-            shadowRadius: 4,
-            overflow: "visible"
-        } as ViewStyle);
-    return { border, shadow };
+    
+    const shadow = () => ({
+        borderRadius: Spacing.tiny,
+        elevation: Spacing.small,
+        shadowColor,
+        shadowOffset: { width: 0, height: 25 },
+        shadowOpacity: 0.1,
+        shadowRadius: 30,
+        overflow: "visible"
+    } as ViewStyle);
+
+    const borderBottom = () => ({borderBottom: `1px solid ${borderDark}`})
+
+    return { border, shadow, borderBottom };
 };
 
 export default useStyles;
