@@ -78,12 +78,11 @@ export const SelectTokenIcon = () => (
 )
 
 export const TokenDivider = () => (
-    <svg width="296" height="34" viewBox="0 0 296 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path opacity="0.1" d="M250 18H0" stroke="#222222" />
-        <circle cx="279" cy="17" r="17" fill="#4373EE" />
-        <path fillRule="evenodd" clipRule="evenodd" d="M278 22L281.5 26L285 22L283 22L283 16L280 16L280 22L278 22Z" fill="white" />
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="17" cy="17" r="17" fill="#4373EE" />
+        <path fillRule="evenodd" clipRule="evenodd" d="M16 22L19.5 26L23 22L21 22L21 16L18 16L18 22L16 22Z" fill="white" />
         <g opacity="0.4">
-            <path fillRule="evenodd" clipRule="evenodd" d="M280 13L276.5 9L273 13L275 13L275 19L278 19L278 13L280 13Z" fill="white" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M18 13L14.5 9L11 13L13 13L13 19L16 19L16 13L18 13Z" fill="white" />
         </g>
     </svg>
 )
@@ -116,5 +115,11 @@ export const SwapIcon = props => (
 export const HomeIcon = props => (
     <svg width="21" height="25" viewBox="0 0 21 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path {...props} fillRule="evenodd" clipRule="evenodd" d="M18.5 11.6026V21C18.5 21.8284 17.8284 22.5 17 22.5H13.937C13.9781 22.3402 14 22.1726 14 22V16C14 14.8954 13.1046 14 12 14H9C7.89543 14 7 14.8954 7 16V22C7 22.1726 7.02187 22.3402 7.063 22.5H4C3.17157 22.5 2.5 21.8284 2.5 21V11.6026C2.5 11.2169 2.64862 10.8459 2.91496 10.5669L9.41496 3.75738C10.0059 3.13833 10.9941 3.13833 11.585 3.75738L18.085 10.5669C18.3514 10.8459 18.5 11.2169 18.5 11.6026ZM0 11.6026C0 10.5739 0.396301 9.5848 1.10658 8.84069L7.60658 2.03118C9.18234 0.380394 11.8177 0.380394 13.3934 2.03118L19.8934 8.84069C20.6037 9.5848 21 10.5739 21 11.6026V21C21 23.2091 19.2091 25 17 25H4C1.79086 25 0 23.2091 0 21V11.6026Z" fill="white" />
+    </svg>
+)
+
+export const TriangleDown = props => (
+    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.75435 4.65685C9.17687 4.65685 9.40891 5.14844 9.14037 5.47464L5.54276 9.84479C5.34276 10.0877 4.97072 10.0877 4.77072 9.84479L1.1731 5.47464C0.904565 5.14844 1.13661 4.65685 1.55913 4.65685L8.75435 4.65685Z" fill={props.color} />
     </svg>
 )

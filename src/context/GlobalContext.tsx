@@ -13,9 +13,7 @@ export const GlobalContext = React.createContext({
     darkMode: false,
     setDarkMode: async (_darkMode: boolean) => {},
     mnemonic: "",
-    setMnemonic: (_mnemonic: string) => {},
-    scrollTop: 0,
-    setScrollTop: (_scrollTop: number) => {}
+    setMnemonic: (_mnemonic: string) => {}
 });
 
 // tslint:disable-next-line:max-func-body-length
@@ -24,7 +22,6 @@ export const GlobalContextProvider = ({ children }) => {
     const [locale, setLocale] = useState(Localization.locale);
     const [darkMode, setDarkMode] = useState(colorScheme === "dark");
     const [mnemonic, setMnemonic] = useState("");
-    const [scrollTop, setScrollTop] = useState(0)
 
     return (
         <GlobalContext.Provider
@@ -57,9 +54,7 @@ export const GlobalContextProvider = ({ children }) => {
                 setMnemonic: async (mne: string) => {
                     await AsyncStorage.setItem("mnemonic", mne);
                     setMnemonic(mne);
-                },
-                scrollTop,
-                setScrollTop: value => setScrollTop(value)
+                }
             }}>
             {children}
         </GlobalContext.Provider>

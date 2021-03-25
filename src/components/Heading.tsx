@@ -24,7 +24,7 @@ const Heading: FC<HeadingProps> = props => {
                 medium={true}
                 fontWeight={props.fontWeight || "medium"}
                 disabled={props.disabled}
-                style={[{ flex: 1, fontSize: IS_DESKTOP ? 18 : 14, paddingBottom: Spacing.tiny }, props.style]}>
+                style={[{ flex: 1, fontSize: IS_DESKTOP ? 14 : 14, paddingBottom: Spacing.tiny }, props.style]}>
                 {props.text}
             </Text>
             {props.buttonText && (

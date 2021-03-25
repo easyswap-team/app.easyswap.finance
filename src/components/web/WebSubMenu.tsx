@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { View } from "react-native";
 import { Link, useRouteMatch } from "react-router-dom";
 
@@ -108,7 +108,7 @@ export const FarmingSubMenu = () => {
 const WebSubMenu: FC<WebSubMenuProps> = props => {
     const { submenu, white, borderDark } = useColors();
     const { border } = useStyles()
-    const { scrollTop, darkMode } = useContext(GlobalContext);
+    const { darkMode } = useContext(GlobalContext);
 
     return (
         <View 

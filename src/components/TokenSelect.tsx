@@ -24,7 +24,7 @@ import TokenPrice from "./TokenPrice";
 import TokenSearch from "./TokenSearch";
 import TokenSymbol from "./TokenSymbol";
 import TokenValue from "./TokenValue";
-import Modal from "modal-react-native-web";
+import Modal from "modal-enhanced-react-native-web";
 import { CloseModalIcon } from './svg/Icons'
 
 export interface TokenSelectProps {

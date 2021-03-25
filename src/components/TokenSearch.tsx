@@ -74,7 +74,7 @@ const TokenSearch: FC<TokenSearchProps> = props => {
                         paddingHorizontal: Spacing.tiny,
                         paddingTop: 12,
                         paddingBottom: 0,
-                        width: 445,
+                        width: 465,
                         marginTop: 40
                     }}
                 />
