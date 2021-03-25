@@ -22,15 +22,15 @@ const Heading: FC<HeadingProps> = props => {
         <FlexView style={{ alignItems: "flex-end", height: 32, marginBottom: props.disabled ? 0 : Spacing.small }}>
             <Text
                 medium={true}
-                fontWeight={props.fontWeight || "bold"}
+                fontWeight={props.fontWeight || "medium"}
                 disabled={props.disabled}
-                style={[{ flex: 1, fontSize: IS_DESKTOP ? 24 : 18, paddingBottom: Spacing.tiny }, props.style]}>
+                style={[{ flex: 1, fontSize: IS_DESKTOP ? 18 : 14, paddingBottom: Spacing.tiny }, props.style]}>
                 {props.text}
             </Text>
             {props.buttonText && (
                 <Button
                     type={"clear"}
-                    size={"small"}
+                    size={"normal"}
                     title={props.buttonText}
                     onPress={props.onPressButton}
                     color={accent}

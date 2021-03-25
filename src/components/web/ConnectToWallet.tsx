@@ -6,26 +6,40 @@ import { IS_DESKTOP, Spacing } from "../../constants/dimension";
 import { EthersContext } from "../../context/EthersContext";
 import { GlobalContext } from "../../context/GlobalContext";
 import useColors from "../../hooks/useColors";
+import useStyles from "../../hooks/useStyles";
 import useTranslation from "../../hooks/useTranslation";
 import Button from "../Button";
 import WebFooter from "./WebFooter";
+import { default as network } from '../../../web/network.json';
 
 const ConnectWallet = () => {
     const { darkMode } = useContext(GlobalContext);
+    const { shadow } = useStyles();
     const metaMask = window.ethereum?.isMetaMask || false;
-    const source = metaMask
-        ? darkMode
-            ? require("../../../assets/metamask-dark.png")
-            : require("../../../assets/metamask.png")
-        : require("../../../assets/sushiswap.jpg");
+    const source = darkMode ? require("../../../assets/metamask-dark.png") : require("../../../assets/metamask.png")
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Image
-                source={source}
-                style={{ width: metaMask ? 223 : 200, height: metaMask ? 183 : 200, marginBottom: Spacing.normal }}
-            />
-            {window.ethereum && <ConnectButton />}
-            <WalletConnectButton />
+            <View style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: darkMode ? '#1F2127' : '#fff',
+                    width: '90%',
+                    maxWidth: '400px',
+                    maxHeight: '400px',
+                    paddingTop: '20px',
+                    paddingBottom: '20px',
+                    marginTop: 80,
+                    borderRadius: 12,
+                    ...shadow()
+                }}>
+                <Image
+                    source={source}
+                    style={{ width: 148, height: 143, marginBottom: Spacing.normal }}
+                />
+                {window.ethereum && <ConnectButton />}
+                <WalletConnectButton />
+            </View>
             <WebFooter simple={true} />
         </View>
     );
@@ -47,11 +61,15 @@ const ConnectButton = () => {
     return (
         <Button
             size={"large"}
-            color={metaMask ? "#e2761b" : primary}
+            color={primary}
             onPress={onPress}
             title={metaMask ? "MetaMask" : t("connect")}
-            containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
-            style={{ marginTop: Spacing.small, marginHorizontal: Spacing.normal }}
+            containerStyle={{ width: IS_DESKTOP ? 400 : "100%" }}
+            style={{
+                marginTop: Spacing.small, 
+                marginHorizontal: Spacing.normal,
+                borderRadius: '8px'
+            }}
         />
     );
 };
@@ -59,13 +77,13 @@ const ConnectButton = () => {
 const WalletConnectButton = () => {
     const { darkMode } = useContext(GlobalContext);
     const { primary } = useColors();
-    const { setEthereum } = useContext(EthersContext);
+    const { setEthereum, chainId } = useContext(EthersContext);
+
     const onPress = async () => {
-        const ethereum = new WalletConnectProvider({
-            rpc: {
-                1: "https://eth-mainnet.alchemyapi.io/v2/fF51JjrwO8qCZW13KRflYpqU_ZeOH1Er"
-            }
-        });
+        const rpc = {
+            [chainId]: network[chainId].alchemyUrl
+        }
+        const ethereum = new WalletConnectProvider({rpc});
         await ethereum.enable();
         // @ts-ignore
         setEthereum(ethereum);
@@ -74,11 +92,15 @@ const WalletConnectButton = () => {
         <Button
             size={"large"}
             type={"outline"}
-            color={darkMode ? "white" : primary}
+            color={primary}
             onPress={onPress}
             title={"WalletConnect"}
-            containerStyle={{ width: IS_DESKTOP ? 440 : "100%" }}
-            style={{ marginTop: Spacing.small, marginHorizontal: Spacing.normal }}
+            containerStyle={{ width: IS_DESKTOP ? 400 : "100%" }}
+            style={{
+                marginTop: Spacing.small,
+                marginHorizontal: Spacing.normal,
+                borderRadius: '8px'
+            }}
         />
     );
 };

@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
-import { Platform, View } from "react-native";
+import React, { lazy, Suspense, useContext, useEffect, useState, useRef } from "react";
+import { Platform, View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { HashRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import { EthersContext } from "../context/EthersContext";
 import { GlobalContext } from "../context/GlobalContext";
 import useColors from "../hooks/useColors";
 import EmptyScreen from "./EmptyScreen";
+import Drawer from 'react-native-drawer'
 
 const FarmingScreen = lazy(() => import("./FarmingScreen"));
 const HarvestScreen = lazy(() => import("./HarvestScreen"));
@@ -34,54 +35,65 @@ export const Screens = () => {
 // tslint:disable-next-line:max-func-body-length
 const WebScreens = () => {
     const { address } = useContext(EthersContext);
-    const [menuExpanded, setMenuExpanded] = useState(false);
     const { background } = useColors();
-    useEffect(() => {
-        if (!address) setMenuExpanded(false);
-    }, [address]);
+    const { darkMode } = useContext(GlobalContext);
+    const drawer = useRef(null)
+
+    const mainContent = (
+        <>
+            <Suspense fallback={<EmptyScreen />}>
+                <Switch>
+                    <Route path={"/swap/my-orders"}>
+                        <MyLimitOrdersScreen />
+                    </Route>
+                    <Route path={"/swap"}>
+                        <SwapScreen />
+                    </Route>
+                    <Route path={"/liquidity/migrate"}>
+                        <Redirect to={"/migrate"} />
+                    </Route>
+                    <Route path={"/liquidity/remove"}>
+                        <RemoveLiquidityScreen />
+                    </Route>
+                    <Route path={"/liquidity"}>
+                        <LiquidityScreen />
+                    </Route>
+                    <Route path={"/farming/harvest"}>
+                        <HarvestScreen />
+                    </Route>
+                    <Route path={"/farming"}>
+                        <FarmingScreen />
+                    </Route>
+                    <Route path={"/migrate"}>
+                        <MigrateScreen />
+                    </Route>
+                    <Route path={"/staking/unstake"}>
+                        <UnstakeScreen />
+                    </Route>
+                    <Route path={"/staking"}>
+                        <StakeScreen />
+                    </Route>
+                    <Route path={"/"} exact={true}>
+                        <HomeScreen />
+                    </Route>
+                    <Redirect to={"/"} />
+                </Switch>
+            </Suspense>
+            <WebHeader openMenu={() => drawer.current?.open()} />
+        </>
+    )
+
     return (
         <Router>
-            <View style={{ flex: 1, backgroundColor: background }}>
-                <Suspense fallback={<EmptyScreen />}>
-                    <Switch>
-                        <Route path={"/swap/my-orders"}>
-                            <MyLimitOrdersScreen />
-                        </Route>
-                        <Route path={"/swap"}>
-                            <SwapScreen />
-                        </Route>
-                        <Route path={"/liquidity/migrate"}>
-                            <Redirect to={"/migrate"} />
-                        </Route>
-                        <Route path={"/liquidity/remove"}>
-                            <RemoveLiquidityScreen />
-                        </Route>
-                        <Route path={"/liquidity"}>
-                            <LiquidityScreen />
-                        </Route>
-                        <Route path={"/farming/harvest"}>
-                            <HarvestScreen />
-                        </Route>
-                        <Route path={"/farming"}>
-                            <FarmingScreen />
-                        </Route>
-                        <Route path={"/migrate"}>
-                            <MigrateScreen />
-                        </Route>
-                        <Route path={"/staking/unstake"}>
-                            <UnstakeScreen />
-                        </Route>
-                        <Route path={"/staking"}>
-                            <StakeScreen />
-                        </Route>
-                        <Route path={"/"} exact={true}>
-                            <HomeScreen />
-                        </Route>
-                        <Redirect to={"/"} />
-                    </Switch>
-                </Suspense>
-                <WebHeader onExpandMenu={() => setMenuExpanded(true)} />
-                {!IS_DESKTOP && <MobileWebMenu expanded={menuExpanded} onCollapse={() => setMenuExpanded(false)} />}
+            <View style={{ flex: 1, background: background, overflow: 'hidden' }}>
+                <Drawer
+                    ref={drawer}
+                    side='right'
+                    openDrawerOffset={100}
+                    content={<MobileWebMenu closeMenu={() => drawer.current.close()} />}
+                >
+                    {mainContent}
+                </Drawer>
             </View>
         </Router>
     );

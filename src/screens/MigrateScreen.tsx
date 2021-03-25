@@ -3,7 +3,6 @@ import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
 import ApproveButton from "../components/ApproveButton";
-import BackgroundImage from "../components/BackgroundImage";
 import Border from "../components/Border";
 import Button from "../components/Button";
 import ChangeNetwork from "../components/ChangeNetwork";
@@ -36,8 +35,8 @@ const MigrateScreen = () => {
     const t = useTranslation();
     return (
         <Screen>
+            <MigrateSubMenu />
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("migrate-liquidity")} />
                     <Text light={true}>{t("migrate-liquidity-desc")}</Text>
@@ -45,7 +44,6 @@ const MigrateScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <MigrateSubMenu />
         </Screen>
     );
 };
@@ -53,7 +51,7 @@ const MigrateScreen = () => {
 const Migrate = () => {
     const { ethereum, chainId } = useContext(EthersContext);
     const state = useMigrateState();
-    if (chainId !== 1) return <ChangeNetwork />;
+    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             {!ethereum?.isWalletConnect && (

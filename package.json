@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@codler/react-native-keyboard-aware-scroll-view": "^1.0.1",
-    "@expo-google-fonts/open-sans": "^0.1.0",
+    "@expo-google-fonts/rubik": "^0.1.0",
     "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.9.0",
@@ -45,6 +45,7 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-appearance": "^0.3.4",
+    "react-native-drawer": "^2.5.1",
     "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-reanimated": "~1.13.0",

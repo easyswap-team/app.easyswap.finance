@@ -12,6 +12,7 @@ import DarkModeSwitch from "../DarkModeSwitch";
 import FlexView from "../FlexView";
 import SvgLogoDark from "../svg/SvgLogoDark";
 import SvgLogoLight from "../svg/SvgLogoLight";
+import { IconMenu, IconMenuDark } from "../svg/Icons"
 import Text from "../Text";
 
 export interface WebHeaderProps {
@@ -45,7 +46,7 @@ const WebHeader: FC<WebHeaderProps> = props => {
                     paddingHorizontal: Spacing.normal
                 }}>
                 <Title />
-                {IS_DESKTOP ? <Menu /> : <MenuIcon onExpand={props.onExpandMenu} />}
+                {IS_DESKTOP ? <Menu /> : <MenuIcon openMenu={props.openMenu} />}
             </FlexView>
         </View>
     );
@@ -57,7 +58,7 @@ export const Title = () => {
     return (
         <View style={{ alignSelf: "center" }}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
-                <SvgLogo width={259} height={45} style={{ marginTop: 8, marginLeft: -16 }} />
+                <SvgLogo width={127} height={28} style={{ marginTop: 8, marginLeft: -10 }} />
             </Link>
         </View>
     );
@@ -74,8 +75,6 @@ const Menu = () => {
             <MenuItem title={t("menu.home")} path={"/"} />
             <MenuItem title={t("menu.swap")} path={"/swap"} />
             <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
-            <MenuItem title={t("menu.migrate")} path={"/migrate"} />
-            <MenuItem title={t("menu.stake")} path={"/staking"} />
             <MenuItem title={t("menu.farm")} path={"/farming"} />
             <DarkModeSwitch style={{ marginLeft: Spacing.small }} />
             <Status />
@@ -102,9 +101,11 @@ const MenuItem = ({ title, path }) => {
     );
 };
 
-const MenuIcon = ({ onExpand }) => {
+const MenuIcon = ({ openMenu }) => {
     const { textDark } = useColors();
-    return <Icon type={"material-community"} name={"menu"} size={28} color={textDark} onPress={onExpand} />;
+    const { darkMode } = useContext(GlobalContext);
+    const MenuBtn = darkMode ? IconMenuDark : IconMenu;
+    return <MenuBtn width={24} height={10} style={{ alignSelf: 'center' }} color={textDark} onClick={openMenu} />;
 };
 
 const Status = () => {

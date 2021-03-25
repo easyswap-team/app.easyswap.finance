@@ -1,8 +1,13 @@
-import { ChainId, CurrencyAmount, Percent, Token as SDKToken, TokenAmount, WETH } from "@sushiswap/sdk";
+import { ChainId, CurrencyAmount, Percent, Token as SDKToken, TokenAmount } from "@sushiswap/sdk";
 import { ethers } from "ethers";
 import { ETH } from "../constants/tokens";
-import Token from "../types/Token";
 import getContract from "./getContract";
+import { Token} from "@sushiswap/sdk";
+
+// ToDo Rename to WBSC (Wrapped BSC)
+export const WETH = {
+    1: new Token(ChainId.MAINNET, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WBNB', 'Wrapped BNB')
+};
 
 export const formatUSD = (value: number, maxFraction = 0) => {
     const formatter = new Intl.NumberFormat("en-US", {

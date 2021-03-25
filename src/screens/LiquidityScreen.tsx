@@ -6,7 +6,6 @@ import { ethers } from "ethers";
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
 import ApproveButton from "../components/ApproveButton";
-import BackgroundImage from "../components/BackgroundImage";
 import Border from "../components/Border";
 import Button from "../components/Button";
 import ChangeNetwork from "../components/ChangeNetwork";
@@ -41,13 +40,16 @@ import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { convertAmount, convertToken, formatBalance, isEmptyValue, isETH, isETHWETHPair, parseBalance } from "../utils";
 import Screen from "./Screen";
+import { default as network } from '../../web/network.json';
+import { SelectTokenIcon, TokenDivider } from '../components/svg/Icons'
+import TokenItem from "../components/TokenItem";
 
 const LiquidityScreen = () => {
     const t = useTranslation();
     return (
         <Screen>
+            <LiquiditySubMenu />
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("add-liquidity")} />
                     <Text light={true}>{t("add-liquidity-desc")}</Text>
@@ -55,7 +57,6 @@ const LiquidityScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <LiquiditySubMenu />
         </Screen>
     );
 };
@@ -63,7 +64,7 @@ const LiquidityScreen = () => {
 const AddLiquidity = () => {
     const { chainId } = useContext(EthersContext);
     const state = useAddLiquidityState();
-    if (chainId !== 1) return <ChangeNetwork />;
+    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             {/*<ModeSelect state={state} />*/}
@@ -109,27 +110,95 @@ const ModeSelect = ({ state }: { state: AddLiquidityState }) => {
 const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
+    const [expanded, setExpanded] = useState(false)
+    const { tokenBg } = useColors();
     return (
-        <TokenSelect
-            title={t("1st-token")}
-            symbol={state.fromSymbol}
-            onChangeSymbol={state.setFromSymbol}
-            hidden={token => !customTokens.find(tk => tk.address === token.address) && token.balance.isZero()}
-        />
+        <View>
+            <Heading text={t("1st-token")} />
+            {
+                state.fromToken ? 
+                    <TokenItem
+                        key={state.fromToken.address}
+                        token={state.fromToken}
+                        selected={false}
+                        onSelectToken={() => {}}
+                        disabled={false}
+                        onClick={() => {setExpanded(true)}}
+                    />
+                : 
+                    <View
+                        onClick={() => {setExpanded(true)}}
+                        style={{
+                            background: tokenBg,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            padding: 20,
+                            borderRadius: 8
+                        }}
+                    >
+                        <SelectTokenIcon />
+                        <Text style={{marginLeft: 15}}>Select a token</Text>
+                    </View>
+            }
+            <TokenSelect
+                title={t("1st-token")}
+                symbol={state.fromSymbol}
+                modalSettings={{
+                    animationType: "slide",
+                    transparent: true,
+                    visible: expanded,
+                    closeModal: () => {setExpanded(false)}
+                }}
+                onChangeSymbol={state.setFromSymbol}
+                hidden={token => !customTokens.find(tk => tk.address === token.address) && token.balance.isZero()}
+            />
+        </View>
     );
 };
+
 
 const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
-    if (!state.fromSymbol) {
-        return <Heading text={t("2nd-token")} disabled={true} />;
-    }
+    const [expanded, setExpanded] = useState(false)
+    const { tokenBg } = useColors();
     return (
         <View>
+            <Heading text={t("2nd-token")} />
+            {
+                state.toToken ? 
+                    <TokenItem
+                        key={state.toToken.address}
+                        token={state.toToken}
+                        selected={false}
+                        onSelectToken={() => {}}
+                        disabled={false}
+                        onClick={() => {setExpanded(true)}}
+                    />
+                : 
+                    <View
+                        onClick={() => {setExpanded(true)}}
+                        style={{
+                            background: tokenBg,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            padding: 20,
+                            borderRadius: 8
+                        }}
+                    >
+                        <SelectTokenIcon />
+                        <Text style={{marginLeft: 15}}>Select a token</Text>
+                    </View>
+            }
             <TokenSelect
                 title={t("2nd-token")}
                 symbol={state.toSymbol}
+                modalSettings={{
+                    animationType: "slide",
+                    transparent: true,
+                    visible: expanded,
+                    closeModal: () => {setExpanded(false)}
+                }}
                 onChangeSymbol={state.setToSymbol}
                 hidden={token =>
                     token.symbol === state.fromSymbol ||

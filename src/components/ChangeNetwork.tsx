@@ -9,7 +9,8 @@ const ChangeNetwork = ({ chainId = 1 }) => {
     const t = useTranslation();
     const networkName = {
         1: "Mainnet",
-        42: "Kovan"
+        42: "Kovan",
+        97: "Testnet"
     }[chainId];
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

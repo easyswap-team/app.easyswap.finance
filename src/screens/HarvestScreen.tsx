@@ -3,7 +3,6 @@ import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
-import BackgroundImage from "../components/BackgroundImage";
 import Border from "../components/Border";
 import Button from "../components/Button";
 import ChangeNetwork from "../components/ChangeNetwork";
@@ -39,8 +38,8 @@ const HarvestScreen = () => {
     const t = useTranslation();
     return (
         <Screen>
+            <FarmingSubMenu />
             <Container>
-                <BackgroundImage />
                 <Content>
                     <Title text={t("harvest-sushi")} />
                     <Text light={true}>{t("harvest-sushi-desc")}</Text>
@@ -48,7 +47,6 @@ const HarvestScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <FarmingSubMenu />
         </Screen>
     );
 };
@@ -57,7 +55,7 @@ const Harvest = () => {
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useFarmingState(true);
-    if (chainId !== 1) return <ChangeNetwork />;
+    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             <LPTokenSelect

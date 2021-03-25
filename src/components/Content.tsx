@@ -8,20 +8,19 @@ import useStyles from "../hooks/useStyles";
 
 const Content: React.FunctionComponent<ViewProps> = props => {
     const { darkMode } = useContext(GlobalContext);
-    const { borderDark: borderColor, background } = useColors();
-    const { border, shadow } = useStyles();
+    const { background, backgroundLight } = useColors();
+    const { shadow } = useStyles();
     return (
         <View
             {...props}
             style={[
                 {
-                    ...border({ color: darkMode ? borderColor : undefined }),
                     ...shadow(),
-                    backgroundColor: background,
+                    backgroundColor: backgroundLight,
                     width: IS_DESKTOP ? DESKTOP_CONTENT_WIDTH : SCREEN_WIDTH - Spacing.large,
                     marginLeft: "auto",
                     marginRight: "auto",
-                    marginTop: Spacing.huge + SUB_MENU_HEIGHT,
+                    marginTop: Spacing.normal,
                     marginBottom: Spacing.large,
                     padding: IS_DESKTOP ? Spacing.normal : Spacing.small + Spacing.tiny
                 },

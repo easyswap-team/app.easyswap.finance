@@ -90,7 +90,7 @@ const EmptyList = ({ text }: { text: string }) => {
 };
 
 export const LPTokenItem: FC<LPTokenItemProps> = props => {
-    const { textMedium } = useColors();
+    const { textMedium, textLight } = useColors();
     const balance = formatBalance(props.token.balance, props.token.decimals, 6);
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
@@ -101,12 +101,18 @@ export const LPTokenItem: FC<LPTokenItemProps> = props => {
             onPress={onPress}
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
             <FlexView style={{ alignItems: "center" }}>
-                <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-                <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
-                <Text medium={true} caption={true} style={{ marginLeft: Spacing.tiny }}>
-                    {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
-                </Text>
+                <View style={{alignSelf: 'flex-start'}}>
+                    <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
+                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
+                </View>
+                <View style={{ marginLeft: Spacing.normal }}>
+                    <Text style={{color: textLight, paddingBottom: 5}}>Liquidity pair</Text>
+                    <Text medium={true} caption={true}>
+                        {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                    </Text>
+                </View>
                 <View style={{ flex: 1, marginLeft: Spacing.tiny }}>
+                    <Text style={{color: textLight, paddingBottom: 5, textAlign: "right"}}>Amount</Text>
                     <Text caption={true} light={true} style={{ textAlign: "right", color: textMedium }}>
                         {balance}
                     </Text>

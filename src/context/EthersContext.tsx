@@ -12,20 +12,11 @@ import useSDK from "../hooks/useSDK";
 import Ethereum from "../types/Ethereum";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
-import { getContract, isWETH } from "../utils";
+import { getContract, WETH, isWETH } from "../utils";
 import { logTransaction } from "../utils/analytics-utils";
 import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
 
 export type OnBlockListener = (block?: number) => void | Promise<void>;
-
-export const ALCHEMY_PROVIDER = new ethers.providers.AlchemyProvider(
-    1,
-    __DEV__ ? process.env.MAINNET_API_KEY : "Em65gXMcaJl7JF9ZxcMwa4r5TcrU8wZV"
-);
-export const KOVAN_PROVIDER = new ethers.providers.AlchemyProvider(
-    42,
-    __DEV__ ? process.env.KOVAN_API_KEY : "MOX3sLJxKwltJjW6XZ8aBtDpenq-18St"
-);
 
 export const EthersContext = React.createContext({
     ethereum: undefined as Ethereum | undefined,
@@ -70,6 +61,8 @@ export const EthersContextProvider = ({ children }) => {
     const [tokens, setTokens] = useState<TokenWithValue[]>([]);
     const [customTokens, setCustomTokens] = useState<Token[]>([]);
     const [loadingTokens, setLoadingTokens] = useState(true);
+
+    const {ALCHEMY_PROVIDER} = global
 
     useAsyncEffect(async () => {
         // Mainnet

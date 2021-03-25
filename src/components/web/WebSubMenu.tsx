@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import { View } from "react-native";
 import { Link, useRouteMatch } from "react-router-dom";
 
-import { HEADER_WIDTH, IS_DESKTOP, Spacing, SUB_MENU_HEIGHT } from "../../constants/dimension";
+import { HEADER_WIDTH, IS_DESKTOP, Spacing, SUB_MENU_HEIGHT, DESKTOP_CONTENT_WIDTH, SCREEN_WIDTH } from "../../constants/dimension";
 import useColors from "../../hooks/useColors";
+import useStyles from "../../hooks/useStyles";
 import useTranslation from "../../hooks/useTranslation";
 import FlexView from "../FlexView";
 import Text from "../Text";
@@ -105,22 +106,20 @@ export const FarmingSubMenu = () => {
 
 const WebSubMenu: FC<WebSubMenuProps> = props => {
     const { submenu } = useColors();
+    const { border } = useStyles()
     return (
         <View
             style={{
-                position: "absolute",
-                top: 0,
-                height: SUB_MENU_HEIGHT,
-                width: "100%",
-                backgroundColor: submenu
-            }}>
+                width: IS_DESKTOP ? DESKTOP_CONTENT_WIDTH : SCREEN_WIDTH - Spacing.large,
+                ...border({padding: 'tiny'}),
+                alignSelf: 'center',
+                marginLeft: -15,
+                marginTop: 30
+            }}
+        >
             <FlexView
                 style={{
-                    width: IS_DESKTOP ? HEADER_WIDTH : "100%",
-                    marginTop: 2,
-                    paddingHorizontal: Spacing.normal,
-                    alignSelf: "center",
-                    justifyContent: "flex-end",
+                    justifyContent: "space-between",
                     alignItems: "center"
                 }}>
                 {props.items.map(item => (
@@ -132,23 +131,26 @@ const WebSubMenu: FC<WebSubMenuProps> = props => {
 };
 
 const MenuItem = ({ title, path }) => {
-    const { accent, textLight } = useColors();
+    const { textMedium, textLight, tokenBg } = useColors();
     const match = useRouteMatch(path);
     const active = match?.isExact;
     return (
         <Link
             to={path}
             style={{
-                marginLeft: Spacing.small,
-                paddingTop: Spacing.tiny,
-                paddingBottom: Spacing.tiny,
+                width: '50%',
+                background: active ? tokenBg : 'none',
+                borderRadius: 8,
+                textAlign: 'center',
+                paddingTop: Spacing.small,
+                paddingBottom: Spacing.small,
                 textDecoration: "none"
             }}>
             <Text
                 fontWeight={active ? "regular" : "light"}
                 style={{
-                    fontSize: 13,
-                    color: active ? accent : textLight
+                    fontSize: 16,
+                    color: active ? textMedium : textLight
                 }}>
                 {title}
             </Text>

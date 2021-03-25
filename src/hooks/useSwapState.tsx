@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { Trade } from "@sushiswap/sdk";
 import useAsyncEffect from "use-async-effect";
 import Fraction from "../constants/Fraction";
-import { ALCHEMY_PROVIDER, EthersContext } from "../context/EthersContext";
+import { EthersContext } from "../context/EthersContext";
 import { formatBalance, isEmptyValue, isETH, parseBalance, pow10 } from "../utils";
 import useDelayedEffect from "./useDelayedEffect";
 import useDelayedOnBlockEffect from "./useDelayedOnBlockEffect";
@@ -41,7 +41,7 @@ const useSwapState: () => SwapState = () => {
     const { calculateLimitOrderFee, calculateLimitOrderReturn } = useSettlement();
     const { createOrder } = useSettlement();
     const [loading, setLoading] = useState(true);
-    const [orderType, setOrderType] = useState<OrderType>();
+    const [orderType, setOrderType] = useState<OrderType>('market');
     const [trade, setTrade] = useState<Trade>();
     const [unsupported, setUnsupported] = useState(false);
     const [swapFee, setSwapFee] = useState("");
