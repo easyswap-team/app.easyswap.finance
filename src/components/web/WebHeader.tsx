@@ -34,14 +34,15 @@ const WebHeader: FC<WebHeaderProps> = props => {
                 backgroundColor: header,
                 borderBottomWidth: 1,
                 borderColor: borderDark
-            }}>
+            }}
+        >
             <FlexView
                 style={{
                     flex: 1,
                     width: IS_DESKTOP ? HEADER_WIDTH : "100%",
                     alignSelf: "center",
                     justifyContent: "space-between",
-                    alignItems: "flex-end",
+                    alignItems: "center",
                     paddingTop: Spacing.small,
                     paddingHorizontal: Spacing.normal
                 }}>
@@ -67,18 +68,18 @@ export const Title = () => {
 const Menu = () => {
     const t = useTranslation();
     return (
-        <FlexView
-            style={{
-                height: "100%",
-                alignItems: "center"
-            }}>
-            <MenuItem title={t("menu.home")} path={"/"} />
-            <MenuItem title={t("menu.swap")} path={"/swap"} />
-            <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
-            <MenuItem title={t("menu.farm")} path={"/farming"} />
-            <DarkModeSwitch style={{ marginLeft: Spacing.small }} />
-            <Status />
-        </FlexView>
+        <>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <MenuItem title={t("menu.home")} path={"/"} />
+                <MenuItem title={t("menu.swap")} path={"/swap"} />
+                <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
+                <MenuItem title={t("menu.farm")} path={"/farming"} />
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Status />
+                <DarkModeSwitch style={{ marginLeft: Spacing.small }} />
+            </View>
+        </>
     );
 };
 
@@ -115,7 +116,7 @@ const Status = () => {
     const title = !!address
         ? ensName || address!.substring(0, 6) + "..." + address!.substring(address!.length - 4, address!.length)
         : t("menu.not-connected");
-    const color = chainId === 1 ? green : chainId === 42 ? "#8A2BE2" : textLight;
+    const color = address ? green : textLight;
     const onPress = () => {
         if (confirm(t("do-you-want-to-disconnect"))) ethereum?.disconnect?.();
     };
@@ -127,12 +128,14 @@ const Status = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     marginLeft: Spacing.small,
-                    paddingHorizontal: Spacing.small,
-                    borderRadius: 16,
+                    paddingHorizontal: 19,
+                    paddingTop: 19,
+                    paddingBottom: 19,
+                    borderRadius: 8,
                     borderWidth: 1,
                     borderColor: borderDark
                 }}>
-                <View style={{ backgroundColor: color, width: 6, height: 6, borderRadius: 3, marginRight: 12 }} />
+                <View style={{ backgroundColor: color, width: 12, height: 12, borderRadius: 12, marginRight: 12 }} />
                 <Text style={{ fontSize: 15, color: textLight, marginRight: 2 }}>{title}</Text>
                 {ethereum?.isWalletConnect && <CloseIcon />}
             </FlexView>

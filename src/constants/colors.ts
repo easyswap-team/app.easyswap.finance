@@ -12,7 +12,7 @@ export const Colors = {
     },
     light: {
         accent: "#4373EE",
-        header: "#ffffffb8",
+        header: "#F6F8FC",
         submenu: "#ffffff80",
         background: "linear-gradient(135deg, rgba(222,232,244,0) 0%,rgba(222,232,244,1) 50%,rgba(125,185,232,0) 100%)",
         backgroundLight: "#fff",

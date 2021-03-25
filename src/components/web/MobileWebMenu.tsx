@@ -23,7 +23,7 @@ import {
 // tslint:disable-next-line:max-func-body-length
 const MobileWebMenu = ({ closeMenu }) => {
     const t = useTranslation();
-    const { accent, whiteLight } = useColors();
+    const { accent, whiteLight, white } = useColors();
     return (
         <TouchableWithoutFeedback style={{ height: "100%" }} onPress={() => closeMenu()}>
             <View
@@ -61,7 +61,7 @@ const MobileWebMenu = ({ closeMenu }) => {
                     <MobileWebMenuItem title={t("menu.farm")} path={"/farming"} name='farm' />
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
-                    <DarkModeSwitch style={{ marginBottom: 4 }} />
+                    <DarkModeSwitch color={white} style={{ marginBottom: 4 }} />
                     <Text style={{marginLeft: 10, opacity: .5, color: whiteLight}}>Change mode</Text>
                 </View>
             </View>
@@ -102,7 +102,7 @@ const MobileWebMenuItem = ({ title, path, name }) => {
 
 const Status = () => {
     const t = useTranslation();
-    const { textLight, textMedium, green, accent, whiteLight } = useColors();
+    const { textLight, white, green, accent, whiteLight } = useColors();
     const { ethereum, chainId, address, ensName } = useContext(EthersContext);
     const connected = address;
     const title = connected
@@ -116,7 +116,7 @@ const Status = () => {
         <View>
             <FlexView style={{ marginBottom: Spacing.tiny, alignItems: 'center' }}>
                 <View style={{ backgroundColor: color, width: 12, height: 12, borderRadius: 12}} />
-                <Text style={{ fontSize: 18, color: connected ? textMedium : whiteLight, marginLeft: 8 }}>{title}</Text>
+                <Text style={{ fontSize: 18, color: connected ? white : whiteLight, marginLeft: 8 }}>{title}</Text>
             </FlexView>
             {ethereum?.isWalletConnect && (
                 <Text
