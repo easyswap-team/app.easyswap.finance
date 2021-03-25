@@ -38,6 +38,7 @@ const WebScreens = () => {
     const { background } = useColors();
     const { darkMode } = useContext(GlobalContext);
     const drawer = useRef(null)
+    const bg = require("../../assets/BG.png");
 
     const mainContent = (
         <>
@@ -85,7 +86,7 @@ const WebScreens = () => {
 
     return (
         <Router>
-            <View style={{ flex: 1, background: background, overflow: 'hidden' }}>
+            <View style={{ flex: 1, background: `url(${bg}) no-repeat center top #f6f8fc`, overflow: 'hidden' }}>
                 <Drawer
                     ref={drawer}
                     side='right'
