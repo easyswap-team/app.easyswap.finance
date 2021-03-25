@@ -41,7 +41,7 @@ import Token from "../types/Token";
 import { convertAmount, convertToken, formatBalance, isEmptyValue, isETH, isETHWETHPair, parseBalance } from "../utils";
 import Screen from "./Screen";
 import { default as network } from '../../web/network.json';
-import { SelectTokenIcon, TokenDivider } from '../components/svg/Icons'
+import { SelectTokenIcon, TokenDivider, TriangleDown } from '../components/svg/Icons'
 import TokenItem from "../components/TokenItem";
 
 const LiquidityScreen = () => {
@@ -64,13 +64,17 @@ const LiquidityScreen = () => {
 const AddLiquidity = () => {
     const { chainId } = useContext(EthersContext);
     const state = useAddLiquidityState();
+    const { border } = useColors();
     if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             {/*<ModeSelect state={state} />*/}
             {/*<Border />*/}
             <FromTokenSelect state={state} />
-            <Border />
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45}}>
+                <View style={{width: '90%', height: 1, background: border}}></View>
+                <TokenDivider />
+            </View>
             <ToTokenSelect state={state} />
             <Border />
             <FromTokenInput state={state} />
@@ -111,7 +115,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
     const [expanded, setExpanded] = useState(false)
-    const { tokenBg } = useColors();
+    const { tokenBg, textMedium } = useColors();
     return (
         <View>
             <Heading text={t("1st-token")} />
@@ -132,21 +136,23 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                             background: tokenBg,
                             flexDirection: 'row',
                             alignItems: 'center',
+                            justifyContent: 'space-between',
                             padding: 20,
                             borderRadius: 8
                         }}
                     >
-                        <SelectTokenIcon />
-                        <Text style={{marginLeft: 15}}>Select a token</Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <SelectTokenIcon />
+                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
+                        </View>
+                        <TriangleDown color={textMedium} />
                     </View>
             }
             <TokenSelect
                 title={t("1st-token")}
                 symbol={state.fromSymbol}
                 modalSettings={{
-                    animationType: "slide",
-                    transparent: true,
-                    visible: expanded,
+                    isVisible: expanded,
                     closeModal: () => {setExpanded(false)}
                 }}
                 onChangeSymbol={state.setFromSymbol}
@@ -161,7 +167,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
     const [expanded, setExpanded] = useState(false)
-    const { tokenBg } = useColors();
+    const { tokenBg, textMedium } = useColors();
     return (
         <View>
             <Heading text={t("2nd-token")} />
@@ -182,21 +188,23 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                             background: tokenBg,
                             flexDirection: 'row',
                             alignItems: 'center',
+                            justifyContent: 'space-between',
                             padding: 20,
                             borderRadius: 8
                         }}
                     >
-                        <SelectTokenIcon />
-                        <Text style={{marginLeft: 15}}>Select a token</Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <SelectTokenIcon />
+                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
+                        </View>
+                        <TriangleDown color={textMedium} />
                     </View>
             }
             <TokenSelect
                 title={t("2nd-token")}
                 symbol={state.toSymbol}
                 modalSettings={{
-                    animationType: "slide",
-                    transparent: true,
-                    visible: expanded,
+                    isVisible: expanded,
                     closeModal: () => {setExpanded(false)}
                 }}
                 onChangeSymbol={state.setToSymbol}
@@ -518,6 +526,7 @@ const SupplyButton = ({
             disabled={disabled}
             loading={state.adding}
             onPress={onPress}
+            type='solid'
         />
     );
 };

@@ -6,7 +6,7 @@ import Text from "./Text";
 
 interface TitleProps {
     text: string;
-    fontWeight?: "light" | "regular" | "bold";
+    fontWeight?: "light" | "regular" | "bold" | "medium";
     disabled?: boolean;
     style?: TextStyle;
 }
@@ -14,9 +14,9 @@ interface TitleProps {
 const Title: FC<TitleProps> = props => {
     return (
         <Text
-            fontWeight={props.fontWeight || "bold"}
+            fontWeight={props.fontWeight || "medium"}
             disabled={props.disabled}
-            style={[{ marginBottom: Spacing.tiny, fontSize: IS_DESKTOP ? 40 : 24 }, props.style]}>
+            style={[{ marginBottom: Spacing.tiny, fontSize: IS_DESKTOP ? 34 : 24 }, props.style]}>
             {props.text}
         </Text>
     );

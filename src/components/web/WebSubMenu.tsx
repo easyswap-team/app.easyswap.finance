@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { View } from "react-native";
 import { Link, useRouteMatch } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import useStyles from "../../hooks/useStyles";
 import useTranslation from "../../hooks/useTranslation";
 import FlexView from "../FlexView";
 import Text from "../Text";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export interface WebSubMenuItem {
     title: string;
@@ -105,16 +106,18 @@ export const FarmingSubMenu = () => {
 };
 
 const WebSubMenu: FC<WebSubMenuProps> = props => {
-    const { submenu } = useColors();
+    const { submenu, white, borderDark } = useColors();
     const { border } = useStyles()
+    const { darkMode } = useContext(GlobalContext);
+
     return (
-        <View
+        <View 
             style={{
-                width: IS_DESKTOP ? DESKTOP_CONTENT_WIDTH : SCREEN_WIDTH - Spacing.large,
-                ...border({padding: 'tiny'}),
+                width: IS_DESKTOP ? 330 : SCREEN_WIDTH - Spacing.large,
+                ...border({padding: 5, color: darkMode ? borderDark : '#ccd5df'}),
                 alignSelf: 'center',
-                marginLeft: -15,
-                marginTop: 30
+                marginLeft: -10,
+                marginTop: 30,
             }}
         >
             <FlexView
@@ -131,7 +134,7 @@ const WebSubMenu: FC<WebSubMenuProps> = props => {
 };
 
 const MenuItem = ({ title, path }) => {
-    const { textMedium, textLight, tokenBg } = useColors();
+    const { textMedium, textLight, tokenBg, subMenuItem } = useColors();
     const match = useRouteMatch(path);
     const active = match?.isExact;
     return (
@@ -139,11 +142,11 @@ const MenuItem = ({ title, path }) => {
             to={path}
             style={{
                 width: '50%',
-                background: active ? tokenBg : 'none',
+                background: active ? subMenuItem : 'none',
                 borderRadius: 8,
                 textAlign: 'center',
-                paddingTop: Spacing.small,
-                paddingBottom: Spacing.small,
+                paddingTop: 9,
+                paddingBottom: 9,
                 textDecoration: "none"
             }}>
             <Text

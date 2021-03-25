@@ -33,7 +33,7 @@ const Text: FC<TextProps> = props => {
             style={[
                 {
                     fontFamily,
-                    fontSize: props.note ? 13 : props.caption ? 18 : 15,
+                    fontSize: props.note ? 13 : props.caption ? 16 : 14,
                     color
                 },
                 props.style

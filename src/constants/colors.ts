@@ -14,7 +14,6 @@ export const Colors = {
         accent: "#4373EE",
         header: "#F6F8FC",
         submenu: "#ffffff80",
-        background: "linear-gradient(135deg, rgba(222,232,244,0) 0%,rgba(222,232,244,1) 50%,rgba(125,185,232,0) 100%)",
         backgroundLight: "#fff",
         border: "#e5e5e5",
         borderDark: "#dedede",
@@ -25,13 +24,13 @@ export const Colors = {
         shadow: "#000",
         placeholder: "#b4b4b4",
         overlay: "#ffffffc0",
-        tokenBg: '#dfe8f466'
+        tokenBg: '#dfe8f466',
+        subMenuItem: '#4373ee1a'
     },
     dark: {
         accent: "#4373EE",
         header: "transparent",
         submenu: "#00000020",
-        background: "linear-gradient(135deg, rgba(32,34,41,1) 0%,rgba(40,47,65,1) 50%,rgba(32,34,41,1) 100%)",
         backgroundLight: "#1F2127",
         border: "#ffffff33",
         borderDark: "#ffffff1a",
@@ -42,6 +41,7 @@ export const Colors = {
         shadow: "#03080c",
         placeholder: "#666666",
         overlay: "#000000c0",
-        tokenBg: '#2A2C32'
+        tokenBg: '#2A2C32',
+        subMenuItem: '#2A2C32'
     }
 };

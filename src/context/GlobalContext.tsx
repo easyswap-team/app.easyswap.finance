@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 
 import * as Localization from "expo-localization";
@@ -22,6 +22,7 @@ export const GlobalContextProvider = ({ children }) => {
     const [locale, setLocale] = useState(Localization.locale);
     const [darkMode, setDarkMode] = useState(colorScheme === "dark");
     const [mnemonic, setMnemonic] = useState("");
+
     return (
         <GlobalContext.Provider
             value={{

@@ -63,7 +63,7 @@ const HomeScreen = ({navigation}) => {
                             text={loading ? t("fetching") : formatUSD(totalValue, 4)}
                             fontWeight={"light"}
                             disabled={loading}
-                            style={{ fontSize: IS_DESKTOP ? 32 : 24, marginBottom: 0, marginLeft: 15 }}
+                            style={{ fontSize: IS_DESKTOP ? 25 : 24, marginBottom: 0, marginLeft: 15 }}
                         />
                     </View>
                     <Home state={state} />

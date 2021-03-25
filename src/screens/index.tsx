@@ -35,10 +35,11 @@ export const Screens = () => {
 // tslint:disable-next-line:max-func-body-length
 const WebScreens = () => {
     const { address } = useContext(EthersContext);
-    const { background } = useColors();
     const { darkMode } = useContext(GlobalContext);
     const drawer = useRef(null)
-    const bg = require("../../assets/BG.png");
+    const bgLight = require("../../assets/BG.png");
+    const bgDark = require("../../assets/BG_dark.png");
+    const background = `url(${darkMode ? bgDark : bgLight}) no-repeat center top ${darkMode ? '#161a1e' : '#f6f8fc'}`
 
     const mainContent = (
         <>
@@ -86,7 +87,7 @@ const WebScreens = () => {
 
     return (
         <Router>
-            <View style={{ flex: 1, background: `url(${bg}) no-repeat center top #f6f8fc`, overflow: 'hidden' }}>
+            <View style={{ flex: 1, background: background, overflow: 'hidden' }}>
                 <Drawer
                     ref={drawer}
                     side='right'
