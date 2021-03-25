@@ -86,7 +86,7 @@ const WebScreens = () => {
 
     return (
         <Router>
-            <View style={{ flex: 1, background: `url(${bg}) no-repeat center top #f6f8fc`, overflow: 'hidden' }}>
+            <View style={{ flex: 1, background: darkMode ? background : `url(${bg}) no-repeat center top #f6f8fc`, overflow: 'hidden' }}>
                 <Drawer
                     ref={drawer}
                     side='right'

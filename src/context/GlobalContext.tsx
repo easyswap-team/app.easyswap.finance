@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 
 import * as Localization from "expo-localization";
@@ -13,7 +13,9 @@ export const GlobalContext = React.createContext({
     darkMode: false,
     setDarkMode: async (_darkMode: boolean) => {},
     mnemonic: "",
-    setMnemonic: (_mnemonic: string) => {}
+    setMnemonic: (_mnemonic: string) => {},
+    scrollTop: 0,
+    setScrollTop: (_scrollTop: number) => {}
 });
 
 // tslint:disable-next-line:max-func-body-length
@@ -22,6 +24,8 @@ export const GlobalContextProvider = ({ children }) => {
     const [locale, setLocale] = useState(Localization.locale);
     const [darkMode, setDarkMode] = useState(colorScheme === "dark");
     const [mnemonic, setMnemonic] = useState("");
+    const [scrollTop, setScrollTop] = useState(0)
+
     return (
         <GlobalContext.Provider
             value={{
@@ -53,7 +57,9 @@ export const GlobalContextProvider = ({ children }) => {
                 setMnemonic: async (mne: string) => {
                     await AsyncStorage.setItem("mnemonic", mne);
                     setMnemonic(mne);
-                }
+                },
+                scrollTop,
+                setScrollTop: value => setScrollTop(value)
             }}>
             {children}
         </GlobalContext.Provider>

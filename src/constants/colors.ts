@@ -25,7 +25,8 @@ export const Colors = {
         shadow: "#000",
         placeholder: "#b4b4b4",
         overlay: "#ffffffc0",
-        tokenBg: '#dfe8f466'
+        tokenBg: '#dfe8f466',
+        subMenuItem: '#4373ee1a'
     },
     dark: {
         accent: "#4373EE",
@@ -42,6 +43,7 @@ export const Colors = {
         shadow: "#03080c",
         placeholder: "#666666",
         overlay: "#000000c0",
-        tokenBg: '#2A2C32'
+        tokenBg: '#2A2C32',
+        subMenuItem: '#2A2C32'
     }
 };

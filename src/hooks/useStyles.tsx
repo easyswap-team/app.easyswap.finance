@@ -11,7 +11,7 @@ const useStyles = () => {
             borderColor: attrs?.color || borderDark,
             borderWidth: 1,
             borderRadius: attrs?.radius || 8,
-            padding: attrs?.padding ? Spacing[attrs.padding] : Spacing.small
+            padding: attrs?.padding ? attrs.padding : Spacing.small
         }),
         []
     );
