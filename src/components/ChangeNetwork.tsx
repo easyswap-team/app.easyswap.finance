@@ -5,12 +5,10 @@ import { Spacing } from "../constants/dimension";
 import useTranslation from "../hooks/useTranslation";
 import Text from "./Text";
 
-const ChangeNetwork = ({ chainId = 1 }) => {
+const ChangeNetwork = ({ chainId = 97 }) => {
     const t = useTranslation();
     const networkName = {
-        1: "Mainnet",
-        42: "Kovan",
-        97: "Testnet"
+        97: "Binance Smart Chain(BSC)"
     }[chainId];
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

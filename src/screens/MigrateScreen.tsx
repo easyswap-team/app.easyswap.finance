@@ -51,7 +51,7 @@ const MigrateScreen = () => {
 const Migrate = () => {
     const { ethereum, chainId } = useContext(EthersContext);
     const state = useMigrateState();
-    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
+    if (chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             {!ethereum?.isWalletConnect && (

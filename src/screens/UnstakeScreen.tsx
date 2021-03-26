@@ -47,7 +47,7 @@ const Staking = () => {
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useStakingState();
-    if (chainId !== 1 && chainId !== 97) return <ChangeNetwork />;
+    if (chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             <XSushiBalance state={state} />

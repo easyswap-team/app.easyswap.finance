@@ -62,7 +62,7 @@ const Swap = () => {
     const { chainId } = useContext(EthersContext);
     const state = useSwapState();
     const { border } = useColors();
-    if (chainId !== 1 && chainId !== 42 && chainId !== 97) return <ChangeNetwork />;
+    if (chainId !== 97) return <ChangeNetwork />;
     return (
         <View style={{ marginTop: Spacing.large }}>
             <FromTokenSelect state={state} />
