@@ -1,0 +1,26 @@
+diff --git a/node_modules/@sushiswap/sdk/dist/constants.d.ts b/node_modules/@sushiswap/sdk/dist/constants.d.ts
+index bcc9f5f..da336ef 100644
+--- a/node_modules/@sushiswap/sdk/dist/constants.d.ts
++++ b/node_modules/@sushiswap/sdk/dist/constants.d.ts
+@@ -16,7 +16,7 @@ export declare enum Rounding {
+     ROUND_HALF_UP = 1,
+     ROUND_UP = 2
+ }
+-export declare const FACTORY_ADDRESS = "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac";
++export declare const FACTORY_ADDRESS = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117";
+ export declare const INIT_CODE_HASH = "0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303";
+ export declare const MINIMUM_LIQUIDITY: JSBI;
+ export declare const ZERO: JSBI;
+diff --git a/node_modules/@sushiswap/sdk/dist/sdk.esm.js b/node_modules/@sushiswap/sdk/dist/sdk.esm.js
+index 27acef0..e1ba178 100644
+--- a/node_modules/@sushiswap/sdk/dist/sdk.esm.js
++++ b/node_modules/@sushiswap/sdk/dist/sdk.esm.js
+@@ -38,7 +38,7 @@ var Rounding;
+   Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
+ })(Rounding || (Rounding = {}));
+ 
+-var FACTORY_ADDRESS = '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac';
++var FACTORY_ADDRESS = '0xed926313B04Cb206eA317583FA41B1d9EaDd8117';
+ var INIT_CODE_HASH = '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303';
+ var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
+ 
