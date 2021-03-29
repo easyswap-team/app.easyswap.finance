@@ -6,7 +6,8 @@ export type ContainerProps = ViewProps;
 const Container: FC<ContainerProps> = props => {
     return Platform.select({
         web: (
-            <ScrollView
+            <ScrollView                
+                scrollEventThrottle={1}
                 contentContainerStyle={{ flex: 1 }}
                 style={[
                     {

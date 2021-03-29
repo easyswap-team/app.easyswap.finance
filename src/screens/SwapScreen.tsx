@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Platform, View } from "react-native";
 
 import { ethers } from "ethers";
@@ -44,11 +44,13 @@ import TokenItem from "../components/TokenItem";
 
 const SwapScreen = () => {
     const t = useTranslation();
+    const [scrollTop, setScrollTop] = useState(0)
+
     return (
         <Screen>
-            <SwapSubMenu />
-            <Container>
-                <Content>
+            <SwapSubMenu scrollTop={scrollTop} />
+            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("new-order")} />
                     <Swap />
                 </Content>
@@ -92,7 +94,7 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
     const { tokens, customTokens } = useContext(EthersContext);
     const ETH = tokens ? tokens.find(token => isETH(token)) : null;
     const [expanded, setExpanded] = useState(false)
-    const { tokenBg, textMedium } = useColors();
+    const { tokenBg, textMedium, selectTokenIcon } = useColors();
 
     return (
         <View>
@@ -120,7 +122,7 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
                         }}
                     >
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon />
+                            <SelectTokenIcon color={selectTokenIcon} />
                             <Text caption style={{marginLeft: 15}}>Select a token</Text>
                         </View>
                         <TriangleDown color={textMedium} />
@@ -150,7 +152,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
     const onChangeSymbol = (symbol: string) => {
         state.setToSymbol(limit && symbol === "ETH" ? "WETH" : symbol);
     };
-    const { tokenBg, textMedium } = useColors();
+    const { tokenBg, textMedium, selectTokenIcon } = useColors();
 
     return (
         <View>
@@ -178,7 +180,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
                         }}
                     >
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon />
+                            <SelectTokenIcon color={selectTokenIcon} />
                             <Text caption style={{marginLeft: 15}}>Select a token</Text>
                         </View>
                         <TriangleDown color={textMedium} />

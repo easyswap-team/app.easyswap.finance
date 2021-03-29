@@ -187,16 +187,33 @@ const TokenItem = (props: TokenItemProps) => {
 };
 
 const LPTokenItem = (props: LPTokenItemProps) => {
+    const { textLight, tokenBg } = useColors();
+
     return (
-        <FlexView style={{ alignItems: "center", paddingHorizontal: Spacing.tiny, paddingVertical: 4 }}>
-            <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-            <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
-            <Text medium={true} caption={true} style={{ marginLeft: Spacing.tiny }}>
-                {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
-            </Text>
+        <FlexView style={{
+            background: tokenBg,
+            alignItems: "center",
+            marginBottom: 5,
+            paddingTop: '20px',
+            paddingRight: '10px',
+            paddingBottom: '20px',
+            paddingLeft: '10px',
+            borderRadius: 8
+            }}
+        >
+            <View style={{alignSelf: 'flex-start'}}>
+                <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
+                <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
+            </View>
+            <View style={{ marginLeft: Spacing.normal }}>
+                <Text style={{color: textLight, paddingBottom: 5}}>Liquidity pair</Text>
+                <Text medium={true} caption={true}>
+                    {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                </Text>
+            </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>
                 <TokenValue token={props.token} disabled={props.disabled} />
-                <FlexView>
+                <FlexView style={{paddingTop: 5}}>
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>
             </View>

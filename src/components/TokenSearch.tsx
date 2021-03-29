@@ -75,7 +75,7 @@ const TokenSearch: FC<TokenSearchProps> = props => {
                         paddingTop: 12,
                         paddingBottom: 0,
                         width: 465,
-                        marginTop: 40
+                        marginTop: 30
                     }}
                 />
                 {props.onAddToken && loading && <Loading />}

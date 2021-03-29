@@ -72,7 +72,10 @@ const TokenSelect: FC<TokenSelectProps> = props => {
                     borderRadius: 8
                 }}
             >
-                <CloseModalIcon style={{alignSelf: 'flex-end'}} fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
+                <View style={{flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between', marginTop: 20}}>
+                    <Text style={{fontSize: 20}}>Select a token</Text>
+                    <CloseModalIcon fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
+                </View>
                 <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
                 <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
             </View>
@@ -154,14 +157,14 @@ const TokenItem = (props: {
                         <TokenPrice
                             token={props.token}
                             disabled={props.disabled}
-                            style={{ marginLeft: Spacing.small }}
+                            style={{ marginLeft: Spacing.small, paddingBottom: 5 }}
                         />
                     )}
                     <TokenName token={props.token} disabled={props.disabled} />
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
                     {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} />}
-                    <FlexView>
+                    <FlexView style={{paddingTop: 5}}>
                         <TokenAmount
                             token={props.token}
                             disabled={props.disabled}

@@ -41,11 +41,13 @@ import Screen from "./Screen";
 
 const FarmingScreen = () => {
     const t = useTranslation();
+    const [scrollTop, setScrollTop] = useState(0)
+
     return (
         <Screen>
-            <FarmingSubMenu />
-            <Container>
-                <Content>
+            <FarmingSubMenu scrollTop={scrollTop} />
+            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("plant-lp-tokens")} />
                     <Text light={true}>{t("plant-lp-tokens-desc")}</Text>
                     <Farming />

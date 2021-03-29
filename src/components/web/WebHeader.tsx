@@ -57,9 +57,9 @@ export const Title = () => {
     const { darkMode } = useContext(GlobalContext);
     const SvgLogo = darkMode ? SvgLogoDark : SvgLogoLight;
     return (
-        <View style={{ alignSelf: "center" }}>
+        <View style={{ alignSelf: "center", width: 215 }}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
-                <SvgLogo width={127} height={28} style={{ marginTop: 8, marginLeft: -10 }} />
+                <SvgLogo width={127} height={28} style={{ marginTop: 8 }} />
             </Link>
         </View>
     );
@@ -88,7 +88,7 @@ const MenuItem = ({ title, path }) => {
     const match = useRouteMatch(path);
     const active = (path === "/" ? match?.isExact : true) && match?.path?.startsWith(path);
     return (
-        <Link to={path} style={{ marginLeft: Spacing.tiny, marginBottom: -4, textDecoration: "none" }}>
+        <Link to={path} style={{ marginLeft: 4, marginRight: 4, marginBottom: -4, textDecoration: "none" }}>
             <Text
                 style={{
                     fontFamily: "regular",
