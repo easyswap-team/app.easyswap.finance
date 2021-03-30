@@ -46,11 +46,13 @@ import TokenItem from "../components/TokenItem";
 
 const LiquidityScreen = () => {
     const t = useTranslation();
+    const [scrollTop, setScrollTop] = useState(0)
+    
     return (
         <Screen>
-            <LiquiditySubMenu />
-            <Container>
-                <Content>
+            <LiquiditySubMenu scrollTop={scrollTop} />
+            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("add-liquidity")} />
                     <Text light={true}>{t("add-liquidity-desc")}</Text>
                     <AddLiquidity />
@@ -115,7 +117,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
     const [expanded, setExpanded] = useState(false)
-    const { tokenBg, textMedium } = useColors();
+    const { tokenBg, textMedium, selectTokenIcon  } = useColors();
     return (
         <View>
             <Heading text={t("1st-token")} />
@@ -142,7 +144,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                         }}
                     >
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon />
+                            <SelectTokenIcon color={selectTokenIcon} />
                             <Text caption style={{marginLeft: 15}}>Select a token</Text>
                         </View>
                         <TriangleDown color={textMedium} />
@@ -167,7 +169,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
     const [expanded, setExpanded] = useState(false)
-    const { tokenBg, textMedium } = useColors();
+    const { tokenBg, textMedium, selectTokenIcon } = useColors();
     return (
         <View>
             <Heading text={t("2nd-token")} />
@@ -194,7 +196,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                         }}
                     >
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon />
+                            <SelectTokenIcon color={selectTokenIcon} />
                             <Text caption style={{marginLeft: 15}}>Select a token</Text>
                         </View>
                         <TriangleDown color={textMedium} />

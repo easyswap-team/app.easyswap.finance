@@ -70,10 +70,10 @@ export const CloseModalIcon = props => (
     </svg>
 )
 
-export const SelectTokenIcon = () => (
-    <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect opacity="0.2" width="28" height="34" rx="8" fill="#4373EE" />
-        <path d="M9 18.071L14.0711 11L19.1421 18.071L14.0711 25.1421L9 18.071Z" fill="white" />
+export const SelectTokenIcon = props => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.2" width="32" height="32" rx="16" fill={props.color ? props.color : '#4373EE'} />
+        <path d="M11 16.071L16.0711 8.99998L21.1421 16.071L16.0711 23.1421L11 16.071Z" fill="white" />
     </svg>
 )
 

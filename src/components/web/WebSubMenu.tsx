@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Link, useRouteMatch } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export interface WebSubMenuProps {
     items: WebSubMenuItem[];
 }
 
-export const SwapSubMenu = () => {
+export const SwapSubMenu = props => {
     const t = useTranslation();
     return (
         <WebSubMenu
@@ -33,11 +33,12 @@ export const SwapSubMenu = () => {
                     path: "/swap/my-orders"
                 }
             ]}
+            {...props}
         />
     );
 };
 
-export const LiquiditySubMenu = () => {
+export const LiquiditySubMenu = props => {
     const t = useTranslation();
     return (
         <WebSubMenu
@@ -51,6 +52,7 @@ export const LiquiditySubMenu = () => {
                     path: "/liquidity/remove"
                 }
             ]}
+            {...props}
         />
     );
 };
@@ -87,7 +89,7 @@ export const StakingSubMenu = () => {
     );
 };
 
-export const FarmingSubMenu = () => {
+export const FarmingSubMenu = props => {
     const t = useTranslation();
     return (
         <WebSubMenu
@@ -101,6 +103,7 @@ export const FarmingSubMenu = () => {
                     path: "/farming/harvest"
                 }
             ]}
+            {...props}
         />
     );
 };
@@ -109,6 +112,30 @@ const WebSubMenu: FC<WebSubMenuProps> = props => {
     const { submenu, white, borderDark } = useColors();
     const { border } = useStyles()
     const { darkMode } = useContext(GlobalContext);
+    const [bg, setBg] = useState(0)
+
+    const getBgColor = opacity => {
+        if(darkMode) {
+            return `rgb(31, 33, 39, ${opacity}%)`
+        }
+        else {
+            return `rgb(255, 255, 255, ${opacity}%)`
+        }
+    }
+
+    useEffect(() => {
+        if(props.scrollTop) {
+            if(props.scrollTop > 100) {
+                setBg(getBgColor(100))
+            }
+            else if(props.scrollTop < 20) {
+                setBg(getBgColor(0))
+            }
+            else {
+                setBg(getBgColor(props.scrollTop))
+            }
+        }
+    }, [props.scrollTop, darkMode])
 
     return (
         <View 
@@ -117,7 +144,10 @@ const WebSubMenu: FC<WebSubMenuProps> = props => {
                 ...border({padding: 5, color: darkMode ? borderDark : '#ccd5df'}),
                 alignSelf: 'center',
                 marginLeft: -10,
-                marginTop: 30,
+                marginTop: 20,
+                position: 'absolute',
+                zIndex: 1,
+                background: bg
             }}
         >
             <FlexView
