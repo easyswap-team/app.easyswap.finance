@@ -12,7 +12,7 @@ const BUSD = new Token(ChainId.MAINNET, "0x3382f1eb52d3caa32e281eac539C48Bb0a3D6
 
 const BASES_TO_CHECK_TRADES_AGAINST = [WETH[ChainId.MAINNET], USDT, SUSHI, BTCB, BBETH, BUSD];
 const CUSTOM_BASES = {
-    [BUSD.address]: [USDT, WETH[ChainId.MAINNET], BTCB]
+    [BUSD.address]: [USDT, WETH[ChainId.MAINNET], BTCB, SUSHI, BUSD, BBETH]
 };
 
 function wrappedCurrency(currency: Currency | undefined): Token | undefined {
