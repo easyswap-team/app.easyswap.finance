@@ -2,6 +2,7 @@ FROM node:14.16.0-buster as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
+COPY patches ./pathes
 COPY yarn.lock ./
 RUN yarn
 RUN yarn add expo-cli
