@@ -19,7 +19,6 @@ const FarmingScreen = lazy(() => import("./FarmingScreen"));
 const HarvestScreen = lazy(() => import("./HarvestScreen"));
 const LiquidityScreen = lazy(() => import("./LiquidityScreen"));
 const MigrateScreen = lazy(() => import("./MigrateScreen"));
-const MyLimitOrdersScreen = lazy(() => import("./MyLimitOrdersScreen"));
 const RemoveLiquidityScreen = lazy(() => import("./RemoveLiquidityScreen"));
 const StakeScreen = lazy(() => import("./StakeScreen"));
 const UnstakeScreen = lazy(() => import("./UnstakeScreen"));
@@ -45,9 +44,6 @@ const WebScreens = () => {
         <>
             <Suspense fallback={<EmptyScreen />}>
                 <Switch>
-                    <Route path={"/swap/my-orders"}>
-                        <MyLimitOrdersScreen />
-                    </Route>
                     <Route path={"/swap"}>
                         <SwapScreen />
                     </Route>

@@ -46,7 +46,7 @@ const RemoveLiquidityScreen = () => {
         <Screen>
             <LiquiditySubMenu />
             <Container>
-                <Content>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("remove-liquidity")} />
                     <Text light={true}>{t("remove-liquidity-desc")}</Text>
                     <RemoveLiquidity />
