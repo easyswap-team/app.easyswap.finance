@@ -48,9 +48,8 @@ const SwapScreen = () => {
 
     return (
         <Screen>
-            <SwapSubMenu scrollTop={scrollTop} />
             <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
-                <Content style={{marginTop: 90}}>
+                <Content>
                     <Title text={t("new-order")} />
                     <Swap />
                 </Content>
