@@ -39,7 +39,7 @@ const MyLimitOrdersScreen = () => {
         <Screen>
             <SwapSubMenu />
             <Container>
-                <Content>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("my-orders")} />
                     <Text light={true}>{t("my-orders-desc")}</Text>
                     <MyLimitOrders />

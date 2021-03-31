@@ -40,7 +40,7 @@ const HarvestScreen = () => {
         <Screen>
             <FarmingSubMenu />
             <Container>
-                <Content>
+                <Content style={{marginTop: 90}}>
                     <Title text={t("harvest-sushi")} />
                     <Text light={true}>{t("harvest-sushi-desc")}</Text>
                     <Harvest />
