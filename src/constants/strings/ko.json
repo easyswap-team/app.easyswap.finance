@@ -86,7 +86,7 @@
   "output-tokens": "출금 토큰(들)",
   "will-be-converted-to": "{{fromSymbol}}가 {{toSymbol}}로 스왑됨",
   "migrate-liquidity": "유동성 마이그레이션",
-  "migrate-liquidity-desc": "Uniswap LP 토큰을 SushiSwap LP 토큰으로 변환하세요.",
+  "migrate-liquidity-desc": "Uniswap LP 토큰을 EasySwap LP 토큰으로 변환하세요.",
   "non-hardware-wallet": "일반 지갑",
   "non-hardware-wallet-desc": "서명을 통해 단일 트랜잭션에서 마이그레이션이 완료됩니다.",
   "hardware-wallet": "하드웨어 지갑 (Trezor, Ledger 등등)",

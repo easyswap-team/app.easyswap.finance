@@ -224,10 +224,9 @@ const LPTokenItem = (props: LPTokenItemProps) => {
 
 const ExternalBtn = ({ path }) => {
     const { textDark, disabled } = useColors();
-    const onPress = () => window.open("https://sushiswapanalytics.com/" + path.toLowerCase(), "_blank");
     const isETH = path.endsWith(ethers.constants.AddressZero);
     return (
-        <TouchableHighlight onPress={onPress} disabled={isETH}>
+        <TouchableHighlight disabled={isETH}>
             <ExternalIcon style={{ marginLeft: Spacing.small }} />
         </TouchableHighlight>
     );
