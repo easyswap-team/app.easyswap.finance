@@ -86,7 +86,7 @@
   "output-tokens": "Output Token(s)",
   "will-be-converted-to": "{{fromSymbol}} will be converted to {{toSymbol}}",
   "migrate-liquidity": "Migrate Liquidity",
-  "migrate-liquidity-desc": "Migrate your Uniswap LP tokens to SushiSwap LP tokens.",
+  "migrate-liquidity-desc": "Migrate your Uniswap LP tokens to EasySwap LP tokens.",
   "non-hardware-wallet": "Non-hardware Wallet",
   "non-hardware-wallet-desc": "Migration is done in one-click using your signature(permit).",
   "hardware-wallet": "Hardware Wallet (Trezor, Ledger, etc.)",

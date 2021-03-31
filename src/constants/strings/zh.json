@@ -83,7 +83,7 @@
   "output-tokens": "释放代币",
   "will-be-converted-to": "{{fromSymbol}}将转换为{{toSymbol}}",
   "migrate-liquidity": "迁移流动性",
-  "migrate-liquidity-desc": "迁移您在Uniswap上提供的流动性，转换成SushiSwap上的LP凭证",
+  "migrate-liquidity-desc": "迁移您在Uniswap上提供的流动性，转换成EasySwap上的LP凭证",
   "non-hardware-wallet": "非硬件钱包",
   "non-hardware-wallet-desc": "使用您的签名进行一键迁移",
   "hardware-wallet": "硬件钱包（Trezor，Ledger等）",
