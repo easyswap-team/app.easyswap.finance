@@ -1,7 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-
-import * as Analytics from "expo-firebase-analytics";
-
 import AsyncStorage from "@react-native-community/async-storage";
 import sushiData from "@sushiswap/sushi-data";
 import { ethers } from "ethers";
@@ -13,7 +10,6 @@ import Ethereum from "../types/Ethereum";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
 import { getContract, WETH, isWETH } from "../utils";
-import { logTransaction } from "../utils/analytics-utils";
 import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
 
 export type OnBlockListener = (block?: number) => void | Promise<void>;
@@ -176,7 +172,6 @@ export const EthersContextProvider = ({ children }) => {
                 const tx = await erc20.approve(spender, amount, {
                     gasLimit
                 });
-                return await logTransaction(tx, "ERC20.approve()", spender, amount.toString());
             }
         },
         [signer]

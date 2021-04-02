@@ -6,7 +6,6 @@ import { SUSHI_ROLL } from "../constants/contracts";
 import { EthersContext } from "../context/EthersContext";
 import LPToken from "../types/LPToken";
 import { getContract } from "../utils";
-import { logTransaction } from "../utils/analytics-utils";
 
 // tslint:disable-next-line:max-func-body-length
 const useSushiRoll = () => {
@@ -29,7 +28,6 @@ const useSushiRoll = () => {
             const tx = await sushiRoll.migrate(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "SushiRoll.migrate()", ...args.map(arg => arg.toString()));
         },
         [ethereum]
     );
@@ -61,7 +59,6 @@ const useSushiRoll = () => {
             const tx = await sushiRoll.migrateWithPermit(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "SushiRoll.migrateWithPermit()", ...args.map(arg => arg.toString()));
         },
         [ethereum]
     );
