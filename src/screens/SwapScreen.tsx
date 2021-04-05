@@ -128,6 +128,7 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
                     </View>
             }
             <TokenSelect
+                state={state}
                 title={t("token-to-sell")}
                 symbol={state.fromSymbol}
                 modalSettings={{
@@ -186,6 +187,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
                     </View>
             }
             <TokenSelect
+                state={state}
                 title={t("token-to-buy")}
                 symbol={state.toSymbol}
                 modalSettings={{

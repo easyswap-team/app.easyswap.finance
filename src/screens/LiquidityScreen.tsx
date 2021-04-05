@@ -151,6 +151,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                     </View>
             }
             <TokenSelect
+                state={state}
                 title={t("1st-token")}
                 symbol={state.fromSymbol}
                 modalSettings={{
@@ -203,6 +204,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
                     </View>
             }
             <TokenSelect
+                state={state}
                 title={t("2nd-token")}
                 symbol={state.toSymbol}
                 modalSettings={{
