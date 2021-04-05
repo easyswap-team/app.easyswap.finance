@@ -7,7 +7,6 @@ import { ORDER_BOOK, SETTLEMENT } from "../constants/contracts";
 import Fraction from "../constants/Fraction";
 import Token from "../types/Token";
 import { getContract, pow10 } from "../utils";
-import { logTransaction } from "../utils/analytics-utils";
 import useSwapRouter from "./useSwapRouter";
 
 // tslint:disable-next-line:max-func-body-length
@@ -30,7 +29,6 @@ const useSettlement = () => {
             const tx = await orderBook.createOrder(args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return await logTransaction(tx, "OrderBook.createOrder()", ...args.map(arg => arg.toString()));
         },
         []
     );
@@ -43,7 +41,6 @@ const useSettlement = () => {
         const tx = await settlement.cancelOrder(args, {
             gasLimit: gasLimit.mul(120).div(100)
         });
-        return await logTransaction(tx, "Settlement.cancelOrder()", ...args.map(arg => arg.toString()));
     }, []);
 
     const queryOrderCanceledEvents = useCallback(async (signer: ethers.Signer) => {

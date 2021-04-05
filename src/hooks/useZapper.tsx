@@ -8,7 +8,6 @@ import { EthersContext } from "../context/EthersContext";
 import LPToken from "../types/LPToken";
 import Token from "../types/Token";
 import { convertToken, deduct, getContract, isETH, parseCurrencyAmount } from "../utils";
-import { logTransaction } from "../utils/analytics-utils";
 import useSDK from "./useSDK";
 import useSwapRouter from "./useSwapRouter";
 
@@ -67,7 +66,6 @@ const useZapper = () => {
                 value,
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "ZapIn_General_V2.ZapIn()", ...args.map(arg => arg.toString()));
         },
         [populateSwapData]
     );
@@ -131,7 +129,6 @@ const useZapper = () => {
             const tx = await contract.ZapOutWithPermit(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "ZapOut_General_V1.ZapOutWithPermit()", ...args.map(arg => arg.toString()));
         },
         [getZapOutSwappedAmount]
     );

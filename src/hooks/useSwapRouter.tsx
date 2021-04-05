@@ -5,7 +5,6 @@ import { ethers } from "ethers";
 import { ROUTER } from "../constants/contracts";
 import Token from "../types/Token";
 import { deduct, getContract } from "../utils";
-import { logTransaction } from "../utils/analytics-utils";
 
 export const FEE = new Percent("3", "1000"); // 0.3%
 
@@ -30,11 +29,6 @@ const useSwapRouter = () => {
                 value: params.value,
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            await logTransaction(
-                tx,
-                "UniswapV2Router02." + params.methodName + "()",
-                ...params.args.map(arg => arg.toString())
-            );
             return {
                 trade,
                 tx
@@ -66,7 +60,6 @@ const useSwapRouter = () => {
             const tx = await router.functions.addLiquidity(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "UniswapV2Router02.addLiquidity()", ...args.map(arg => arg.toString()));
         },
         []
     );
@@ -93,7 +86,6 @@ const useSwapRouter = () => {
             const tx = await router.functions.removeLiquidityETH(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "UniswapV2Router02.removeLiquidityETH()", ...args.map(arg => arg.toString()));
         },
         []
     );
@@ -122,7 +114,6 @@ const useSwapRouter = () => {
             const tx = await router.functions.removeLiquidity(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
-            return logTransaction(tx, "UniswapV2Router02.removeLiquidity()", ...args.map(arg => arg.toString()));
         },
         []
     );
@@ -146,7 +137,6 @@ const useSwapRouter = () => {
                 gasLimit: gasLimit.mul(120).div(100),
                 value: amountETH
             });
-            return logTransaction(tx, "UniswapV2Router02.addLiquidityETH()", ...args.map(arg => arg.toString()));
         },
         []
     );
