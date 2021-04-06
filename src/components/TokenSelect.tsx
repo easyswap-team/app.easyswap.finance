@@ -77,7 +77,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
                     <CloseModalIcon fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
                 </View>
                 <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
-                <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
+                <TokenList state={props.state} disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
             </View>
         </Modal>
     );
@@ -88,6 +88,7 @@ const TokenList = (props: {
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
     closeModal?: any;
+    state?: any;
 }) => {
     const { loadingTokens, tokens } = useContext(EthersContext);
     const renderItem = useCallback(
@@ -105,9 +106,20 @@ const TokenList = (props: {
         },
         [props.onSelectToken, props.disabled]
     );
-    const data = useMemo(
-        () => tokens.filter(token => (props.hidden ? !props.hidden(token) : true)).sort(compareTokens),
-        [tokens, props.hidden]
+
+    const data = useMemo(() => {
+            const filtredTokens = tokens.filter(token => {
+                if(props.hidden) {
+                    if(props.hidden(token) || token.symbol === props.state.fromToken?.symbol || token.symbol === props.state.toToken?.symbol) {
+                        return false
+                    }
+                    else {
+                        return true
+                    }
+                }
+            }).sort(compareTokens)
+            return filtredTokens
+        }, [tokens, props.hidden]
     );
     return loadingTokens ? (
         <Loading />
