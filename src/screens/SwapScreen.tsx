@@ -150,7 +150,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
     const [expanded, setExpanded] = useState(false)
     const limit = state.orderType === "limit";
     const onChangeSymbol = (symbol: string) => {
-        state.setToSymbol(limit && symbol === "ETH" ? "WETH" : symbol);
+        state.setToSymbol(limit && symbol === "BNB" ? "WBNB" : symbol);
     };
     const { tokenBg, textMedium, selectTokenIcon } = useColors();
 

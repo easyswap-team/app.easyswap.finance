@@ -59,7 +59,7 @@ export const isETHWETHPair = (fromToken?: Token, toToken?: Token) => {
 };
 
 export const convertToken = (token: Token) => {
-    return token.symbol === "ETH" ? WETH["1"] : new SDKToken(ChainId.MAINNET, token.address, token.decimals);
+    return token.symbol === "BNB" ? WETH["1"] : new SDKToken(ChainId.MAINNET, token.address, token.decimals);
 };
 
 export const convertAmount = (token: Token, amount: string) => {
