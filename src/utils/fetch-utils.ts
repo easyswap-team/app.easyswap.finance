@@ -1,6 +1,5 @@
 import React, {useContext} from "react"
 import { Pair } from "@sushiswap/sdk";
-import sushiData from "@sushiswap/sushi-data";
 import { ethers } from "ethers";
 import { ORDER_BOOK, SETTLEMENT } from "../constants/contracts";
 import Fraction from "../constants/Fraction";
@@ -20,6 +19,7 @@ import {
     parseCurrencyAmount,
     pow10
 } from "./index";
+import { default as farmPools } from '../../web/farmPools.json'
 
 const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
 const MASTER_CHEF = "0x373c198d653d6FB916ebcf09af0AD979818ddDEB";
@@ -81,106 +81,57 @@ export const fetchTokenWithValue = async (
 
 // tslint:disable-next-line:max-func-body-length
 export const fetchPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
-    const info = await sushiData.sushi.info();
-    const masterchefInfo = await sushiData.masterchef.info();
-    const pools = await sushiData.masterchef.pools();
-    const reduce = await sushiData.masterchef.pool({ poolId: "45" });
-    if (!reduce) return undefined;
-    const sushiPerBlock = Math.floor(100 - 100 * (reduce.allocPoint / masterchefInfo.totalAllocPoint));
     const balances = await fetchTokenBalances(
         account,
-        pools.map(pool => pool.pair)
+        farmPools.map(pool => pool.pair)
     );
+
     // tslint:disable-next-line:max-func-body-length
     const fetchPool = async (pool, i): Promise<LPToken | null> => {
-        if (pool.slpBalance === 0) return null;
         try {
             const result = await Promise.all([
-                fetchStakedValue(pool.pair),
                 fetchPairTokens(pool.pair, tokens, provider)
             ]);
-            if (!result[0]) return null;
-            const apy = calcAPY(
-                info.derivedETH,
-                sushiPerBlock,
-                pool.allocPoint,
-                masterchefInfo.totalAllocPoint,
-                result[0].totalValueETH,
-                pool.slpBalance,
-                result[0].totalSupply
-            );
-            if (apy === 0) return null;
-            return {
+            
+            const poolData = {
                 ...pool,
-                apy,
-                address: pool.pair,
-                decimals: 18,
-                tokenA: result[1].tokenA,
-                tokenB: result[1].tokenB,
-                symbol: result[1].tokenA.symbol + "-" + result[1].tokenB.symbol + " LP",
+                tokenA: result[0].tokenA,
+                tokenB: result[0].tokenB,
                 balance: ethers.BigNumber.from(balances[i] || 0),
-                sushiRewardedPerYear: calcSushiRewardedPerYear(
-                    sushiPerBlock,
-                    pool.allocPoint,
-                    masterchefInfo.totalAllocPoint,
-                    result[0].totalSupply
-                ),
-                totalSupply: parseBalance(String(result[0].totalSupply), 18),
-                totalValueUSD: result[0].totalValueUSD,
-                multiplier: pool.allocPoint / 1000
-            };
+                totalSupply: parseBalance(String(pool.totalSupply), 18)
+            }
+
+            return poolData;
         } catch (e) {
             return null;
         }
     };
-    return (await Promise.all(pools.map(fetchPool))).filter(pool => !!pool) as LPToken[];
+    return (await Promise.all(farmPools.map(fetchPool))).filter(pool => !!pool) as LPToken[];
 };
 
 export const fetchMyPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
-    const pools = await sushiData.masterchef.pools();
     const fetchMyPool = async (pool): Promise<LPToken | null> => {
         try {
             const myStake = await fetchMyStake(pool.id, account, provider);
             if (myStake.amountDeposited.isZero()) return null;
+
             const result = await Promise.all([
-                fetchStakedValue(pool.pair),
                 fetchPairTokens(pool.pair, tokens, provider)
             ]);
             return {
                 ...pool,
-                address: pool.pair,
-                decimals: 18,
-                tokenA: result[1].tokenA,
-                tokenB: result[1].tokenB,
-                symbol: result[1].tokenA.symbol + "-" + result[1].tokenB.symbol + " LP",
+                tokenA: result[0].tokenA,
+                tokenB: result[0].tokenB,
                 balance: ethers.constants.Zero,
                 amountDeposited: myStake.amountDeposited,
                 pendingSushi: myStake.pendingSushi,
-                totalSupply: parseBalance(String(result[0].totalSupply), 18)
+                totalSupply: parseBalance(String(pool.totalSupply), 18)
             };
         } catch (e) {
             return null;
         }
     };
-    return (await Promise.all(pools.map(fetchMyPool))).filter(pool => !!pool) as LPToken[];
-};
-
-const calcAPY = (derivedETH, sushiPerBlock, allocPoint, totalAllocPoint, totalValueETH, slpBalance, totalSupply) => {
-    return (
-        (derivedETH * blocksPerDay * sushiPerBlock * 3 * 365 * (allocPoint / totalAllocPoint)) /
-        (totalValueETH * (slpBalance / totalSupply))
-    );
-};
-
-const calcSushiRewardedPerYear = (sushiPerBlock, allocPoint, totalAllocPoint, totalSupply) => {
-    return ethers.BigNumber.from(blocksPerDay * sushiPerBlock * 3 * 365 * allocPoint)
-        .mul(pow10(36))
-        .div(totalAllocPoint)
-        .div(parseBalance(String(totalSupply)));
-};
-
-const fetchStakedValue = async (lpToken: string) => {
-    return await sushiData.masterchef.stakedValue({ lpToken });
+    return (await Promise.all(farmPools.map(fetchMyPool))).filter(pool => !!pool) as LPToken[];
 };
 
 const fetchMyStake = async (poolId: number, account: string, provider: ethers.providers.JsonRpcProvider) => {
