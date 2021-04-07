@@ -10,7 +10,8 @@
         "symbol": "USDT-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.525,
-        "totalSupply": 0.000001508936908095
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
     },
     {
         "id": 1,
@@ -23,7 +24,8 @@
         "symbol": "WBNB-BTCB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.871,
-        "totalSupply": 0.000001508936908095
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
     },
     {
         "id": 2,
@@ -36,7 +38,8 @@
         "symbol": "BBETH-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 3.014,
-        "totalSupply": 0.000001508936908095
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
     },
     {
         "id": 3,
@@ -49,6 +52,21 @@
         "symbol": "BUSD-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 0.273,
-        "totalSupply": 0.000001508936908095
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 4,
+        "pair": "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e",
+        "allocPoint": 400,
+        "slpBalance": 19252.11008060398,
+        "apy": 3.449123110094798e-9,
+        "address": "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e",
+        "decimals": 18,
+        "symbol": "ESM",
+        "totalValueUSD": 16691.889633904201,
+        "multiplier": 0.2734,
+        "totalSupply": 0.000002488936908095,
+        "type": "ESM token"
     }
 ]
