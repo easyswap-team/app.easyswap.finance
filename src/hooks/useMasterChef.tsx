@@ -11,6 +11,8 @@ const useMasterChef = () => {
         const tx = await masterChef.deposit(lpTokenId, amount, {
             gasLimit: gasLimit.mul(120).div(100)
         });
+
+        return tx
     }, []);
 
     const withdraw = useCallback(async (lpTokenId: number, amount: ethers.BigNumber, signer: ethers.Signer) => {
@@ -19,6 +21,8 @@ const useMasterChef = () => {
         const tx = await masterChef.withdraw(lpTokenId, amount, {
             gasLimit: gasLimit.mul(120).div(100)
         });
+
+        return tx
     }, []);
 
     return {

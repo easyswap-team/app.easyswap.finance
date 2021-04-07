@@ -29,6 +29,8 @@ const useSettlement = () => {
             const tx = await orderBook.createOrder(args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         []
     );
@@ -41,6 +43,8 @@ const useSettlement = () => {
         const tx = await settlement.cancelOrder(args, {
             gasLimit: gasLimit.mul(120).div(100)
         });
+
+        return tx
     }, []);
 
     const queryOrderCanceledEvents = useCallback(async (signer: ethers.Signer) => {

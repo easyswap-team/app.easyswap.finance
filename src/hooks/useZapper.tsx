@@ -66,6 +66,8 @@ const useZapper = () => {
                 value,
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         [populateSwapData]
     );
@@ -129,6 +131,8 @@ const useZapper = () => {
             const tx = await contract.ZapOutWithPermit(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         [getZapOutSwappedAmount]
     );
