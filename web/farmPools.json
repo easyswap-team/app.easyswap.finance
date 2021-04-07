@@ -1,0 +1,72 @@
+[
+    {
+        "id": 0,
+        "pair": "0xBEE09E500219e29989e8C32EB129465FF30b0de9",
+        "allocPoint": 2525,
+        "slpBalance": 2.318521839181027,
+        "apy": 0.003847618444354578,
+        "address": "0xBEE09E500219e29989e8C32EB129465FF30b0de9",
+        "decimals": 18,
+        "symbol": "USDT-WBNB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 2.525,
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 1,
+        "pair": "0xaDA474fD70E21108984EeC2dac57c4067FaE9839",
+        "allocPoint": 2871,
+        "slpBalance": 2.925774767721405,
+        "apy": 0.0034668424755635308,
+        "address": "0xaDA474fD70E21108984EeC2dac57c4067FaE9839",
+        "decimals": 18,
+        "symbol": "WBNB-BTCB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 2.871,
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 2,
+        "pair": "0x9a10b3cBE6CCe3E3F136386DB5894e3f214Dc212",
+        "allocPoint": 3014,
+        "slpBalance": 3176921.4459584225,
+        "apy": 3.351803716248766e-9,
+        "address": "0x9a10b3cBE6CCe3E3F136386DB5894e3f214Dc212",
+        "decimals": 18,
+        "symbol": "BBETH-WBNB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 3.014,
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 3,
+        "pair": "0x813aC670f9D1FCa53909327729f06e5ea74BA752",
+        "allocPoint": 273,
+        "slpBalance": 205252.11008060398,
+        "apy": 4.699123110094798e-9,
+        "address": "0x813aC670f9D1FCa53909327729f06e5ea74BA752",
+        "decimals": 18,
+        "symbol": "BUSD-WBNB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 0.273,
+        "totalSupply": 0.000001508936908095,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 4,
+        "pair": "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e",
+        "allocPoint": 400,
+        "slpBalance": 19252.11008060398,
+        "apy": 3.449123110094798e-9,
+        "address": "0x8A7454Ad58E3D60bf2eF4B3f1b04F6981269394e",
+        "decimals": 18,
+        "symbol": "ESM",
+        "totalValueUSD": 16691.889633904201,
+        "multiplier": 0.2734,
+        "totalSupply": 0.000002488936908095,
+        "type": "ESM token"
+    }
+]

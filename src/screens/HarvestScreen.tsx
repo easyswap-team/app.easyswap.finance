@@ -28,6 +28,7 @@ import { FarmingSubMenu } from "../components/web/WebSubMenu";
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
 import useFarmingState, { FarmingState } from "../hooks/useFarmingState";
+import useColors from "../hooks/useColors";
 import useTranslation from "../hooks/useTranslation";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
@@ -77,6 +78,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
+    const { textLight } = useColors();
     return (
         <Selectable
             selected={props.selected}
@@ -85,9 +87,12 @@ const TokenItem: FC<LPTokenItemProps> = props => {
             <FlexView style={{ alignItems: "center" }}>
                 <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
                 <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
-                <Text medium={true} caption={true} style={{ marginLeft: Spacing.tiny }}>
-                    {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
-                </Text>
+                <View style={{flexDirection: 'column', marginLeft: Spacing.tiny}}>
+                    {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
+                    <Text medium={true} caption={true}>
+                        {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                    </Text>
+                </View>
                 <Text caption={IS_DESKTOP} medium={true} style={{ flex: 1, textAlign: "right", marginRight: 4 }}>
                     {amount}
                 </Text>
