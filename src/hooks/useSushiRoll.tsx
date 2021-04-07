@@ -28,6 +28,8 @@ const useSushiRoll = () => {
             const tx = await sushiRoll.migrate(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         [ethereum]
     );
@@ -59,6 +61,8 @@ const useSushiRoll = () => {
             const tx = await sushiRoll.migrateWithPermit(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         [ethereum]
     );

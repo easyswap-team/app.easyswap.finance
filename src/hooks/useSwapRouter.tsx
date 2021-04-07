@@ -60,6 +60,8 @@ const useSwapRouter = () => {
             const tx = await router.functions.addLiquidity(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         []
     );
@@ -86,6 +88,8 @@ const useSwapRouter = () => {
             const tx = await router.functions.removeLiquidityETH(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         []
     );
@@ -114,6 +118,8 @@ const useSwapRouter = () => {
             const tx = await router.functions.removeLiquidity(...args, {
                 gasLimit: gasLimit.mul(120).div(100)
             });
+
+            return tx
         },
         []
     );
@@ -137,6 +143,8 @@ const useSwapRouter = () => {
                 gasLimit: gasLimit.mul(120).div(100),
                 value: amountETH
             });
+
+            return tx
         },
         []
     );

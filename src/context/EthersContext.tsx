@@ -172,6 +172,8 @@ export const EthersContextProvider = ({ children }) => {
                 const tx = await erc20.approve(spender, amount, {
                     gasLimit
                 });
+
+                return tx
             }
         },
         [signer]

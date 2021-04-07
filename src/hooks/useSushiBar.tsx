@@ -11,6 +11,8 @@ const useSushiBar = () => {
         const tx = await sushiBar.enter(amount, {
             gasLimit: gasLimit.mul(120).div(100)
         });
+
+        return tx
     }, []);
 
     const leave = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
@@ -19,6 +21,8 @@ const useSushiBar = () => {
         const tx = await sushiBar.leave(amount, {
             gasLimit: gasLimit.mul(120).div(100)
         });
+
+        return tx
     }, []);
 
     return {

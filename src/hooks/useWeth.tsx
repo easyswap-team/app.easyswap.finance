@@ -14,6 +14,8 @@ const useWeth = () => {
             value: amount,
             gasLimit
         });
+
+        return tx
     }, []);
 
     const unwrapETH = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
@@ -22,6 +24,8 @@ const useWeth = () => {
         const tx = await weth.withdraw(amount, {
             gasLimit
         });
+
+        return tx
     }, []);
 
     return {
