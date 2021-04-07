@@ -86,6 +86,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
+    const { textLight } = useColors();
     return (
         <Selectable
             selected={props.selected}
@@ -94,9 +95,12 @@ const TokenItem: FC<LPTokenItemProps> = props => {
             <FlexView style={{ alignItems: "center" }}>
                 <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
                 <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
-                <Text medium={true} caption={true} style={{ marginLeft: Spacing.tiny }}>
-                    {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
-                </Text>
+                <View style={{flexDirection: 'column', marginLeft: Spacing.tiny}}>
+                    {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
+                    <Text medium={true} caption={true}>
+                        {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                    </Text>
+                </View>
                 <View style={{ flex: 1, alignItems: "flex-end", marginRight: 4 }}>
                     <Text note={true}>
                         {multiplier > 1 ? "✨" : ""}
