@@ -22,7 +22,7 @@ import {
 import { default as farmPools } from '../../web/farmPools.json'
 
 const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
-const MASTER_CHEF = "0x373c198d653d6FB916ebcf09af0AD979818ddDEB";
+const MASTER_CHEF = "0x2743E0Ea86b0c6C5F7588445206058B7f10f8C0C";
 const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
 
 const blocksPerDay = 6500;
@@ -124,7 +124,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                 tokenB: result[0].tokenB,
                 balance: ethers.constants.Zero,
                 amountDeposited: myStake.amountDeposited,
-                pendingSushi: myStake.pendingSushi,
+                pendingEsm: myStake.pendingEsm,
                 totalSupply: parseBalance(String(pool.totalSupply), 18)
             };
         } catch (e) {
@@ -137,8 +137,8 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
 const fetchMyStake = async (poolId: number, account: string, provider: ethers.providers.JsonRpcProvider) => {
     const masterChef = getContract("MasterChef", MASTER_CHEF, provider);
     const { amount: amountDeposited } = await masterChef.userInfo(poolId, account);
-    const pendingSushi = await masterChef.pendingSushi(poolId, account);
-    return { amountDeposited, pendingSushi };
+    const pendingEsm = await masterChef.pendingEsm(poolId, account);
+    return { amountDeposited, pendingEsm };
 };
 
 const fetchPairTokens = async (pair: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {

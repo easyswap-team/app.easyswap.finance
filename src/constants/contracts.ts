@@ -4,7 +4,7 @@ import Settlement from "@sushiswap/settlement/deployments/mainnet/Settlement.jso
 // export const UNISWAP_ROUTER = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 export const SUSHISWAP_ROUTER = "0x84F9A7b8ce8eeF993bFEF5534E49FEfDF0dEc77d";
 export const ROUTER = SUSHISWAP_ROUTER;
-export const MASTER_CHEF = "0x373c198d653d6FB916ebcf09af0AD979818ddDEB";
+export const MASTER_CHEF = "0x2743E0Ea86b0c6C5F7588445206058B7f10f8C0C";
 export const SUSHI_BAR = "0x6342c257Cb0094761C3AB3Aa7D6d8Ff031c8a123";
 export const SUSHI_ROLL = "0x02728f44db8FAd3347A9CE25FFCf40ffab8b8108";
 export const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";

@@ -66,5 +66,22 @@
       "decimals": 18,
       "logoURI": "https://static.alchemyapi.io/images/assets/4679.png"
     }
+  },
+  {
+    "address": "0xC0b3c6A13A2B4Ab88Ec6520Fc0CD48E214636C7a",
+    "decimals": 18,
+    "symbol": "WBNB-ESM LP",
+    "tokenA": {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "symbol": "WBNB",
+      "decimals": 18,
+      "logoURI": "https://static.alchemyapi.io/images/assets/2396.png"
+    },
+    "tokenB": {
+      "address": "0x605341403C8177f3F446fe049D7d5C5714316f94",
+      "symbol": "ESM",
+      "decimals": 18,
+      "logoURI": "https://static.alchemyapi.io/images/assets/4679.png"
+    }
   }
 ]
