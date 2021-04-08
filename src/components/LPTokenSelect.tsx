@@ -65,11 +65,7 @@ const LPTokenList = ({
         },
         [state.setSelectedLPToken]
     );
-    const data = state.lpTokens.sort((p1, p2) => {
-        const m1 = p1.multiplier || 0;
-        const m2 = p2.multiplier || 0;
-        return m1 === m2 ? (p2.apy || 0) - (p1.apy || 0) : m2 - m1;
-    });
+    const data = state.lpTokens.sort((prev, next) => next.id - prev.id)
     return state.loading ? (
         <Loading />
     ) : data.length === 0 ? (

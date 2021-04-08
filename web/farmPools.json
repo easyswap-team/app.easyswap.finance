@@ -68,5 +68,21 @@
         "multiplier": 0.2734,
         "totalSupply": 0.000002488936908095,
         "type": "Liquidity pair"
+    },
+    {
+        "id": 5,
+        "pair": "0x605341403C8177f3F446fe049D7d5C5714316f94",
+        "allocPoint": 400,
+        "slpBalance": 19252.11008060398,
+        "apy": 3.449123110094798e-9,
+        "address": "0x605341403C8177f3F446fe049D7d5C5714316f94",
+        "decimals": 18,
+        "symbol": "ESM",
+        "totalValueUSD": 16691.889633904201,
+        "multiplier": 0.2734,
+        "totalSupply": 0.000002488936908095,
+        "name": "EasySwap Maker",
+        "logoURI": "./images/tokens/ESM.png",
+        "type": "ESM Token"
     }
 ]

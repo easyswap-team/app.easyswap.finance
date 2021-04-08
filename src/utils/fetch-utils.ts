@@ -89,44 +89,73 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
     // tslint:disable-next-line:max-func-body-length
     const fetchPool = async (pool, i): Promise<LPToken | null> => {
         try {
-            const result = await Promise.all([
-                fetchPairTokens(pool.pair, tokens, provider)
-            ]);
-            
-            const poolData = {
-                ...pool,
-                tokenA: result[0].tokenA,
-                tokenB: result[0].tokenB,
-                balance: ethers.BigNumber.from(balances[i] || 0),
-                totalSupply: parseBalance(String(pool.totalSupply), 18)
-            }
+            let result
 
-            return poolData;
+            if(pool.type === 'Liquidity pair') {
+                result = await Promise.all([
+                    fetchPairTokens(pool.pair, tokens, provider)
+                ]);
+
+                const poolData = {
+                    ...pool,
+                    tokenA: result[0].tokenA,
+                    tokenB: result[0].tokenB,
+                    balance: ethers.BigNumber.from(balances[i] || 0),
+                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                }
+
+                return poolData;
+            }
+            else if(pool.type === 'ESM Token') {
+                const poolData = {
+                    ...pool,
+                    balance: ethers.BigNumber.from(balances[i] || 0),
+                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                }
+
+                return poolData;
+            }
         } catch (e) {
             return null;
         }
     };
+    
     return (await Promise.all(farmPools.map(fetchPool))).filter(pool => !!pool) as LPToken[];
 };
 
 export const fetchMyPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
     const fetchMyPool = async (pool): Promise<LPToken | null> => {
         try {
+            
             const myStake = await fetchMyStake(pool.id, account, provider);
             if (myStake.amountDeposited.isZero()) return null;
+            
+            let result
 
-            const result = await Promise.all([
-                fetchPairTokens(pool.pair, tokens, provider)
-            ]);
-            return {
-                ...pool,
-                tokenA: result[0].tokenA,
-                tokenB: result[0].tokenB,
-                balance: ethers.constants.Zero,
-                amountDeposited: myStake.amountDeposited,
-                pendingEsm: myStake.pendingEsm,
-                totalSupply: parseBalance(String(pool.totalSupply), 18)
-            };
+            if(pool.type === 'Liquidity pair') {
+                result = await Promise.all([
+                    fetchPairTokens(pool.pair, tokens, provider)
+                ]);
+
+                return {
+                    ...pool,
+                    tokenA: result[0].tokenA,
+                    tokenB: result[0].tokenB,
+                    balance: ethers.constants.Zero,
+                    amountDeposited: myStake.amountDeposited,
+                    pendingEsm: myStake.pendingEsm,
+                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                };
+            }
+            else if(pool.type === 'ESM Token') {
+                return {
+                    ...pool,
+                    balance: ethers.constants.Zero,
+                    amountDeposited: myStake.amountDeposited,
+                    pendingEsm: myStake.pendingEsm,
+                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                };
+            }
         } catch (e) {
             return null;
         }
