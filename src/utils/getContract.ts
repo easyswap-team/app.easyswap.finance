@@ -3,7 +3,7 @@ import IUniswapV2Factory from "@sushiswap/core/build/contracts/IUniswapV2Factory
 import IUniswapV2Pair from "@sushiswap/core/build/contracts/IUniswapV2Pair.json";
 import IUniswapV2Router02 from "@sushiswap/core/build/contracts/IUniswapV2Router02.json";
 import IWETH from "@sushiswap/core/build/contracts/IWETH.json";
-import MasterChef from "@sushiswap/core/build/contracts/MasterChef.json";
+import MasterChef from "../constants/abi/MasterChef.json";
 import SushiBar from "@sushiswap/core/build/contracts/SushiBar.json";
 import SushiRoll from "@sushiswap/core/build/contracts/SushiRoll.json";
 import OrderBook from "@sushiswap/settlement/deployments/kovan/OrderBook.json";

@@ -124,7 +124,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                 tokenB: result[0].tokenB,
                 balance: ethers.constants.Zero,
                 amountDeposited: myStake.amountDeposited,
-                pendingSushi: myStake.pendingSushi,
+                pendingEsm: myStake.pendingEsm,
                 totalSupply: parseBalance(String(pool.totalSupply), 18)
             };
         } catch (e) {
@@ -137,8 +137,8 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
 const fetchMyStake = async (poolId: number, account: string, provider: ethers.providers.JsonRpcProvider) => {
     const masterChef = getContract("MasterChef", MASTER_CHEF, provider);
     const { amount: amountDeposited } = await masterChef.userInfo(poolId, account);
-    const pendingSushi = await masterChef.pendingSushi(poolId, account);
-    return { amountDeposited, pendingSushi };
+    const pendingEsm = await masterChef.pendingEsm(poolId, account);
+    return { amountDeposited, pendingEsm };
 };
 
 const fetchPairTokens = async (pair: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
