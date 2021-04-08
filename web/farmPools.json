@@ -82,7 +82,7 @@
         "multiplier": 0.2734,
         "totalSupply": 0.000002488936908095,
         "name": "EasySwap Maker",
-        "logoURI": "./images/tokens/#",
+        "logoURI": "./images/tokens/ESM.png",
         "type": "ESM Token"
     }
 ]
