@@ -65,17 +65,12 @@ const LPTokenList = ({
         },
         [state.setSelectedLPToken]
     );
-    const data = state.lpTokens.sort((p1, p2) => {
-        const m1 = p1.multiplier || 0;
-        const m2 = p2.multiplier || 0;
-        return m1 === m2 ? (p2.apy || 0) - (p1.apy || 0) : m2 - m1;
-    });
     return state.loading ? (
         <Loading />
-    ) : data.length === 0 ? (
+    ) : state.lpTokens.length === 0 ? (
         <EmptyList text={emptyText} />
     ) : (
-        <FlatList keyExtractor={item => item.symbol} data={data} renderItem={renderItem} />
+        <FlatList keyExtractor={item => item.symbol} data={state.lpTokens} renderItem={renderItem} />
     );
 };
 

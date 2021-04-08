@@ -79,18 +79,45 @@ const TokenItem: FC<LPTokenItemProps> = props => {
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
     const { textLight } = useColors();
+
+    const getSymbols = () => {
+        let symbols = ''
+
+        if(props.token.tokenA && props.token.tokenB) {
+            symbols = `${props.token.tokenA.symbol}-${props.token.tokenB.symbol}`
+        }
+        else if(props.token.symbol) {
+            symbols = props.token.symbol
+        }
+        
+        return symbols
+    }
+
+    const getLogos = () => {
+        if(props.token.tokenA && props.token.tokenB) {
+            return (
+                <>
+                    <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
+                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
+                </>
+            )
+        }
+        else if(props.token.symbol) {
+            return <TokenLogo token={props.token} small={true} replaceWETH={true} />
+        }
+    }
+
     return (
         <Selectable
             selected={props.selected}
             onPress={onPress}
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
             <FlexView style={{ alignItems: "center" }}>
-                <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-                <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
+                {getLogos()}
                 <View style={{flexDirection: 'column', marginLeft: Spacing.tiny}}>
                     {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
                     <Text medium={true} caption={true}>
-                        {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                        {getSymbols()}
                     </Text>
                 </View>
                 <Text caption={IS_DESKTOP} medium={true} style={{ flex: 1, textAlign: "right", marginRight: 4 }}>
