@@ -64,6 +64,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
     return (
         <Modal {...props.modalSettings}>
             <View style={{
+                    minWidth: IS_DESKTOP ? 560 : '100%',
                     height: "90%",
                     alignItems: "center",
                     alignSelf: 'center',
@@ -169,13 +170,25 @@ const TokenItem = (props: {
                         <TokenPrice
                             token={props.token}
                             disabled={props.disabled}
-                            style={{ marginLeft: Spacing.small, paddingBottom: 5 }}
+                            style={{
+                                marginLeft: Spacing.small,
+                                paddingBottom: 5,
+                                width: '80%',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis'
+                            }}
                         />
                     )}
                     <TokenName token={props.token} disabled={props.disabled} />
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
-                    {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} />}
+                    {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} style={{
+                        width: '80%',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                    }} />}
                     <FlexView style={{paddingTop: 5}}>
                         <TokenAmount
                             token={props.token}

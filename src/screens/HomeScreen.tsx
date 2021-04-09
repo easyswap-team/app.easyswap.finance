@@ -170,12 +170,12 @@ const TokenItem = (props: TokenItemProps) => {
     return (
         <FlexView style={{ alignItems: "center", marginBottom: 5, paddingBottom: 20, paddingTop: 20, paddingLeft: 10, paddingRight: 10, background: tokenBg, borderRadius: 8 }}>
             <TokenLogo token={props.token} disabled={props.disabled} />
-            <View>
-                <TokenPrice token={props.token} disabled={props.disabled} style={{ marginLeft: Spacing.small, paddingBottom: 5 }} />
+            <View style={{width: '45%'}}>
+                <TokenPrice token={props.token} disabled={props.disabled} style={{ width: '80%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginLeft: Spacing.small, paddingBottom: 5 }} />
                 <TokenName token={props.token} disabled={props.disabled} />
             </View>
-            <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <TokenValue token={props.token} disabled={props.disabled} style={{paddingBottom: 5}} />
+            <View style={{ flex: 1, alignItems: "flex-end", width: '45%' }}>
+                <TokenValue token={props.token} disabled={props.disabled} style={{ textAlign: 'right', width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', paddingBottom: 5 }} />
                 <FlexView>
                     <TokenAmount token={props.token} disabled={props.disabled} />
                     {IS_DESKTOP && <TokenSymbol token={props.token} disabled={props.disabled} />}
@@ -212,7 +212,7 @@ const LPTokenItem = (props: LPTokenItemProps) => {
                 </Text>
             </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <TokenValue token={props.token} disabled={props.disabled} />
+                <TokenValue token={props.token} disabled={props.disabled} style={{ textAlign: 'right', width: '80%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}} />
                 <FlexView style={{paddingTop: 5}}>
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>

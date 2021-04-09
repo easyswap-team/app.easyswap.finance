@@ -36,23 +36,42 @@ const TokenItem = (props: {
             onClick={() => {props.onClick()}}
         >
             <TokenLogo token={props.token} disabled={props.disabled} />
-            <View>
+            <View style={{width: '45%'}}>
                 {props.token.priceUSD !== null && (
                     <TokenPrice
                         token={props.token}
                         disabled={props.disabled}
-                        style={{ marginLeft: Spacing.small }}
+                        style={{ 
+                            width: '80%',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            marginLeft: Spacing.small
+                        }}
                     />
                 )}
                 <TokenName token={props.token} disabled={props.disabled} />
             </View>
-            <View style={{ flex: 1, alignItems: "flex-end" }}>
-                {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} />}
+            <View style={{ width: '45%', flex: 1, alignItems: "flex-end" }}>
+                {
+                    props.token.valueUSD !== null && 
+                        <TokenValue token={props.token} disabled={props.disabled} style={{ 
+                            flex: 1,
+                            textAlign: "right",
+                            width: '80%',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
+                        }} />
+                }
                 <FlexView>
                     <TokenAmount
                         token={props.token}
                         disabled={props.disabled}
-                        style={{ flex: 1, textAlign: "right" }}
+                        style={{ 
+                            flex: 1,
+                            textAlign: "right"
+                        }}
                     />
                     {IS_DESKTOP && <TokenSymbol token={props.token} disabled={props.disabled} />}
                 </FlexView>
