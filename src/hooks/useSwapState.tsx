@@ -54,7 +54,7 @@ const useSwapState: () => SwapState = () => {
 
     useEffect(() => {
         if (!orderType) {
-            state.setFromSymbol("");
+            state.setFromAmount('');
         }
         setLimitOrderPrice("");
     }, [orderType]);
