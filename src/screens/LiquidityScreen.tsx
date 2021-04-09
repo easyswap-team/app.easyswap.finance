@@ -68,6 +68,12 @@ const AddLiquidity = () => {
     const state = useAddLiquidityState();
     const { border } = useColors();
     if (chainId !== 97) return <ChangeNetwork />;
+
+    const flipTokens = () => {
+        state.setFromSymbol(state.toSymbol)
+        state.setToSymbol(state.fromSymbol)
+    }
+
     return (
         <View style={{ marginTop: Spacing.large }}>
             {/*<ModeSelect state={state} />*/}
@@ -75,7 +81,9 @@ const AddLiquidity = () => {
             <FromTokenSelect state={state} />
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45}}>
                 <View style={{width: '90%', height: 1, background: border}}></View>
-                <TokenDivider />
+                <View onClick={() => flipTokens()} style={{ cursor: 'pointer' }}>
+                    <TokenDivider />
+                </View>
             </View>
             <ToTokenSelect state={state} />
             <Border />
