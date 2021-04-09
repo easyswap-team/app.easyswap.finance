@@ -59,7 +59,7 @@ const TokenSearch: FC<TokenSearchProps> = props => {
         [provider, props.text]
     );
     return (
-        <View>
+        <View style={{width: '100%'}}>
             <FlexView style={{ marginBottom: Spacing.small }}>
                 <Input
                     value={props.text}
@@ -74,7 +74,7 @@ const TokenSearch: FC<TokenSearchProps> = props => {
                         paddingHorizontal: Spacing.tiny,
                         paddingTop: 12,
                         paddingBottom: 0,
-                        width: 465,
+                        width: '100%',
                         marginTop: 30
                     }}
                 />
