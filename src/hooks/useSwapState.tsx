@@ -53,6 +53,9 @@ const useSwapState: () => SwapState = () => {
     const [creatingOrder, setCreatingOrder] = useState(false);
 
     useEffect(() => {
+        if (!orderType) {
+            state.setFromAmount('');
+        }
         setLimitOrderPrice("");
     }, [orderType]);
 
