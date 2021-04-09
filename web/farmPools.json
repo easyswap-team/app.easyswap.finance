@@ -10,7 +10,7 @@
         "symbol": "USDT-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.525,
-        "totalSupply": 0.000001508936908095,
+        "totalSupply": 1000000.1508936908095,
         "type": "Liquidity pair"
     },
     {
@@ -24,7 +24,7 @@
         "symbol": "WBNB-BTCB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.871,
-        "totalSupply": 0.000001508936908095,
+        "totalSupply": 1000000.000001508936908095,
         "type": "Liquidity pair"
     },
     {
@@ -38,7 +38,7 @@
         "symbol": "BBETH-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 3.014,
-        "totalSupply": 0.000001508936908095,
+        "totalSupply": 1000000.000501508936908095,
         "type": "Liquidity pair"
     },
     {
@@ -52,7 +52,7 @@
         "symbol": "BUSD-WBNB LP",
         "totalValueUSD": 14690.234633904201,
         "multiplier": 0.273,
-        "totalSupply": 0.000001508936908095,
+        "totalSupply": 1000000.000001508936908095,
         "type": "Liquidity pair"
     },
     {
@@ -66,7 +66,7 @@
         "symbol": "ESM-WBNB LP",
         "totalValueUSD": 16691.889633904201,
         "multiplier": 0.2734,
-        "totalSupply": 0.000002488936908095,
+        "totalSupply": 1000000.000002488936908095,
         "type": "Liquidity pair"
     },
     {
@@ -80,7 +80,7 @@
         "symbol": "ESM",
         "totalValueUSD": 16691.889633904201,
         "multiplier": 0.2734,
-        "totalSupply": 0.000002488936908095,
+        "totalSupply": 1000000.000002488936908095,
         "name": "EasySwap Maker",
         "logoURI": "./images/tokens/ESM.png",
         "type": "ESM Token"
