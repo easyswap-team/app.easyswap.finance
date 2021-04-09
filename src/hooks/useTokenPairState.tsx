@@ -48,9 +48,6 @@ const useTokenPairState: () => TokenPairState = () => {
     const toToken = tokens.find(token => token.symbol === toSymbol);
 
     useEffect(() => {
-        if (fromSymbol === "") {
-            setToSymbol("");
-        }
         setFromAmount("");
         setToAmount("");
     }, [fromSymbol, toSymbol]);
