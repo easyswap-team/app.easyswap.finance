@@ -27,6 +27,8 @@ const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
 
 const blocksPerDay = 6500;
 
+let balancesGlobal
+
 export const fetchTokens = async (account: string, customTokens?: Token[]) => {
     const response = await fetch("tokens.json");
     const json = await response.json();
@@ -36,6 +38,9 @@ export const fetchTokens = async (account: string, customTokens?: Token[]) => {
         account,
         tokens.map(token => token.address)
     );
+
+    balancesGlobal = balances
+
     return [
         {
             ...ETH,
@@ -287,22 +292,33 @@ export const fetchLPTokenWithValue = async (
     getPair: (fromToken: Token, toToken: Token, provider: ethers.providers.BaseProvider) => Promise<Pair>,
     provider: ethers.providers.BaseProvider
 ) => {
-    const pair = await getPair(lpToken.tokenA, lpToken.tokenB, provider);
-    const values = await Promise.all([
-        await fetchTotalValue(lpToken.tokenA, pair, weth, wethPriceUSD, getPair, provider),
-        await fetchTotalValue(lpToken.tokenB, pair, weth, wethPriceUSD, getPair, provider)
-    ]);
-    const priceUSD = values[0]
-        .add(values[1])
-        .mul(pow10(18))
-        .div(lpToken.totalSupply);
-    return {
-        ...lpToken,
-        priceUSD: Number(formatBalance(priceUSD)),
-        valueUSD: Number(
-            formatBalance(priceUSD.mul(lpToken.amountDeposited || lpToken.balance).div(pow10(lpToken.decimals)))
-        )
-    };
+    if(lpToken.tokenA && lpToken.tokenB) {
+        const pair = await getPair(lpToken.tokenA, lpToken.tokenB, provider);
+        const values = await Promise.all([
+            await fetchTotalValue(lpToken.tokenA, pair, weth, wethPriceUSD, getPair, provider),
+            await fetchTotalValue(lpToken.tokenB, pair, weth, wethPriceUSD, getPair, provider)
+        ]);
+        const priceUSD = values[0]
+            .add(values[1])
+            .mul(pow10(18))
+            .div(lpToken.totalSupply);
+        return {
+            ...lpToken,
+            priceUSD: Number(formatBalance(priceUSD)),
+            valueUSD: Number(
+                formatBalance(priceUSD.mul(lpToken.amountDeposited || lpToken.balance).div(pow10(lpToken.decimals)))
+            )
+        };
+    }
+    else {
+        return {
+            ...lpToken,
+            priceUSD: Number(formatBalance(lpToken.balance)),
+            valueUSD: Number(
+                formatBalance(lpToken.balance.mul(lpToken.amountDeposited || lpToken.balance).div(pow10(lpToken.decimals)))
+            )
+        };
+    }
 };
 
 const fetchTotalValue = async (token: Token, lpPair: Pair, weth: Token, wethPriceUSD: Fraction, getPair, provider) => {

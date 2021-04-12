@@ -189,6 +189,33 @@ const TokenItem = (props: TokenItemProps) => {
 const LPTokenItem = (props: LPTokenItemProps) => {
     const { textLight, tokenBg } = useColors();
 
+    const getSymbols = () => {
+        let symbols = ''
+
+        if(props.token.tokenA && props.token.tokenB) {
+            symbols = `${props.token.tokenA.symbol}-${props.token.tokenB.symbol}`
+        }
+        else if(props.token.symbol) {
+            symbols = props.token.symbol
+        }
+        
+        return symbols
+    }
+
+    const getLogos = () => {
+        if(props.token.tokenA && props.token.tokenB) {
+            return (
+                <>
+                    <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
+                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
+                </>
+            )
+        }
+        else if(props.token.symbol) {
+            return <TokenLogo token={props.token} small={true} replaceWETH={true} />
+        }
+    }
+
     return (
         <FlexView style={{
             background: tokenBg,
@@ -202,13 +229,12 @@ const LPTokenItem = (props: LPTokenItemProps) => {
             }}
         >
             <View style={{alignSelf: 'flex-start'}}>
-                <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-                <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
+                {getLogos()}
             </View>
             <View style={{ marginLeft: Spacing.normal }}>
                 <Text style={{color: textLight, paddingBottom: 5}}>Liquidity pair</Text>
                 <Text medium={true} caption={true}>
-                    {props.token.tokenA.symbol}-{props.token.tokenB.symbol}
+                    {getSymbols()}
                 </Text>
             </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>

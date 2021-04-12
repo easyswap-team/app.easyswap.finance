@@ -153,10 +153,10 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     const total = state.selectedLPToken?.amountDeposited;
     const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingSushi?.mul(amount).div(total) : null;
     const disabled = !state.pair || !state.selectedLPToken;
-    const label1 = state.selectedLPToken
+    const label1 = state.selectedLPToken?.tokenA
         ? t("deposited-", { symbol: state.selectedLPToken.tokenA.symbol })
         : t("deposited-token-1");
-    const label2 = state.selectedLPToken
+    const label2 = state.selectedLPToken?.tokenB
         ? t("deposited-", { symbol: state.selectedLPToken.tokenB.symbol })
         : t("deposited-token-2");
     return (
