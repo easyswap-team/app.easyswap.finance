@@ -152,13 +152,14 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     const amount = parseBalance(state.amount);
     const total = state.selectedLPToken?.amountDeposited;
     const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingSushi?.mul(amount).div(total) : null;
-    const disabled = !state.pair || !state.selectedLPToken;
-    const label1 = state.selectedLPToken
+    const disabled = !state.pair && !state.selectedLPToken;
+    const label1 = state.selectedLPToken?.tokenA
         ? t("deposited-", { symbol: state.selectedLPToken.tokenA.symbol })
         : t("deposited-token-1");
-    const label2 = state.selectedLPToken
+    const label2 = state.selectedLPToken?.tokenB
         ? t("deposited-", { symbol: state.selectedLPToken.tokenB.symbol })
         : t("deposited-token-2");
+
     return (
         <InfoBox>
             <AmountMeta
@@ -167,8 +168,8 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
                 disabled={disabled || isEmptyValue(state.amount)}
             />
             <Meta label={t("deposited-lp-token")} text={total ? formatBalance(total) : ""} disabled={disabled} />
-            <Meta label={label1} text={state.fromAmount} disabled={disabled} />
-            <Meta label={label2} text={state.toAmount} disabled={disabled} />
+            {state.selectedLPToken?.tokenA && <Meta label={label1} text={state.fromAmount} disabled={disabled} />}
+            {state.selectedLPToken?.tokenB && <Meta label={label2} text={state.toAmount} disabled={disabled} />}
             <WithdrawControls state={state} />
         </InfoBox>
     );
