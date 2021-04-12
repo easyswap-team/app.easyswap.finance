@@ -27,8 +27,6 @@ const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
 
 const blocksPerDay = 6500;
 
-let balancesGlobal
-
 export const fetchTokens = async (account: string, customTokens?: Token[]) => {
     const response = await fetch("tokens.json");
     const json = await response.json();
@@ -38,8 +36,6 @@ export const fetchTokens = async (account: string, customTokens?: Token[]) => {
         account,
         tokens.map(token => token.address)
     );
-
-    balancesGlobal = balances
 
     return [
         {
@@ -292,7 +288,7 @@ export const fetchLPTokenWithValue = async (
     getPair: (fromToken: Token, toToken: Token, provider: ethers.providers.BaseProvider) => Promise<Pair>,
     provider: ethers.providers.BaseProvider
 ) => {
-    if(lpToken.tokenA && lpToken.tokenB) {
+    if(lpToken.type !== 'Liquidity pair') {
         const pair = await getPair(lpToken.tokenA, lpToken.tokenB, provider);
         const values = await Promise.all([
             await fetchTotalValue(lpToken.tokenA, pair, weth, wethPriceUSD, getPair, provider),
