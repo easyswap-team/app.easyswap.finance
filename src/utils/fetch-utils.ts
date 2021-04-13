@@ -288,7 +288,7 @@ export const fetchLPTokenWithValue = async (
     getPair: (fromToken: Token, toToken: Token, provider: ethers.providers.BaseProvider) => Promise<Pair>,
     provider: ethers.providers.BaseProvider
 ) => {
-    if(lpToken.type !== 'Liquidity pair') {
+    if(lpToken.type === 'Liquidity pair') {
         const pair = await getPair(lpToken.tokenA, lpToken.tokenB, provider);
         const values = await Promise.all([
             await fetchTotalValue(lpToken.tokenA, pair, weth, wethPriceUSD, getPair, provider),
