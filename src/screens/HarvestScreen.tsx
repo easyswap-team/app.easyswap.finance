@@ -151,7 +151,7 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     const t = useTranslation();
     const amount = parseBalance(state.amount);
     const total = state.selectedLPToken?.amountDeposited;
-    const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingSushi?.mul(amount).div(total) : null;
+    const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingEsm?.mul(amount).div(total) : null;
     const disabled = !state.pair && !state.selectedLPToken;
     const label1 = state.selectedLPToken?.tokenA
         ? t("deposited-", { symbol: state.selectedLPToken.tokenA.symbol })
