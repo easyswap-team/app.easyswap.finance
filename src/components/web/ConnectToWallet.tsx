@@ -27,9 +27,10 @@ const ConnectWallet = () => {
                     width: '90%',
                     maxWidth: '400px',
                     maxHeight: '400px',
-                    paddingTop: '20px',
-                    paddingBottom: '20px',
-                    marginTop: 80,
+                    marginTop: 100,
+                    paddingTop: 20,
+                    paddingBottom: 20,
+                    flex: '1 0 100%',
                     borderRadius: 12,
                     ...shadow()
                 }}>
