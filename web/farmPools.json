@@ -11,6 +11,7 @@
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.525,
         "totalSupply": 1000000.1508936908095,
+        "sushiRewardedPerYear": 1,
         "type": "Liquidity pair"
     },
     {
@@ -25,6 +26,7 @@
         "totalValueUSD": 14690.234633904201,
         "multiplier": 2.871,
         "totalSupply": 1000000.000001508936908095,
+        "sushiRewardedPerYear": 1,
         "type": "Liquidity pair"
     },
     {
@@ -39,6 +41,7 @@
         "totalValueUSD": 14690.234633904201,
         "multiplier": 3.014,
         "totalSupply": 1000000.000501508936908095,
+        "sushiRewardedPerYear": 1,
         "type": "Liquidity pair"
     },
     {
@@ -53,6 +56,7 @@
         "totalValueUSD": 14690.234633904201,
         "multiplier": 0.273,
         "totalSupply": 1000000.000001508936908095,
+        "sushiRewardedPerYear": 1,
         "type": "Liquidity pair"
     },
     {
@@ -67,6 +71,7 @@
         "totalValueUSD": 16691.889633904201,
         "multiplier": 0.2734,
         "totalSupply": 1000000.000002488936908095,
+        "sushiRewardedPerYear": 1,
         "type": "Liquidity pair"
     },
     {
@@ -81,6 +86,7 @@
         "totalValueUSD": 16691.889633904201,
         "multiplier": 0.2734,
         "totalSupply": 1000000.000002488936908095,
+        "sushiRewardedPerYear": 1,
         "name": "EasySwap Maker",
         "logoURI": "./images/tokens/ESM.png",
         "type": "ESM Token"
