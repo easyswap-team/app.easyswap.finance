@@ -3,7 +3,6 @@ import { Image, View, ViewStyle } from "react-native";
 
 import useColors from "../hooks/useColors";
 import Token from "../types/Token";
-import { isWETH } from "../utils";
 
 const TokenLogo = (props: {
     token: Token;
@@ -14,10 +13,9 @@ const TokenLogo = (props: {
 }) => {
     const { backgroundLight: disabled } = useColors();
     const [error, setError] = useState(false);
-    const size = props.small ? 28 : 27;
+    const size = props.small ? 28 : 32;
     const placeholder = require("../../assets/empty-token.png");
-    const ETH = require("../../assets/ETH.png");
-    const source = props.replaceWETH && isWETH(props.token) ? ETH : { uri: props.token.logoURI };
+    const source = { uri: props.token.logoURI };
     return (
         <View
             style={[

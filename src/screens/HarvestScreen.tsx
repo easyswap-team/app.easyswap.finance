@@ -37,10 +37,13 @@ import Screen from "./Screen";
 
 const HarvestScreen = () => {
     const t = useTranslation();
+    const [scrollTop, setScrollTop] = useState(0)
+
     return (
         <Screen>
-            <FarmingSubMenu />
-            <Container>
+            {IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
+            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                {!IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
                 <Content style={{marginTop: 90}}>
                     <Title text={t("harvest-sushi")} />
                     <Text light={true}>{t("harvest-sushi-desc")}</Text>
@@ -58,7 +61,7 @@ const Harvest = () => {
     const state = useFarmingState(true);
     if (chainId !== 97) return <ChangeNetwork />;
     return (
-        <View style={{ marginTop: Spacing.large }}>
+        <View style={{ marginTop: 25 }}>
             <LPTokenSelect
                 state={state}
                 title={"My Farms"}
@@ -98,7 +101,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
             return (
                 <>
                     <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
+                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
                 </>
             )
         }
@@ -114,7 +117,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
             <FlexView style={{ alignItems: "center" }}>
                 {getLogos()}
-                <View style={{flexDirection: 'column', marginLeft: Spacing.tiny}}>
+                <View style={{flexDirection: 'column', marginLeft: Spacing.normal}}>
                     {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
                     <Text medium={true} caption={true}>
                         {getSymbols()}
