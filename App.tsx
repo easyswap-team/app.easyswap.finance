@@ -1,6 +1,6 @@
 /* tslint:disable:ordered-imports */
 import "./globals";
-import React, {useContext, useEffect} from "react";
+import React from "react";
 
 import { Rubik_300Light, Rubik_400Regular, Rubik_500Medium, Rubik_700Bold } from "@expo-google-fonts/rubik";
 import { AppLoading } from "expo";

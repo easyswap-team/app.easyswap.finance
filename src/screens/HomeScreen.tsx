@@ -31,6 +31,7 @@ import TokenWithValue from "../types/TokenWithValue";
 import { formatUSD } from "../utils";
 import Screen from "./Screen";
 import { PortfolioIcon, PortfolioDarkIcon, ExternalIcon } from '../components/svg/Icons'
+import ChangeNetwork from "../components/ChangeNetwork";
 
 interface TokenItemProps {
     token: TokenWithValue;
@@ -47,7 +48,7 @@ const HomeScreen = ({navigation}) => {
     const state = useHomeState();
     const { borderDark } = useColors();
     const { borderBottom } = useStyles();
-    const { loadingTokens } = useContext(EthersContext);
+    const { loadingTokens, chainId } = useContext(EthersContext);
     const { darkMode } = useContext(GlobalContext);
     const loading = loadingTokens || state.loadingLPTokens || state.loadingPools;
     const totalValue = sum(state.tokens) + sum(state.lpTokens) + sum(state.pools);
@@ -57,16 +58,24 @@ const HomeScreen = ({navigation}) => {
             <Container>
                 <Content style={{ paddingBottom: Spacing.huge }}>
                     <Title text={t("total-value")} style={{ flex: 1, paddingBottom: 15 }} />
-                    <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15, ...borderBottom()}}>
-                        {darkMode ? <PortfolioDarkIcon /> : <PortfolioIcon />}
-                        <Title
-                            text={loading ? t("fetching") : formatUSD(totalValue, 4)}
-                            fontWeight={"light"}
-                            disabled={loading}
-                            style={{ fontSize: IS_DESKTOP ? 25 : 24, marginBottom: 0, marginLeft: 15 }}
-                        />
-                    </View>
-                    <Home state={state} />
+
+                    {
+                        chainId !== 97 ?
+                            <ChangeNetwork />
+                        :
+                            <>
+                                <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15, ...borderBottom()}}>
+                                    {darkMode ? <PortfolioDarkIcon /> : <PortfolioIcon />}
+                                    <Title
+                                        text={loading ? t("fetching") : formatUSD(totalValue, 4)}
+                                        fontWeight={"light"}
+                                        disabled={loading}
+                                        style={{ fontSize: IS_DESKTOP ? 25 : 24, marginBottom: 0, marginLeft: 15 }}
+                                    />
+                                </View>
+                                <Home state={state} />
+                            </>
+                    }
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
@@ -207,7 +216,7 @@ const LPTokenItem = (props: LPTokenItemProps) => {
             return (
                 <>
                     <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
-                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ marginLeft: 4 }} />
+                    <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
                 </>
             )
         }

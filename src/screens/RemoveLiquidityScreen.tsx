@@ -41,11 +41,14 @@ import { deduct, formatBalance, isEmptyValue, parseBalance } from "../utils";
 import Screen from "./Screen";
 
 const RemoveLiquidityScreen = () => {
+    const [scrollTop, setScrollTop] = useState(0)
     const t = useTranslation();
+
     return (
         <Screen>
-            <LiquiditySubMenu />
-            <Container>
+            {IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
+            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                {!IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
                 <Content style={{marginTop: 90}}>
                     <Title text={t("remove-liquidity")} />
                     <Text light={true}>{t("remove-liquidity-desc")}</Text>

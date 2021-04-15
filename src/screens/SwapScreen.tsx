@@ -44,11 +44,9 @@ import TokenItem from "../components/TokenItem";
 
 const SwapScreen = () => {
     const t = useTranslation();
-    const [scrollTop, setScrollTop] = useState(0)
-
     return (
         <Screen>
-            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+            <Container>
                 <Content>
                     <Title text={t("new-order")} />
                     <Swap />

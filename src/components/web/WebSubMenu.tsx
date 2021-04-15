@@ -143,7 +143,6 @@ const WebSubMenu: FC<WebSubMenuProps> = props => {
                 width: IS_DESKTOP ? 330 : SCREEN_WIDTH - Spacing.large,
                 ...border({padding: 5, color: darkMode ? borderDark : '#ccd5df'}),
                 alignSelf: 'center',
-                marginLeft: -10,
                 marginTop: 20,
                 position: 'absolute',
                 zIndex: 1,

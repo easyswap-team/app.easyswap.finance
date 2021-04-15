@@ -38,6 +38,7 @@ import useSDK from "../hooks/useSDK";
 import useTranslation from "../hooks/useTranslation";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
+import { IS_DESKTOP } from "../constants/dimension";
 import { convertAmount, convertToken, formatBalance, isEmptyValue, isETH, isETHWETHPair, parseBalance } from "../utils";
 import Screen from "./Screen";
 import { default as network } from '../../web/network.json';
@@ -50,8 +51,9 @@ const LiquidityScreen = () => {
     
     return (
         <Screen>
-            <LiquiditySubMenu scrollTop={scrollTop} />
+            {IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
             <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+                {!IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
                 <Content style={{marginTop: 90}}>
                     <Title text={t("add-liquidity")} />
                     <Text light={true}>{t("add-liquidity-desc")}</Text>
