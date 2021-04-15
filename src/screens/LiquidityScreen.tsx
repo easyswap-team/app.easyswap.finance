@@ -47,12 +47,12 @@ import TokenItem from "../components/TokenItem";
 
 const LiquidityScreen = () => {
     const t = useTranslation();
-    const [scrollTop, setScrollTop] = useState(0)
+    const [scrollTop, setScrollTop] = useState(100)
     
     return (
         <Screen>
             {IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
-            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+            <Container>
                 {!IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
                 <Content style={{marginTop: 90}}>
                     <Title text={t("add-liquidity")} />
@@ -71,20 +71,24 @@ const AddLiquidity = () => {
     const { border } = useColors();
     if (chainId !== 97) return <ChangeNetwork />;
 
+    let bothTokensSelected = state.toSymbol && state.fromSymbol
+
     const flipTokens = () => {
-        state.setFromSymbol(state.toSymbol)
-        state.setToSymbol(state.fromSymbol)
+        if(bothTokensSelected) {
+            state.setFromSymbol(state.toSymbol)
+            state.setToSymbol(state.fromSymbol)
+        }
     }
 
     return (
-        <View style={{ marginTop: Spacing.large }}>
+        <View style={{ marginTop: 25 }}>
             {/*<ModeSelect state={state} />*/}
             {/*<Border />*/}
             <FromTokenSelect state={state} />
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45, marginBottom: 20}}>
                 <View style={{width: '90%', height: 1, background: border}}></View>
-                <View onClick={() => flipTokens()} style={{ cursor: 'pointer' }}>
-                    <TokenDivider />
+                <View onClick={() => flipTokens()} style={bothTokensSelected ? { cursor: 'pointer' } : { cursor: 'default' }}>
+                    <TokenDivider style={bothTokensSelected ? {opacity: 1} : {opacity: 0.2}} />
                 </View>
             </View>
             <ToTokenSelect state={state} />
@@ -130,47 +134,18 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const { tokenBg, textMedium, selectTokenIcon  } = useColors();
     return (
         <View>
-            <Heading text={t("1st-token")} />
-            {
-                state.fromToken ? 
-                    <TokenItem
-                        key={state.fromToken.address}
-                        token={state.fromToken}
-                        selected={false}
-                        onSelectToken={() => {}}
-                        disabled={false}
-                        onClick={() => {setExpanded(true)}}
-                    />
-                : 
-                    <View
-                        onClick={() => {setExpanded(true)}}
-                        style={{
-                            background: tokenBg,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: 20,
-                            borderRadius: 8
-                        }}
-                    >
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon color={selectTokenIcon} />
-                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
-                        </View>
-                        <TriangleDown color={textMedium} />
-                    </View>
-            }
             <TokenSelect
-                state={state}
-                title={t("1st-token")}
+                title={t("token-to-sell")}
                 symbol={state.fromSymbol}
-                modalSettings={{
-                    isVisible: expanded,
-                    closeModal: () => {setExpanded(false)}
-                }}
                 onChangeSymbol={state.setFromSymbol}
-                hidden={token => !customTokens.find(tk => tk.address === token.address) && token.balance.isZero()}
+                hidden={token =>
+                    (!customTokens.find(tk => tk.address === token.address) && token.balance.isZero()) ||
+                    (state.orderType === "limit" && isETH(token))
+                }
             />
+            {state.orderType === "limit" && !state.fromSymbol && ETH && !ETH.balance.isZero() && (
+                <LimitOrderUnsupportedNotice />
+            )}
         </View>
     );
 };
@@ -182,45 +157,14 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const [expanded, setExpanded] = useState(false)
     const { tokenBg, textMedium, selectTokenIcon } = useColors();
     return (
+
         <View>
-            <Heading text={t("2nd-token")} />
-            {
-                state.toToken ? 
-                    <TokenItem
-                        key={state.toToken.address}
-                        token={state.toToken}
-                        selected={false}
-                        onSelectToken={() => {}}
-                        disabled={false}
-                        onClick={() => {setExpanded(true)}}
-                    />
-                : 
-                    <View
-                        onClick={() => {setExpanded(true)}}
-                        style={{
-                            background: tokenBg,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: 20,
-                            borderRadius: 8
-                        }}
-                    >
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon color={selectTokenIcon} />
-                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
-                        </View>
-                        <TriangleDown color={textMedium} />
-                    </View>
-            }
             <TokenSelect
-                state={state}
                 title={t("2nd-token")}
                 symbol={state.toSymbol}
-                modalSettings={{
-                    isVisible: expanded,
-                    closeModal: () => {setExpanded(false)}
-                }}
+                type='token-to-buy'
+                symbol={state.toSymbol}
+                fromSymbol={state.fromSymbol}
                 onChangeSymbol={state.setToSymbol}
                 hidden={token =>
                     token.symbol === state.fromSymbol ||

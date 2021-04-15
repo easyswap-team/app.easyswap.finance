@@ -3,9 +3,9 @@ import { FlatList, View, ViewStyle } from "react-native";
 
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
-import { GlobalContext } from "../context/GlobalContext";
 import useDelayedEffect from "../hooks/useDelayedEffect";
 import useTranslation from "../hooks/useTranslation";
+import useStyles from "../hooks/useStyles";
 import useColors from "../hooks/useColors";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
@@ -24,8 +24,6 @@ import TokenPrice from "./TokenPrice";
 import TokenSearch from "./TokenSearch";
 import TokenSymbol from "./TokenSymbol";
 import TokenValue from "./TokenValue";
-import Modal from "modal-enhanced-react-native-web";
-import { CloseModalIcon } from './svg/Icons'
 
 export interface TokenSelectProps {
     title: string;
@@ -34,7 +32,8 @@ export interface TokenSelectProps {
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
     style?: ViewStyle;
-    modalSettings?: any;
+    type?: string;
+    fromSymbol?: string;
 }
 
 const TokenSelect: FC<TokenSelectProps> = props => {
@@ -44,6 +43,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
     const token = useMemo(() => tokens.find(t => t.symbol === props.symbol), [tokens, props.symbol]);
     const onSelectToken = t => props.onChangeSymbol(t.symbol);
     const onUnselectToken = () => props.onChangeSymbol("");
+    const { border } = useStyles();
     const onAddToken = async (t: Token) => {
         await addCustomToken(t);
         setSearch("");
@@ -58,29 +58,32 @@ const TokenSelect: FC<TokenSelectProps> = props => {
     };
     useEffect(() => setSearch(""), [props.symbol]);
     useDelayedEffect(() => setQuery(search.trim().toLowerCase()), 300, [search]);
-    const { backgroundLight } = useColors();
-    const { darkMode } = useContext(GlobalContext);
+    
+    const tokensContent = () => (
+        <>
+            <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
+            <TokenList disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} />
+        </>
+    )
 
     return (
-        <Modal {...props.modalSettings}>
-            <View style={{
-                    minWidth: IS_DESKTOP ? 560 : '100%',
-                    height: "90%",
-                    alignItems: "center",
-                    alignSelf: 'center',
-                    backgroundColor: backgroundLight,
-                    padding: '20px',
-                    borderRadius: 8
-                }}
-            >
-                <View style={{flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between', marginTop: 20}}>
-                    <Text style={{fontSize: 20}}>Select a token</Text>
-                    <CloseModalIcon fill={darkMode ? '#fff' : '#222'} onClick={() => {props.modalSettings.closeModal()}} />
-                </View>
-                <TokenSearch text={search} onChangeText={setSearch} tokens={tokens} onAddToken={onAddToken} />
-                <TokenList state={props.state} disabled={props.disabled} hidden={hidden} onSelectToken={onSelectToken} closeModal={props.modalSettings.closeModal} />
-            </View>
-        </Modal>
+        <View style={props.style}>
+            <Expandable title={props.title} expanded={!props.symbol} onExpand={() => props.onChangeSymbol("")}>
+                {
+                    
+                    props.type === 'token-to-buy' ? 
+                        props.fromSymbol ?
+                            tokensContent()
+                        :
+                            <View style={{ paddingVertical: 30, ...border() }}>
+                                <Text style={{ fontSize: 16, textAlign: 'center' }}>First, select a token to Sell</Text>
+                            </View>
+                    :
+                        tokensContent()
+                }
+            </Expandable>
+            {token && <TokenItem token={token} selected={true} onSelectToken={onUnselectToken} selectable={true} />}
+        </View>
     );
 };
 
@@ -88,8 +91,6 @@ const TokenList = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: (token: Token) => boolean;
     hidden?: (token: Token) => boolean;
-    closeModal?: any;
-    state?: any;
 }) => {
     const { loadingTokens, tokens } = useContext(EthersContext);
     const renderItem = useCallback(
@@ -101,26 +102,14 @@ const TokenList = (props: {
                     selected={false}
                     onSelectToken={props.onSelectToken}
                     disabled={props.disabled?.(item)}
-                    closeModal={props.closeModal}
                 />
             );
         },
         [props.onSelectToken, props.disabled]
     );
-
-    const data = useMemo(() => {
-            const filtredTokens = tokens.filter(token => {
-                if(props.hidden) {
-                    if(props.hidden(token) || token.symbol === props.state.fromToken?.symbol || token.symbol === props.state.toToken?.symbol) {
-                        return false
-                    }
-                    else {
-                        return true
-                    }
-                }
-            }).sort(compareTokens)
-            return filtredTokens
-        }, [tokens, props.hidden]
+    const data = useMemo(
+        () => tokens.filter(token => (props.hidden ? !props.hidden(token) : true)).sort(compareTokens),
+        [tokens, props.hidden]
     );
     return loadingTokens ? (
         <Loading />
@@ -149,11 +138,10 @@ const TokenItem = (props: {
     onSelectToken: (token: Token) => void;
     disabled?: boolean;
     selectable?: boolean;
-    closeModal?: any;
 }) => {
+    const { tokenBg } = useColors();
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
-        props.closeModal()
     }, [props.onSelectToken, props.token]);
     return (
         <Selectable
@@ -161,35 +149,31 @@ const TokenItem = (props: {
             onPress={onPress}
             disabled={props.disabled || props.selectable}
             containerStyle={{
-                marginBottom: ITEM_SEPARATOR_HEIGHT
+                marginBottom: 5
             }}>
-            <FlexView style={{ alignItems: "center" }}>
+            <FlexView style={{
+                    alignItems: "center",
+                    paddingBottom: 20,
+                    paddingTop: 20,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    background: tokenBg,
+                    borderRadius: 8
+                }}>
                 <TokenLogo token={props.token} disabled={props.disabled} />
                 <View>
                     {props.token.priceUSD !== null && (
                         <TokenPrice
                             token={props.token}
                             disabled={props.disabled}
-                            style={{
-                                marginLeft: Spacing.small,
-                                paddingBottom: 5,
-                                width: '80%',
-                                whiteSpace: 'nowrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis'
-                            }}
+                            style={{ marginLeft: Spacing.small, paddingBottom: 5 }}
                         />
                     )}
                     <TokenName token={props.token} disabled={props.disabled} />
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
-                    {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} style={{
-                        width: '80%',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                    }} />}
-                    <FlexView style={{paddingTop: 5}}>
+                    {props.token.valueUSD !== null && <TokenValue token={props.token} disabled={props.disabled} style={{ paddingBottom: 5 }} />}
+                    <FlexView>
                         <TokenAmount
                             token={props.token}
                             disabled={props.disabled}

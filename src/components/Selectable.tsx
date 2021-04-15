@@ -24,7 +24,7 @@ const Selectable: FC<SelectableProps> = props => {
                         {...props}
                         style={[
                             {
-                                ...border({ color: props.selected ? accent : borderDark }),
+                                ...border({ color: props.selected ? accent : 'transparent', padding: '0px', borderWidth: 2 }),
                                 backgroundColor: hovered && !props.disabled ? backgroundLight : background
                             },
                             props.style

@@ -77,8 +77,8 @@ export const SelectTokenIcon = props => (
     </svg>
 )
 
-export const TokenDivider = () => (
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const TokenDivider = props => (
+    <svg {...props} width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="17" cy="17" r="17" fill="#4373EE" />
         <path fillRule="evenodd" clipRule="evenodd" d="M16 22L19.5 26L23 22L21 22L21 16L18 16L18 22L16 22Z" fill="white" />
         <g opacity="0.4">

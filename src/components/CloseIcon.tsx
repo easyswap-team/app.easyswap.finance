@@ -4,8 +4,7 @@ import { Icon } from "react-native-elements";
 import useColors from "../hooks/useColors";
 
 const CloseIcon = () => {
-    const { accent } = useColors();
-    return <Icon type={"material-community"} name={"close"} color={accent} style={{ marginLeft: 4 }} />;
+    return <Icon type={"material-community"} name={"close"} color='#ABB1B9' style={{ marginLeft: 4 }} />;
 };
 
 export default CloseIcon;

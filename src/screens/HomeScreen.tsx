@@ -177,7 +177,16 @@ const EmptyList = () => {
 const TokenItem = (props: TokenItemProps) => {
     const { tokenBg } = useColors();
     return (
-        <FlexView style={{ alignItems: "center", marginBottom: 5, paddingBottom: 20, paddingTop: 20, paddingLeft: 10, paddingRight: 10, background: tokenBg, borderRadius: 8 }}>
+        <FlexView style={{
+                alignItems: "center",
+                marginBottom: 5,
+                paddingBottom: 20,
+                paddingTop: 20,
+                paddingLeft: 10,
+                paddingRight: 10,
+                background: tokenBg,
+                borderRadius: 8
+            }}>
             <TokenLogo token={props.token} disabled={props.disabled} />
             <View style={{width: '45%'}}>
                 <TokenPrice token={props.token} disabled={props.disabled} style={{ width: '80%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginLeft: Spacing.small, paddingBottom: 5 }} />
