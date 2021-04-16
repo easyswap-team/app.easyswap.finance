@@ -145,6 +145,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                     balance: ethers.constants.Zero,
                     amountDeposited: myStake.amountDeposited,
                     pendingEsm: myStake.pendingEsm,
+                    pendingEsg: myStake.pendingEsg,
                     totalSupply: parseBalance(String(pool.totalSupply), 18)
                 };
             }
@@ -154,6 +155,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                     balance: ethers.constants.Zero,
                     amountDeposited: myStake.amountDeposited,
                     pendingEsm: myStake.pendingEsm,
+                    pendingEsg: myStake.pendingEsg,
                     totalSupply: parseBalance(String(pool.totalSupply), 18)
                 };
             }
@@ -168,7 +170,8 @@ const fetchMyStake = async (poolId: number, account: string, provider: ethers.pr
     const masterChef = getContract("MasterChef", MASTER_CHEF, provider);
     const { amount: amountDeposited } = await masterChef.userInfo(poolId, account);
     const pendingEsm = await masterChef.pendingEsm(poolId, account);
-    return { amountDeposited, pendingEsm };
+    const pendingEsg = await masterChef.pendingEsg(poolId, account);
+    return { amountDeposited, pendingEsm, pendingEsg};
 };
 
 const fetchPairTokens = async (pair: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
