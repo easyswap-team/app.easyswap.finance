@@ -230,7 +230,7 @@ const LPTokenItem = (props: LPTokenItemProps) => {
             )
         }
         else if(props.token.symbol) {
-            return <TokenLogo token={props.token} small={true} replaceWETH={true} />
+            return <TokenLogo token={props.token} small={true} replaceWETH={true} style={{ top: 5, left: 10 }} />
         }
     }
 
