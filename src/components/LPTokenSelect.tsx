@@ -86,17 +86,27 @@ const EmptyList = ({ text }: { text: string }) => {
 };
 
 export const LPTokenItem: FC<LPTokenItemProps> = props => {
-    const { textMedium, textLight } = useColors();
+    const { textMedium, textLight, tokenBg } = useColors();
     const balance = formatBalance(props.token.balance, props.token.decimals, 6);
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
+
     return (
         <Selectable
             selected={props.selected}
             onPress={onPress}
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
-            <FlexView style={{ alignItems: "center" }}>
+            <FlexView style={{
+                    alignItems: "center",
+                    paddingBottom: 20,
+                    paddingTop: 20,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    background: tokenBg,
+                    borderRadius: 8
+                }}
+            >
                 <View style={{alignSelf: 'flex-start'}}>
                     <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
                     <TokenLogo token={props.token.tokenB} small={true} replaceWETH={true} style={{ position: 'absolute', top: 15, left: 15 }} />
