@@ -41,12 +41,12 @@ import Screen from "./Screen";
 
 const FarmingScreen = () => {
     const t = useTranslation();
-    const [scrollTop, setScrollTop] = useState(0)
+    const [scrollTop, setScrollTop] = useState(100)
 
     return (
         <Screen>
             {IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
-            <Container onScroll={({nativeEvent}) => setScrollTop(nativeEvent.contentOffset.y)}>
+            <Container>
                 {!IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
                 <Content style={{marginTop: 90}}>
                     <Title text={t("plant-lp-tokens")} />
@@ -87,7 +87,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
     const onPress = useCallback(() => {
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
-    const { textLight } = useColors();
+    const { textLight, tokenBg } = useColors();
 
     const getSymbols = () => {
         let symbols = ''
@@ -121,8 +121,19 @@ const TokenItem: FC<LPTokenItemProps> = props => {
             selected={props.selected}
             onPress={onPress}
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
-            <FlexView style={{ alignItems: "center" }}>
-                {getLogos()}
+            <FlexView style={{
+                    alignItems: "center",
+                    paddingBottom: 20,
+                    paddingTop: 20,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    background: tokenBg,
+                    borderRadius: 8
+                }}
+            >
+                <View style={{alignSelf: 'flex-start'}}>
+                    {getLogos()}
+                </View>
                 <View style={{flexDirection: 'column', marginLeft: Spacing.normal}}>
                     {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
                     <Text medium={true} caption={true}>
@@ -130,7 +141,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
                     </Text>
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end", marginRight: 4 }}>
-                    <Text note={true}>
+                    <Text note={true} style={{ paddingBottom: 5 }}>
                         {multiplier > 1 ? "✨" : ""}
                         {multiplier.toFixed(2) || "1.00"}x APY
                     </Text>

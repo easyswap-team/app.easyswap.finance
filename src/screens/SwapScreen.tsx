@@ -30,6 +30,7 @@ import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import Fraction from "../constants/Fraction";
 import { EthersContext } from "../context/EthersContext";
 import useColors from "../hooks/useColors";
+import useStyles from "../hooks/useStyles";
 import useDelayedEffect from "../hooks/useDelayedEffect";
 import useLinker from "../hooks/useLinker";
 import useSwapState, { OrderType, SwapState } from "../hooks/useSwapState";
@@ -63,18 +64,22 @@ const Swap = () => {
     const { border } = useColors();
     if (chainId !== 97) return <ChangeNetwork />;
 
+    let bothTokensSelected = state.toSymbol && state.fromSymbol
+
     const flipTokens = () => {
-        state.setFromSymbol(state.toSymbol)
-        state.setToSymbol(state.fromSymbol)
+        if(bothTokensSelected) {
+            state.setFromSymbol(state.toSymbol)
+            state.setToSymbol(state.fromSymbol)
+        }
     }
 
     return (
-        <View style={{ marginTop: Spacing.large }}>
+        <View style={{ marginTop: 25 }}>
             <FromTokenSelect state={state} />
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 45, marginBottom: 20}}>
                 <View style={{width: '90%', height: 1, background: border}}></View>
-                <View onClick={() => flipTokens()} style={{ cursor: 'pointer' }}>
-                    <TokenDivider />
+                <View onClick={() => flipTokens()} style={bothTokensSelected ? { cursor: 'pointer' } : { cursor: 'default' }}>
+                    <TokenDivider style={bothTokensSelected ? {opacity: 1} : {opacity: 0.2}} />
                 </View>
             </View>
             <ToTokenSelect state={state} />
@@ -103,50 +108,18 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
 
     return (
         <View>
-            <Heading text={t("token-to-sell")} />
-            {
-                state.fromToken ? 
-                    <TokenItem
-                        key={state.fromToken.address}
-                        token={state.fromToken}
-                        selected={false}
-                        onSelectToken={() => {}}
-                        disabled={false}
-                        onClick={() => {setExpanded(true)}}
-                    />
-                : 
-                    <View
-                        onClick={() => {setExpanded(true)}}
-                        style={{
-                            background: tokenBg,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: 20,
-                            borderRadius: 8
-                        }}
-                    >
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon color={selectTokenIcon} />
-                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
-                        </View>
-                        <TriangleDown color={textMedium} />
-                    </View>
-            }
             <TokenSelect
-                state={state}
                 title={t("token-to-sell")}
                 symbol={state.fromSymbol}
-                modalSettings={{
-                    isVisible: expanded,
-                    closeModal: () => {setExpanded(false)}
-                }}
                 onChangeSymbol={state.setFromSymbol}
                 hidden={token =>
                     (!customTokens.find(tk => tk.address === token.address) && token.balance.isZero()) ||
                     (state.orderType === "limit" && isETH(token))
                 }
             />
+            {state.orderType === "limit" && !state.fromSymbol && ETH && !ETH.balance.isZero() && (
+                <LimitOrderUnsupportedNotice />
+            )}
         </View>
     );
 };
@@ -162,44 +135,11 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
 
     return (
         <View>
-            <Heading text={t("token-to-buy")} />
-            {
-                state.toToken ?
-                    <TokenItem
-                        key={state.toToken.address}
-                        token={state.toToken}
-                        selected={false}
-                        onSelectToken={() => {}}
-                        disabled={false}
-                        onClick={() => {setExpanded(true)}}
-                    />
-                : 
-                    <View
-                        onClick={() => {setExpanded(true)}}
-                        style={{
-                            background: tokenBg,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: 20,
-                            borderRadius: 8
-                        }}
-                    >
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <SelectTokenIcon color={selectTokenIcon} />
-                            <Text caption style={{marginLeft: 15}}>Select a token</Text>
-                        </View>
-                        <TriangleDown color={textMedium} />
-                    </View>
-            }
             <TokenSelect
-                state={state}
                 title={t("token-to-buy")}
+                type='token-to-buy'
                 symbol={state.toSymbol}
-                modalSettings={{
-                    isVisible: expanded,
-                    closeModal: () => {setExpanded(false)}
-                }}
+                fromSymbol={state.fromSymbol}
                 onChangeSymbol={onChangeSymbol}
                 hidden={token => token.symbol === state.fromSymbol || (limit && isETH(token))}
             />
@@ -210,8 +150,16 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
 
 const AmountInput = ({ state }: { state: SwapState }) => {
     const t = useTranslation();
+    const { border } = useStyles();
     if (!state.fromSymbol || !state.toSymbol) {
-        return <Heading text={t("amount")} disabled={true} />;
+        return (
+            <>
+                <Heading text={t("amount")} />
+                <View style={{ paddingVertical: 30, ...border() }}>
+                    <Text style={{ fontSize: 16, textAlign: 'center' }}>Select a token to Sell & Buy</Text>
+                </View>
+            </>
+        );
     }
     return (
         <View>
