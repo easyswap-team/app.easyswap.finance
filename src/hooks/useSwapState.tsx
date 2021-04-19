@@ -53,9 +53,6 @@ const useSwapState: () => SwapState = () => {
     const [creatingOrder, setCreatingOrder] = useState(false);
 
     useEffect(() => {
-        if (!orderType) {
-            state.setFromAmount('');
-        }
         setLimitOrderPrice("");
     }, [orderType]);
 
@@ -137,6 +134,7 @@ const useSwapState: () => SwapState = () => {
                     await updateTokens();
                     setTrade(undefined);
                     setOrderType(undefined);
+                    state.setFromAmount('');
                 }
             } finally {
                 setSwapping(false);

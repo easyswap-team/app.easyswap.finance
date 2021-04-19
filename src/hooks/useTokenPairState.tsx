@@ -87,7 +87,7 @@ const useTokenPairState: () => TokenPairState = () => {
                 if (tx) {
                     await tx.wait();
                     await updateTokens();
-                    setFromSymbol("");
+                    setFromAmount('');
                 }
             } finally {
                 setWrapping(false);
@@ -103,7 +103,7 @@ const useTokenPairState: () => TokenPairState = () => {
                 if (tx) {
                     await tx.wait();
                     await updateTokens();
-                    setFromSymbol("");
+                    setFromAmount('');
                 }
             } finally {
                 setUnwrapping(false);
