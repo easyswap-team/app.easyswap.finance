@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useState } from "react";
+import React, { FC, useCallback, useContext, useState, useEffect } from "react";
 import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
@@ -30,6 +30,7 @@ import { EthersContext } from "../context/EthersContext";
 import useFarmingState, { FarmingState } from "../hooks/useFarmingState";
 import useColors from "../hooks/useColors";
 import useTranslation from "../hooks/useTranslation";
+import useHelper from "../hooks/useHelper";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { formatBalance, isEmptyValue, parseBalance } from "../utils";
@@ -59,7 +60,20 @@ const Harvest = () => {
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useFarmingState(true);
+    const {pathTokenAdress} = useHelper()
+    
     if (chainId !== 97) return <ChangeNetwork />;
+    
+    useEffect(() => {
+        if(state.lpTokens) {
+            const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
+
+            if(opendToken) {
+                state.setSelectedLPToken(opendToken)
+            }
+        }
+    }, [state, pathTokenAdress])
+
     return (
         <View style={{ marginTop: 25 }}>
             <LPTokenSelect

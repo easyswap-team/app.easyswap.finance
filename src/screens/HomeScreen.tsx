@@ -42,6 +42,7 @@ interface TokenItemProps {
 interface LPTokenItemProps {
     token: LPTokenWithValue;
     disabled?: boolean;
+    tokenType?: string;
 }
 
 const HomeScreen = ({navigation}) => {
@@ -117,7 +118,7 @@ const MyLPTokens = ({ state }: { state: HomeState }) => {
         <View style={{marginTop: 20}}>
             <Heading text={t("liquidity")} buttonText={t("manage")} onPressButton={goToRemoveLiquidity} />
             {/* @ts-ignore */}
-            <TokenList loading={state.loadingLPTokens} tokens={state.lpTokens} TokenItem={LPTokenItem} />
+            <TokenList loading={state.loadingLPTokens} tokens={state.lpTokens} TokenItem={LPTokenItem} typeToken={'liqudity'} />
         </View>
     );
 };
@@ -129,7 +130,7 @@ const Pools = ({ state }: { state: HomeState }) => {
         <View>
             <Heading text={t("farms")} buttonText={t("manage")} onPressButton={goToFarming} />
             {/* @ts-ignore */}
-            <TokenList loading={state.loadingPools} tokens={state.pools} TokenItem={LPTokenItem} />
+            <TokenList loading={state.loadingPools} tokens={state.pools} TokenItem={LPTokenItem} typeToken={'farm'} />
         </View>
     );
 };
@@ -138,9 +139,11 @@ const TokenList = (props: {
     loading: boolean;
     tokens?: TokenWithValue[] | LPTokenWithValue[];
     TokenItem: FC<TokenItemProps | LPTokenItemProps>;
+    typeToken?: string;
+
 }) => {
     const renderItem = useCallback(({ item }) => {
-        return <props.TokenItem key={item.address} token={item} />;
+        return <props.TokenItem key={item.address} token={item} typeToken={props.typeToken} />;
     }, []);
     const data = useMemo(
         () =>
@@ -207,7 +210,6 @@ const TokenItem = (props: TokenItemProps) => {
 
 const LPTokenItem = (props: LPTokenItemProps) => {
     const { textLight, tokenBg } = useColors();
-
     const getSymbols = () => {
         let symbols = ''
 
@@ -262,7 +264,11 @@ const LPTokenItem = (props: LPTokenItemProps) => {
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>
             </View>
-            <ExternalBtn path={"/liquidity/remove/?adress=" + props.token.address} />
+            <ExternalBtn path={
+                props.typeToken === 'liqudity' ? `/liquidity/remove/?adress=${props.token.address}` :
+                props.typeToken === 'farm' ? `/farming/harvest/?adress=${props.token.address}` : ''
+            } 
+            />
         </FlexView>
     );
 };

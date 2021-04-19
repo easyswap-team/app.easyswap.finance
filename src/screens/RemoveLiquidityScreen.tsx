@@ -63,11 +63,11 @@ const RemoveLiquidityScreen = () => {
 
 const RemoveLiquidity = () => {
     const { chainId } = useContext(EthersContext);
-    if (chainId !== 97) return <ChangeNetwork />;
-
     const t = useTranslation();
-    const {pathTokenAdress} = useHelper()
     const state = useRemoveLiquidityState();
+    const {pathTokenAdress} = useHelper()
+
+    if (chainId !== 97) return <ChangeNetwork />;
     
     useEffect(() => {
         if(state.lpTokens) {
