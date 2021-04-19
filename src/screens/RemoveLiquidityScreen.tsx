@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState, useEffect } from "react";
 import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
@@ -34,6 +34,7 @@ import { EthersContext } from "../context/EthersContext";
 import useRemoveLiquidityState, { RemoveLiquidityState } from "../hooks/useRemoveLiquidityState";
 import { FEE } from "../hooks/useSwapRouter";
 import useTranslation from "../hooks/useTranslation";
+import useHelper from "../hooks/useHelper";
 import LPToken from "../types/LPToken";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
@@ -62,9 +63,22 @@ const RemoveLiquidityScreen = () => {
 
 const RemoveLiquidity = () => {
     const { chainId } = useContext(EthersContext);
-    const t = useTranslation();
-    const state = useRemoveLiquidityState();
     if (chainId !== 97) return <ChangeNetwork />;
+
+    const t = useTranslation();
+    const {pathTokenAdress} = useHelper()
+    const state = useRemoveLiquidityState();
+    
+    useEffect(() => {
+        if(state.lpTokens) {
+            const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
+
+            if(opendToken) {
+                state.setSelectedLPToken(opendToken)
+            }
+        }
+    }, [state])
+    
     return (
         <View style={{ marginTop: Spacing.large }}>
             <LPTokenSelect

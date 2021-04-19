@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useContext, useMemo } from "react";
 import { FlatList, Platform, TouchableHighlight, View } from "react-native";
 import { Icon } from "react-native-elements";
+import { Link } from "react-router-dom";
 
 import { ethers } from "ethers";
 import Border from "../components/Border";
@@ -261,18 +262,17 @@ const LPTokenItem = (props: LPTokenItemProps) => {
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>
             </View>
-            <ExternalBtn path={"/pairs/" + props.token.address} />
+            <ExternalBtn path={"/liquidity/remove/?adress=" + props.token.address} />
         </FlexView>
     );
 };
 
 const ExternalBtn = ({ path }) => {
     const { textDark, disabled } = useColors();
-    const isETH = path.endsWith(ethers.constants.AddressZero);
     return (
-        <TouchableHighlight disabled={isETH}>
+        <Link to={path}>
             <ExternalIcon style={{ marginLeft: Spacing.small }} />
-        </TouchableHighlight>
+        </Link>
     );
 };
 
