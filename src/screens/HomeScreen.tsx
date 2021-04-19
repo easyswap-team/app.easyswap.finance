@@ -200,7 +200,7 @@ const TokenItem = (props: TokenItemProps) => {
                     {IS_DESKTOP && <TokenSymbol token={props.token} disabled={props.disabled} />}
                 </FlexView>
             </View>
-            <ExternalBtn path={"/tokens/" + props.token.address} />
+            <ExternalBtn path={"/swap/?adress=" + props.token.address} />
         </FlexView>
     );
 };

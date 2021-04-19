@@ -77,7 +77,7 @@ const RemoveLiquidity = () => {
                 state.setSelectedLPToken(opendToken)
             }
         }
-    }, [state])
+    }, [state, pathTokenAdress])
     
     return (
         <View style={{ marginTop: Spacing.large }}>
