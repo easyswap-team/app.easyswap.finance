@@ -121,6 +121,7 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
     return (
         <View>
             <TokenSelect
+                state={state}
                 title={t("token-to-sell")}
                 symbol={state.fromSymbol}
                 onChangeSymbol={state.setFromSymbol}
@@ -148,6 +149,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
     return (
         <View>
             <TokenSelect
+                state={state}
                 title={t("token-to-buy")}
                 type='token-to-buy'
                 symbol={state.toSymbol}
