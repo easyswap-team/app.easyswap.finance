@@ -57,10 +57,11 @@ const HarvestScreen = () => {
 };
 
 const Harvest = () => {
+    const [tokenChanged, setTokenChanged] = useState(false)
     const { chainId } = useContext(EthersContext);
+    const {pathTokenAdress} = useHelper()
     const t = useTranslation();
     const state = useFarmingState(true);
-    const {pathTokenAdress} = useHelper()
     
     if (chainId !== 97) return <ChangeNetwork />;
     
@@ -68,7 +69,7 @@ const Harvest = () => {
         if(state.lpTokens) {
             const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
 
-            if(opendToken) {
+            if(opendToken && !tokenChanged) {
                 state.setSelectedLPToken(opendToken)
             }
         }
@@ -80,6 +81,7 @@ const Harvest = () => {
                 state={state}
                 title={"My Farms"}
                 emptyText={t("you-dont-have-lp-tokens-deposited")}
+                setTokenChanged={setTokenChanged}setTokenChanged={setTokenChanged}
                 Item={TokenItem}
             />
             <Border />
@@ -93,6 +95,9 @@ const Harvest = () => {
 const TokenItem: FC<LPTokenItemProps> = props => {
     const amount = formatBalance(props.token?.amountDeposited || 0, props.token.decimals, 8);
     const onPress = useCallback(() => {
+        if(props.setTokenChanged) {
+            props.setTokenChanged(true)
+        }
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
     const { textLight, tokenBg } = useColors();

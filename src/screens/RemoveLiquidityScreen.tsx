@@ -40,6 +40,7 @@ import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { deduct, formatBalance, isEmptyValue, parseBalance } from "../utils";
 import Screen from "./Screen";
+import { useLinkProps } from "@react-navigation/native";
 
 const RemoveLiquidityScreen = () => {
     const [scrollTop, setScrollTop] = useState(100)
@@ -62,6 +63,7 @@ const RemoveLiquidityScreen = () => {
 };
 
 const RemoveLiquidity = () => {
+    const [tokenChanged, setTokenChanged] = useState(false)
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useRemoveLiquidityState();
@@ -73,7 +75,7 @@ const RemoveLiquidity = () => {
         if(state.lpTokens) {
             const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
 
-            if(opendToken) {
+            if(opendToken && !tokenChanged) {
                 state.setSelectedLPToken(opendToken)
             }
         }
@@ -85,6 +87,7 @@ const RemoveLiquidity = () => {
                 state={state}
                 title={t("your-liquidity")}
                 emptyText={t("you-dont-have-liquidity")}
+                setTokenChanged={setTokenChanged}
                 Item={LPTokenItem}
             />
             {/*<Border />*/}
