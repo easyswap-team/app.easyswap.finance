@@ -22,7 +22,7 @@ import {
 import { default as farmPools } from '../../web/farmPools.json'
 
 const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
-const MASTER_CHEF = "0x6Ea90906c240f2F3b15dE880b3C7775c2AcFcc40";
+const MASTER_CHEF = "0x180FAF09AdD6a27554b11a131DCe6f6A3ddF4cBf";
 const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
 
 const blocksPerDay = 6500;
