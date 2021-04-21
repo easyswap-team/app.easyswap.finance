@@ -43,7 +43,7 @@ const LPTokenSelect: FC<LPTokenSelectProps> = props => {
                 <LPTokenList state={props.state} emptyText={props.emptyText} Item={props.Item} />
             </Expandable>
             {props.state.selectedLPToken && (
-                <props.Item token={props.state.selectedLPToken} selected={true} onSelectToken={onUnselectToken} />
+                <props.Item token={props.state.selectedLPToken} selected={true} onSelectToken={onUnselectToken} setTokenChanged={props.setTokenChanged} />
             )}
         </View>
     );
@@ -89,6 +89,9 @@ export const LPTokenItem: FC<LPTokenItemProps> = props => {
     const { textMedium, textLight, tokenBg } = useColors();
     const balance = formatBalance(props.token.balance, props.token.decimals, 6);
     const onPress = useCallback(() => {
+        if(props.setTokenChanged) {
+            props.setTokenChanged(true)
+        }
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
 

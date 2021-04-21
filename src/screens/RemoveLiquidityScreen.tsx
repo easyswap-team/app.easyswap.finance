@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState, useEffect } from "react";
 import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
@@ -34,11 +34,13 @@ import { EthersContext } from "../context/EthersContext";
 import useRemoveLiquidityState, { RemoveLiquidityState } from "../hooks/useRemoveLiquidityState";
 import { FEE } from "../hooks/useSwapRouter";
 import useTranslation from "../hooks/useTranslation";
+import useHelper from "../hooks/useHelper";
 import LPToken from "../types/LPToken";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { deduct, formatBalance, isEmptyValue, parseBalance } from "../utils";
 import Screen from "./Screen";
+import { useLinkProps } from "@react-navigation/native";
 
 const RemoveLiquidityScreen = () => {
     const [scrollTop, setScrollTop] = useState(100)
@@ -61,16 +63,31 @@ const RemoveLiquidityScreen = () => {
 };
 
 const RemoveLiquidity = () => {
+    const [tokenChanged, setTokenChanged] = useState(false)
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useRemoveLiquidityState();
+    const {pathTokenAdress} = useHelper()
+
     if (chainId !== 97) return <ChangeNetwork />;
+    
+    useEffect(() => {
+        if(state.lpTokens) {
+            const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
+
+            if(opendToken && !tokenChanged) {
+                state.setSelectedLPToken(opendToken)
+            }
+        }
+    }, [state, pathTokenAdress])
+    
     return (
         <View style={{ marginTop: Spacing.large }}>
             <LPTokenSelect
                 state={state}
                 title={t("your-liquidity")}
                 emptyText={t("you-dont-have-liquidity")}
+                setTokenChanged={setTokenChanged}
                 Item={LPTokenItem}
             />
             {/*<Border />*/}

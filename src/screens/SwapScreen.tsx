@@ -31,6 +31,7 @@ import Fraction from "../constants/Fraction";
 import { EthersContext } from "../context/EthersContext";
 import useColors from "../hooks/useColors";
 import useStyles from "../hooks/useStyles";
+import useHelper from "../hooks/useHelper";
 import useDelayedEffect from "../hooks/useDelayedEffect";
 import useLinker from "../hooks/useLinker";
 import useSwapState, { OrderType, SwapState } from "../hooks/useSwapState";
@@ -105,10 +106,22 @@ const FromTokenSelect = ({ state }: { state: SwapState }) => {
     const ETH = tokens ? tokens.find(token => isETH(token)) : null;
     const [expanded, setExpanded] = useState(false)
     const { tokenBg, textMedium, selectTokenIcon } = useColors();
+    const {pathTokenAdress} = useHelper()
+
+    useEffect(() => {
+        if(tokens) {
+            const opendToken = tokens.find(token => token.address === pathTokenAdress)
+
+            if(opendToken) {
+                state.setFromSymbol(opendToken.symbol)
+            }
+        }
+    }, [tokens, pathTokenAdress])  
 
     return (
         <View>
             <TokenSelect
+                state={state}
                 title={t("token-to-sell")}
                 symbol={state.fromSymbol}
                 onChangeSymbol={state.setFromSymbol}
@@ -136,6 +149,7 @@ const ToTokenSelect = ({ state }: { state: SwapState }) => {
     return (
         <View>
             <TokenSelect
+                state={state}
                 title={t("token-to-buy")}
                 type='token-to-buy'
                 symbol={state.toSymbol}

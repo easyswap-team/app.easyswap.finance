@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useState } from "react";
+import React, { FC, useCallback, useContext, useState, useEffect } from "react";
 import { Platform, View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
@@ -30,6 +30,7 @@ import { EthersContext } from "../context/EthersContext";
 import useFarmingState, { FarmingState } from "../hooks/useFarmingState";
 import useColors from "../hooks/useColors";
 import useTranslation from "../hooks/useTranslation";
+import useHelper from "../hooks/useHelper";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { formatBalance, isEmptyValue, parseBalance } from "../utils";
@@ -56,16 +57,31 @@ const HarvestScreen = () => {
 };
 
 const Harvest = () => {
+    const [tokenChanged, setTokenChanged] = useState(false)
     const { chainId } = useContext(EthersContext);
+    const {pathTokenAdress} = useHelper()
     const t = useTranslation();
     const state = useFarmingState(true);
+    
     if (chainId !== 97) return <ChangeNetwork />;
+    
+    useEffect(() => {
+        if(state.lpTokens) {
+            const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
+
+            if(opendToken && !tokenChanged) {
+                state.setSelectedLPToken(opendToken)
+            }
+        }
+    }, [state, pathTokenAdress])
+
     return (
         <View style={{ marginTop: 25 }}>
             <LPTokenSelect
                 state={state}
                 title={"My Farms"}
                 emptyText={t("you-dont-have-lp-tokens-deposited")}
+                setTokenChanged={setTokenChanged}setTokenChanged={setTokenChanged}
                 Item={TokenItem}
             />
             <Border />
@@ -79,6 +95,9 @@ const Harvest = () => {
 const TokenItem: FC<LPTokenItemProps> = props => {
     const amount = formatBalance(props.token?.amountDeposited || 0, props.token.decimals, 8);
     const onPress = useCallback(() => {
+        if(props.setTokenChanged) {
+            props.setTokenChanged(true)
+        }
         props.onSelectToken(props.token);
     }, [props.onSelectToken, props.token]);
     const { textLight, tokenBg } = useColors();
