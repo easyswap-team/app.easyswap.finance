@@ -58,10 +58,10 @@ const HarvestScreen = () => {
 
 const Harvest = () => {
     const [tokenChanged, setTokenChanged] = useState(false)
-    const { chainId } = useContext(EthersContext);
     const {pathTokenAdress} = useHelper()
-    const t = useTranslation();
     const state = useFarmingState(true);
+    const t = useTranslation();
+    const { chainId } = useContext(EthersContext);
     
     if (chainId !== 97) return <ChangeNetwork />;
     
