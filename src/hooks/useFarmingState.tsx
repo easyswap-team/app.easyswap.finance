@@ -73,7 +73,7 @@ const useFarmingState: (myPools: boolean) => FarmingState = myPools => {
     }, [state.pair, state.selectedLPToken]);
 
     const onDeposit = useCallback(async () => {
-        if (state.selectedLPToken?.id && state.amount && signer) {
+        if (typeof state.selectedLPToken?.id !== 'undefined' && state.amount && signer) {
             setDepositing(true);
             try {
                 const amount = parseBalance(state.amount, state.selectedLPToken.decimals);
