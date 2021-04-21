@@ -184,7 +184,7 @@ const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
     }
     const onAmountChanged = (newAmount: string) => {
         state.setFromAmount(newAmount);
-        if (state.pair && state.fromToken && state.priceDetermined) {
+        if (state.pair && state.fromToken) {
             const fromPrice = state.pair.priceOf(convertToken(state.fromToken));
             const toAmount = fromPrice.quote(convertAmount(state.fromToken, newAmount)).toExact();
             state.setToAmount(isEmptyValue(toAmount) ? "" : toAmount);
@@ -205,7 +205,7 @@ const ToTokenInput = ({ state }: { state: AddLiquidityState }) => {
     if (!state.fromSymbol || !state.toSymbol) return <View />;
     const onAmountChanged = (newAmount: string) => {
         state.setToAmount(newAmount);
-        if (state.pair && state.toToken && state.priceDetermined) {
+        if (state.pair && state.toToken) {
             const toPrice = state.pair.priceOf(convertToken(state.toToken));
             const fromAmount = toPrice.quote(convertAmount(state.toToken, newAmount)).toExact();
             state.setFromAmount(isEmptyValue(fromAmount) ? "" : fromAmount);
@@ -234,7 +234,7 @@ const ZapNotice = ({ state }: { state: AddLiquidityState }) => {
 };
 
 const PriceInfo = ({ state }: { state: AddLiquidityState }) => {
-    if (state.fromToken && state.toToken && !state.loading && (!state.pair || !state.priceDetermined)) {
+    if (state.fromToken && state.toToken && !state.loading && (!state.pair)) {
         return <FirstProviderInfo state={state} />;
     } else {
         return <PairPriceInfo state={state} />;
@@ -321,7 +321,7 @@ const PairPriceInfo = ({ state }: { state: AddLiquidityState }) => {
     const { fromAmount, toAmount, lpTokenAmount } = useAmountCalculator(state);
     const disabled = isEmptyValue(state.fromAmount) || isEmptyValue(state.toAmount);
     const price =
-        state.pair && state.fromToken && state.priceDetermined
+        state.pair && state.fromToken && state.fromSymbol && state.toSymbol
             ? state.pair.priceOf(convertToken(state.fromToken)).toFixed(8)
             : undefined;
     const symbol = state.fromSymbol + "-" + state.toSymbol;

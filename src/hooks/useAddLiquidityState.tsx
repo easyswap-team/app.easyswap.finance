@@ -15,7 +15,6 @@ export interface AddLiquidityState extends TokenPairState {
     mode?: AddLiquidityMode;
     setMode: (mode?: AddLiquidityMode) => void;
     pair?: Pair;
-    priceDetermined: boolean;
     onAdd: () => Promise<void>;
     adding: boolean;
 }
@@ -31,13 +30,6 @@ const useAddLiquidityState: () => AddLiquidityState = () => {
     const { getPair } = useSDK();
     const { addLiquidity, addLiquidityETH } = useSwapRouter();
     const { zapIn } = useZapper();
-    const priceDetermined =
-        !!pair &&
-        !!state.toToken &&
-        !pair
-            .priceOf(convertToken(state.toToken))
-            .denominator.toString()
-            .startsWith("0");
 
     useEffect(() => {
         setPair(undefined);
@@ -99,7 +91,6 @@ const useAddLiquidityState: () => AddLiquidityState = () => {
         mode,
         setMode,
         pair,
-        priceDetermined,
         onAdd,
         adding
     };
