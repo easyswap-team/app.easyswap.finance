@@ -84,7 +84,7 @@ export const fetchTokenWithValue = async (
 export const fetchPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
     const balances = await fetchTokenBalances(
         account,
-        farmPools.map(pool => pool.pair)
+        farmPools.map(pool => pool.address)
     );
 
     // tslint:disable-next-line:max-func-body-length
@@ -94,7 +94,7 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
 
             if(pool.type === 'Liquidity pair') {
                 result = await Promise.all([
-                    fetchPairTokens(pool.pair, tokens, provider)
+                    fetchPairTokens(pool.address, tokens, provider)
                 ]);
 
                 const poolData = {
@@ -135,7 +135,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
 
             if(pool.type === 'Liquidity pair') {
                 result = await Promise.all([
-                    fetchPairTokens(pool.pair, tokens, provider)
+                    fetchPairTokens(pool.address, tokens, provider)
                 ]);
 
                 return {
