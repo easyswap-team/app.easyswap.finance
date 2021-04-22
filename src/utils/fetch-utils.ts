@@ -21,8 +21,8 @@ import {
 } from "./index";
 import { default as network } from '../../web/network.json';
 
-const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
-const MASTER_CHEF = "0x180FAF09AdD6a27554b11a131DCe6f6A3ddF4cBf";
+const SUSHISWAP_FACTORY = "0x0B9A824Af766D03B14788F90745D7E2630F6Ee91"
+const MASTER_CHEF = "0x3bdEf18CbF1EF467658bE07915A8d0dF76d57149";
 const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
 const blocksPerDay = 6500;
 

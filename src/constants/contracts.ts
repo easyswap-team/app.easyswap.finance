@@ -2,9 +2,9 @@ import OrderBook from "@sushiswap/settlement/deployments/kovan/OrderBook.json";
 import Settlement from "@sushiswap/settlement/deployments/mainnet/Settlement.json";
 
 // export const UNISWAP_ROUTER = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
-export const SUSHISWAP_ROUTER = "0x84F9A7b8ce8eeF993bFEF5534E49FEfDF0dEc77d";
+export const SUSHISWAP_ROUTER = "0xe597a752BA0F4D4D7056c77AB949AbA16575Db92";
 export const ROUTER = SUSHISWAP_ROUTER;
-export const MASTER_CHEF = "0x180FAF09AdD6a27554b11a131DCe6f6A3ddF4cBf";
+export const MASTER_CHEF = "0x3bdEf18CbF1EF467658bE07915A8d0dF76d57149";
 export const SUSHI_BAR = "0x6342c257Cb0094761C3AB3Aa7D6d8Ff031c8a123";
 export const SUSHI_ROLL = "0x02728f44db8FAd3347A9CE25FFCf40ffab8b8108";
 export const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
