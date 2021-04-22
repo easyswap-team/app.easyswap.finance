@@ -117,7 +117,7 @@ export const EthersContextProvider = ({ children }) => {
                 if (list?.length > 0 && weth && p) {
                     let tokenPriceResponse = await fetch(network[97].tokenPrice)
                     let tokenPrice = await tokenPriceResponse.json()
-                    const wethPriceUSD = Fraction.parse(String(tokenPrice));
+                    const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
                     setTokens(
                         await Promise.all(
                             list.map(async token => await fetchTokenWithValue(token, weth, wethPriceUSD, getPair, p))

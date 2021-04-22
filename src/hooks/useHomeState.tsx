@@ -40,7 +40,7 @@ const useHomeState = () => {
             setLoadingLPTokens(true);
             let tokenPriceResponse = await fetch(network[97].tokenPrice)
             let tokenPrice = await tokenPriceResponse.json()
-            const wethPriceUSD = Fraction.parse(String(tokenPrice));
+            const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyLPTokens(await signer.getAddress(), tokens, provider);
             try {
                 setLPTokens(
@@ -61,7 +61,7 @@ const useHomeState = () => {
             setLoadingPools(true);
             let tokenPriceResponse = await fetch(network[97].tokenPrice)
             let tokenPrice = await tokenPriceResponse.json()
-            const wethPriceUSD = Fraction.parse(String(tokenPrice));
+            const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyPools(await signer.getAddress(), tokens, provider);
             try {
                 setPools(
