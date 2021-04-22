@@ -11,6 +11,7 @@ import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
 import { getContract, isWETH } from "../utils";
 import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
+import { default as network } from '../../web/network.json';
 
 export type OnBlockListener = (block?: number) => void | Promise<void>;
 
@@ -114,7 +115,9 @@ export const EthersContextProvider = ({ children }) => {
                 const weth = list.find(t => isWETH(t));
                 const p = chainId === 1 ? provider : ALCHEMY_PROVIDER;
                 if (list?.length > 0 && weth && p) {
-                    const wethPriceUSD = Fraction.parse(String(await sushiData.weth.price()));
+                    let tokenPriceResponse = await fetch(network[97].tokenPrice)
+                    let tokenPrice = await tokenPriceResponse.json()
+                    const wethPriceUSD = Fraction.parse(String(tokenPrice));
                     setTokens(
                         await Promise.all(
                             list.map(async token => await fetchTokenWithValue(token, weth, wethPriceUSD, getPair, p))

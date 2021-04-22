@@ -24,9 +24,6 @@ const App = () => {
             let chainId = Number(res)
             const alchemyUrl = network[chainId].alchemyUrl
 
-            // change subgraph
-            sushiData.graphAPIEndpoints.exchange = network[chainId].subGraphExchangeUrl
-
             // change alchemy
             ethers.providers.AlchemyProvider.getUrl = () => {
                 return {
