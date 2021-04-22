@@ -1,17 +1,14 @@
 {
     "1": {
-        "alchemyUrl": "http://localhost:8546",
-        "subGraphExchangeUrl": "http://localhost:8546/graphql"
+        "alchemyUrl": "http://localhost:8546"
     },
     "42": {
-        "alchemyUrl": "http://localhost:8546",
-        "subGraphExchangeUrl": "http://localhost:8546/graphql"
+        "alchemyUrl": "http://localhost:8546"
     },
     "97": {
         "alchemyUrl": "http://localhost:8646",
         "tokens": "http://127.0.0.1:8646/api/tokens/",
         "farmPools": "http://127.0.0.1:8646/api/farms/",
-        "tokenPrice": "http://127.0.0.1:8646/api/price/",
-        "subGraphExchangeUrl": "http://localhost:8646/graphql"
+        "tokenPrice": "http://127.0.0.1:8646/api/price/"
     }
 }

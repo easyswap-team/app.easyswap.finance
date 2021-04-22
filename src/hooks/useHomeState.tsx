@@ -8,6 +8,7 @@ import LPTokenWithValue from "../types/LPTokenWithValue";
 import { isWETH } from "../utils";
 import { fetchLPTokenWithValue, fetchMyLPTokens, fetchMyPools } from "../utils/fetch-utils";
 import useSDK from "./useSDK";
+import { default as network } from '../../web/network.json';
 
 export interface HomeState {
     loadingLPTokens: boolean;
@@ -37,7 +38,9 @@ const useHomeState = () => {
         const weth = tokens.find(t => isWETH(t));
         if (provider && signer && weth && tokens && tokens.length > 0) {
             setLoadingLPTokens(true);
-            const wethPriceUSD = Fraction.parse(String(await sushiData.weth.price()));
+            let tokenPriceResponse = await fetch(network[97].tokenPrice)
+            let tokenPrice = await tokenPriceResponse.json()
+            const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyLPTokens(await signer.getAddress(), tokens, provider);
             try {
                 setLPTokens(
@@ -56,7 +59,9 @@ const useHomeState = () => {
         const weth = tokens.find(t => isWETH(t));
         if (provider && signer && weth && tokens && tokens.length > 0 && lpTokens) {
             setLoadingPools(true);
-            const wethPriceUSD = Fraction.parse(String(await sushiData.weth.price()));
+            let tokenPriceResponse = await fetch(network[97].tokenPrice)
+            let tokenPrice = await tokenPriceResponse.json()
+            const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyPools(await signer.getAddress(), tokens, provider);
             try {
                 setPools(
