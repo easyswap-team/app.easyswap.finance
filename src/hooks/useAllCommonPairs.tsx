@@ -2,16 +2,18 @@ import { useCallback } from "react";
 import { WETH } from "../utils";
 import { ChainId, Currency, ETHER, Fetcher, Pair, Token} from "@sushiswap/sdk";
 import { ethers } from "ethers";
-import { default as tokensData } from '../../web/tokens.json'
+import { default as network } from '../../web/network.json';
 
 const BASES_TO_CHECK_TRADES_AGAINST = [];
 
-tokensData.tokens.forEach(token => {
-    BASES_TO_CHECK_TRADES_AGAINST.push(new Token(ChainId.MAINNET, token.address, token.decimals, token.symbol, token.name))
+fetch(network[97].tokens).then(response => response.json()).then(tokens => {
+    tokens.forEach(token => {
+        BASES_TO_CHECK_TRADES_AGAINST.push(new Token(ChainId.BSC, token.address, token.decimals, token.symbol, token.name))
+    })
 })
 
 function wrappedCurrency(currency: Currency | undefined): Token | undefined {
-    return currency === ETHER ? WETH[ChainId.MAINNET] : currency instanceof Token ? currency : undefined;
+    return currency === ETHER ? WETH[ChainId.BSC] : currency instanceof Token ? currency : undefined;
 }
 
 // Source: https://github.com/Uniswap/uniswap-interface/blob/master/src/hooks/Trades.ts

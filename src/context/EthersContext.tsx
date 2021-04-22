@@ -9,7 +9,7 @@ import useSDK from "../hooks/useSDK";
 import Ethereum from "../types/Ethereum";
 import Token from "../types/Token";
 import TokenWithValue from "../types/TokenWithValue";
-import { getContract, WETH, isWETH } from "../utils";
+import { getContract, isWETH } from "../utils";
 import { fetchTokens, fetchTokenWithValue } from "../utils/fetch-utils";
 
 export type OnBlockListener = (block?: number) => void | Promise<void>;

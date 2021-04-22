@@ -19,18 +19,17 @@ import {
     parseCurrencyAmount,
     pow10
 } from "./index";
-import { default as farmPools } from '../../web/farmPools.json'
+import { default as network } from '../../web/network.json';
 
 const SUSHISWAP_FACTORY = "0xed926313B04Cb206eA317583FA41B1d9EaDd8117"
 const MASTER_CHEF = "0x180FAF09AdD6a27554b11a131DCe6f6A3ddF4cBf";
 const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
-
 const blocksPerDay = 6500;
 
 export const fetchTokens = async (account: string, customTokens?: Token[]) => {
-    const response = await fetch("tokens.json");
-    const json = await response.json();
-    const tokens = [...json.tokens, ...(customTokens || [])];
+    let tokensResponse = await fetch(network[97].tokens)
+    let tokensJSON = await tokensResponse.json()
+    const tokens = [...tokensJSON, ...(customTokens || [])];
 
     const balances = await fetchTokenBalances(
         account,
@@ -82,6 +81,9 @@ export const fetchTokenWithValue = async (
 
 // tslint:disable-next-line:max-func-body-length
 export const fetchPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
+    let farmPoolsResponse = await fetch(network[97].farmPools)
+    let farmPools = await farmPoolsResponse.json()
+
     const balances = await fetchTokenBalances(
         account,
         farmPools.map(pool => pool.address)
@@ -125,9 +127,11 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
 };
 
 export const fetchMyPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
+    let farmPoolsResponse = await fetch(network[97].farmPools)
+    let farmPools = await farmPoolsResponse.json()
+    
     const fetchMyPool = async (pool): Promise<LPToken | null> => {
         try {
-            
             const myStake = await fetchMyStake(pool.id, account, provider);
             if (myStake.amountDeposited.isZero()) return null;
             

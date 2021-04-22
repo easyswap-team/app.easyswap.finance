@@ -9,6 +9,9 @@
     },
     "97": {
         "alchemyUrl": "http://localhost:8646",
+        "tokens": "http://127.0.0.1:8646/api/tokens/",
+        "farmPools": "http://127.0.0.1:8646/api/farms/",
+        "tokenPrice": "http://127.0.0.1:8646/api/price/",
         "subGraphExchangeUrl": "http://localhost:8646/graphql"
     }
 }
