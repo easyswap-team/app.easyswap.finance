@@ -69,8 +69,6 @@ const RemoveLiquidity = () => {
     const state = useRemoveLiquidityState();
     const {pathTokenAdress} = useHelper()
 
-    if (chainId !== 97) return <ChangeNetwork />;
-    
     useEffect(() => {
         if(state.lpTokens) {
             const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
@@ -80,6 +78,8 @@ const RemoveLiquidity = () => {
             }
         }
     }, [state, pathTokenAdress])
+
+    if (chainId !== 97) return <ChangeNetwork />;
     
     return (
         <View style={{ marginTop: Spacing.large }}>
