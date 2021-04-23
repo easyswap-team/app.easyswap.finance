@@ -187,12 +187,6 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingEsm : null;
     const sushiEsg = total && amount.lte(total) ? state.selectedLPToken!.pendingEsg : null;
     const disabled = !state.pair && !state.selectedLPToken;
-    const label1 = state.selectedLPToken?.tokenA
-        ? t("deposited-", { symbol: state.selectedLPToken.tokenA.symbol })
-        : t("deposited-token-1");
-    const label2 = state.selectedLPToken?.tokenB
-        ? t("deposited-", { symbol: state.selectedLPToken.tokenB.symbol })
-        : t("deposited-token-2");
 
     return (
         <InfoBox>
@@ -205,8 +199,6 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
                 suffix={"ESG"}
             />
             <Meta label={t("deposited-lp-token")} text={total ? formatBalance(total) : ""} disabled={disabled} />
-            {state.selectedLPToken?.tokenA && <Meta label={label1} text={state.fromAmount} disabled={disabled} />}
-            {state.selectedLPToken?.tokenB && <Meta label={label2} text={state.toAmount} disabled={disabled} />}
             <WithdrawControls state={state} />
         </InfoBox>
     );
