@@ -26,6 +26,7 @@
   "limit-order": "Orden limitada",
   "limit-order-desc": "Realizar una orden con un precio deseado para liquidar",
   "token-to-sell": "Token para vender",
+  "token-to-add": "Token para agregar",
   "token-to-buy": "Token para comprar",
   "amount": "La cantidad",
   "token-not-supported-in-beta": "Este token no es compatible con la versión beta..",

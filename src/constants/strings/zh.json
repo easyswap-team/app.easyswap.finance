@@ -26,6 +26,7 @@
   "limit-order": "限价单",
   "limit-order-desc": "限价委托等待成交",
   "token-to-sell": "出售代币",
+  "token-to-add": "要添加的令牌",
   "token-to-buy": "购买代币",
   "amount": "数量",
   "token-not-supported-in-beta": "Beta版暂不支持此代币",

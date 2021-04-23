@@ -136,7 +136,7 @@ const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
         <View>
             <TokenSelect
                 state={state}
-                title={t("token-to-sell")}
+                title={t("token-to-add")}
                 symbol={state.fromSymbol}
                 onChangeSymbol={state.setFromSymbol}
                 hidden={token =>

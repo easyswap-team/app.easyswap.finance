@@ -26,6 +26,7 @@
   "limit-order": "指値注文",
   "limit-order-desc": "決済したい価格で注文",
   "token-to-sell": "売るトークン",
+  "token-to-add": "追加するトークン",
   "token-to-buy": "買うトークン",
   "amount": "数量",
   "token-not-supported-in-beta": "このトークンはベータ版ではサポートしていません。",
