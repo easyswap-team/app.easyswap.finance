@@ -62,9 +62,7 @@ const Harvest = () => {
     const state = useFarmingState(true);
     const t = useTranslation();
     const { chainId } = useContext(EthersContext);
-    
-    if (chainId !== 97) return <ChangeNetwork />;
-    
+
     useEffect(() => {
         if(state.lpTokens) {
             const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
@@ -74,6 +72,8 @@ const Harvest = () => {
             }
         }
     }, [state, pathTokenAdress])
+    
+    if (chainId !== 97) return <ChangeNetwork />;
 
     return (
         <View style={{ marginTop: 25 }}>
