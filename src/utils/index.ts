@@ -6,7 +6,7 @@ import { Token} from "@sushiswap/sdk";
 
 // ToDo Rename to WBSC (Wrapped BSC)
 export const WETH = {
-    1: new Token(ChainId.MAINNET, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WBNB', 'Wrapped BNB')
+    97: new Token(ChainId.BSC, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WBNB', 'Wrapped BNB')
 };
 
 export const formatUSD = (value: number, maxFraction = 0) => {
@@ -52,14 +52,14 @@ export const isEmptyValue = (text: string) =>
 
 export const isETH = (token?: Token) => token?.address.toLowerCase() === ETH.address.toLowerCase();
 
-export const isWETH = (token?: Token) => token?.address.toLowerCase() === WETH[1].address.toLowerCase();
+export const isWETH = (token?: Token) => token?.address.toLowerCase() === WETH[97].address.toLowerCase();
 
 export const isETHWETHPair = (fromToken?: Token, toToken?: Token) => {
     return (isETH(fromToken) && isWETH(toToken)) || (isWETH(fromToken) && isETH(toToken));
 };
 
 export const convertToken = (token: Token) => {
-    return token.symbol === "BNB" ? WETH["1"] : new SDKToken(ChainId.BSC, token.address, token.decimals);
+    return token.symbol === "BNB" ? WETH[97] : new SDKToken(ChainId.BSC, token.address, token.decimals);
 };
 
 export const convertAmount = (token: Token, amount: string) => {
