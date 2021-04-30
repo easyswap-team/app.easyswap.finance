@@ -69,7 +69,7 @@ const AddLiquidity = () => {
     const { chainId } = useContext(EthersContext);
     const state = useAddLiquidityState();
     const { border } = useColors();
-    if (chainId !== 97) return <ChangeNetwork />;
+    if (chainId !== 56) return <ChangeNetwork />;
 
     let bothTokensSelected = state.toSymbol && state.fromSymbol
 

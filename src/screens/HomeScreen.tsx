@@ -62,7 +62,7 @@ const HomeScreen = ({navigation}) => {
                     <Title text={t("total-value")} style={{ flex: 1, paddingBottom: 15 }} />
 
                     {
-                        chainId !== 97 ?
+                        chainId !== 56 ?
                             <ChangeNetwork />
                         :
                             <>

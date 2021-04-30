@@ -6,7 +6,7 @@ import { default as network } from '../../web/network.json';
 
 const BASES_TO_CHECK_TRADES_AGAINST = [];
 
-fetch(network[97].tokens).then(response => response.json()).then(tokens => {
+fetch(network[56].tokens).then(response => response.json()).then(tokens => {
     tokens.forEach(token => {
         BASES_TO_CHECK_TRADES_AGAINST.push(new Token(ChainId.BSC, token.address, token.decimals, token.symbol, token.name))
     })

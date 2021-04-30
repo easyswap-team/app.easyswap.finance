@@ -6,7 +6,7 @@ import { getContract } from "../utils";
 
 const useWeth = () => {
     const wrapETH = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
-        const weth = getContract("IWETH", WETH[97].address, signer);
+        const weth = getContract("IWETH", WETH[56].address, signer);
         const gasLimit = await weth.estimateGas.deposit({
             value: amount
         });
@@ -19,7 +19,7 @@ const useWeth = () => {
     }, []);
 
     const unwrapETH = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
-        const weth = getContract("IWETH", WETH[97].address, signer);
+        const weth = getContract("IWETH", WETH[56].address, signer);
         const gasLimit = await weth.estimateGas.withdraw(amount);
         const tx = await weth.withdraw(amount, {
             gasLimit

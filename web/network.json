@@ -5,10 +5,10 @@
     "42": {
         "alchemyUrl": "http://localhost:8546"
     },
-    "97": {
-        "alchemyUrl": "https://testapi.easyswap.finance",
-        "tokens": "https://testapi.easyswap.finance/api/tokens/",
-        "farmPools": "https://testapi.easyswap.finance/api/farms/",
-        "tokenPrice": "https://testapi.easyswap.finance/api/price/"
+    "56": {
+        "alchemyUrl": "https://api.easyswap.finance",
+        "tokens": "https://api.easyswap.finance/api/tokens/",
+        "farmPools": "https://api.easyswap.finance/api/farms/",
+        "tokenPrice": "https://api.easyswap.finance/api/price/"
     }
 }

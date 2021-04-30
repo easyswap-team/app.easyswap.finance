@@ -1,0 +1,62 @@
+[
+    {
+        "id": 0,
+        "pair": "0x95072085c933Ea718910f6779375dE36c10c2392",
+        "allocPoint": 10000,
+        "slpBalance": 205252.11008060398,
+        "apy": 4.699123110094798e-9,
+        "address": "0x95072085c933Ea718910f6779375dE36c10c2392",
+        "decimals": 18,
+        "symbol": "BUSD-WBNB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 0.273,
+        "totalSupply": 1000000.000001508936908095,
+        "sushiRewardedPerYear": 1,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 1,
+        "pair": "0x3a53fb81110926128A061Bf835216C266745Ae48",
+        "allocPoint": 10000,
+        "slpBalance": 2.925774767721405,
+        "apy": 0.0034668424755635308,
+        "address": "0x3a53fb81110926128A061Bf835216C266745Ae48",
+        "decimals": 18,
+        "symbol": "USDT-BUSD LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 2.871,
+        "totalSupply": 1000000.000001508936908095,
+        "sushiRewardedPerYear": 1,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 2,
+        "pair": "0x1769C32e0cA96dcdB0c05E04194a7044f822E481",
+        "allocPoint": 10000,
+        "slpBalance": 3176921.4459584225,
+        "apy": 3.351803716248766e-9,
+        "address": "0x1769C32e0cA96dcdB0c05E04194a7044f822E481",
+        "decimals": 18,
+        "symbol": "BTCB-WBNB LP",
+        "totalValueUSD": 14690.234633904201,
+        "multiplier": 3.014,
+        "totalSupply": 1000000.000501508936908095,
+        "sushiRewardedPerYear": 1,
+        "type": "Liquidity pair"
+    },
+    {
+        "id": 3,
+        "pair": "0x811e95FE116B589147E47649bc6aF5A144287Cf2",
+        "allocPoint": 10000,
+        "slpBalance": 19252.11008060398,
+        "apy": 3.449123110094798e-9,
+        "address": "0x811e95FE116B589147E47649bc6aF5A144287Cf2",
+        "decimals": 18,
+        "symbol": "ETH-WBNB LP",
+        "totalValueUSD": 16691.889633904201,
+        "multiplier": 0.2734,
+        "totalSupply": 1000000.000002488936908095,
+        "sushiRewardedPerYear": 1,
+        "type": "Liquidity pair"
+    }
+]

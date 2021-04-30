@@ -115,7 +115,7 @@ export const EthersContextProvider = ({ children }) => {
                 const weth = list.find(t => isWETH(t));
                 const p = chainId === 1 ? provider : ALCHEMY_PROVIDER;
                 if (list?.length > 0 && weth && p) {
-                    let tokenPriceResponse = await fetch(network[97].tokenPrice)
+                    let tokenPriceResponse = await fetch(network[56].tokenPrice)
                     let tokenPrice = await tokenPriceResponse.json()
                     const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
                     setTokens(

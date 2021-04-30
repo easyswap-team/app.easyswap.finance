@@ -38,7 +38,7 @@ const useHomeState = () => {
         const weth = tokens.find(t => isWETH(t));
         if (provider && signer && weth && tokens && tokens.length > 0) {
             setLoadingLPTokens(true);
-            let tokenPriceResponse = await fetch(network[97].tokenPrice)
+            let tokenPriceResponse = await fetch(network[56].tokenPrice)
             let tokenPrice = await tokenPriceResponse.json()
             const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyLPTokens(await signer.getAddress(), tokens, provider);
@@ -59,7 +59,7 @@ const useHomeState = () => {
         const weth = tokens.find(t => isWETH(t));
         if (provider && signer && weth && tokens && tokens.length > 0 && lpTokens) {
             setLoadingPools(true);
-            let tokenPriceResponse = await fetch(network[97].tokenPrice)
+            let tokenPriceResponse = await fetch(network[56].tokenPrice)
             let tokenPrice = await tokenPriceResponse.json()
             const wethPriceUSD = Fraction.parse(String(tokenPrice[0]?.current_price));
             const fetched = await fetchMyPools(await signer.getAddress(), tokens, provider);

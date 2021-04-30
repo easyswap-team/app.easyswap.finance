@@ -21,13 +21,13 @@ import {
 } from "./index";
 import { default as network } from '../../web/network.json';
 
-const SUSHISWAP_FACTORY = "0x0B9A824Af766D03B14788F90745D7E2630F6Ee91"
-const MASTER_CHEF = "0x3bdEf18CbF1EF467658bE07915A8d0dF76d57149";
-const LP_TOKEN_SCANNER = "0xff4dd677a7110abacc1f28D47c01FBe71Bde8150";
+const SUSHISWAP_FACTORY = "0xb7E370d5a8323BCb346Bbaab6DCE7929643B4a4D"
+const MASTER_CHEF = "0xFBD73Ea0b3Ea8c142093E2494Cf362c6CFB02a2c";
+const LP_TOKEN_SCANNER = "0xcF1829b4446bd8bf544597C7206a7BCE020A35a2";
 const blocksPerDay = 6500;
 
 export const fetchTokens = async (account: string, customTokens?: Token[]) => {
-    let tokensResponse = await fetch(network[97].tokens)
+    let tokensResponse = await fetch(network[56].tokens)
     let tokensJSON = await tokensResponse.json()
     const tokens = [...tokensJSON, ...(customTokens || [])];
 
@@ -81,7 +81,7 @@ export const fetchTokenWithValue = async (
 
 // tslint:disable-next-line:max-func-body-length
 export const fetchPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
-    let farmPoolsResponse = await fetch(network[97].farmPools)
+    let farmPoolsResponse = await fetch(network[56].farmPools)
     let farmPools = await farmPoolsResponse.json()
 
     const balances = await fetchTokenBalances(
@@ -127,7 +127,7 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
 };
 
 export const fetchMyPools = async (account: string, tokens: Token[], provider: ethers.providers.JsonRpcProvider) => {
-    let farmPoolsResponse = await fetch(network[97].farmPools)
+    let farmPoolsResponse = await fetch(network[56].farmPools)
     let farmPools = await farmPoolsResponse.json()
     
     const fetchMyPool = async (pool): Promise<LPToken | null> => {

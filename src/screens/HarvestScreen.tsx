@@ -73,7 +73,7 @@ const Harvest = () => {
         }
     }, [state, pathTokenAdress])
     
-    if (chainId !== 97) return <ChangeNetwork />;
+    if (chainId !== 56) return <ChangeNetwork />;
 
     return (
         <View style={{ marginTop: 25 }}>
