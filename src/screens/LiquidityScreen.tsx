@@ -446,7 +446,7 @@ const useZapTokenAllowance = (zapToken?: Token) => {
                 const minAllowance = ethers.BigNumber.from(2)
                     .pow(96)
                     .sub(1);
-                if (isETH(zapToken)) {
+                if (! isETH(zapToken)) {
                     const fromAllowance = await getTokenAllowance(zapToken.address, ZAP_IN);
                     setAllowed(ethers.BigNumber.from(fromAllowance).gte(minAllowance));
                 }
