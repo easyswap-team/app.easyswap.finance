@@ -14,10 +14,10 @@ import FlexView from "./FlexView";
 const SocialIcons = () => {
     const { darkMode } = useContext(GlobalContext);
     const { background, textLight, white } = useColors();
-    const onPressTwitter = useLinker("#", "", "_blank");
-    const onPressGithub = useLinker("#", "", "_blank");
-    const onPressTelegram = useLinker("#", "", "_blank");
-    const onPressM = useLinker("#", "", "_blank");
+    const onPressTwitter = useLinker("https://twitter.com/EasyswapFinance", "", "_blank");
+    const onPressGithub = useLinker("https://github.com/easyswap-team", "", "_blank");
+    const onPressTelegram = useLinker("https://t.me/easyswapFinance", "", "_blank");
+    const onPressM = useLinker("https://medium.com/@EasyswapFinance", "", "_blank");
     return (
         <FlexView style={{ width: "300px", justifyContent: "space-around"}}>
             <GithubIconLight color={darkMode ? white : '#4373EE'} onPress={onPressGithub} />
