@@ -108,7 +108,7 @@
   "plant-lp-tokens-desc": "LPトークンを提供し、追加のESMおよびESG報酬を受け取ります。",
   "active-farms": "アクティブなファーム",
   "unable-load-farms": "一時的にファームの読み込みが無効です。",
-  "sushi-vested-notice": "⚠️ SUSHIの報酬の2/3は6か月後に付与されます。1/3はすぐに収穫できますが、残りの2/3は6か月待つことで収穫できます。",
+  "reward-fee-notice": "⚠️ 収穫時に、ESM / ESG報酬の5％がAragonDAOが管理するEasySwap開発ファンドに送られます",
   "tokens-needed-for-farming-notice": "ファーミングを始めるには {{symbol}} トークンが必要です。LPトークンを入手するために流動性を追加してください。",
   "sushi-per-year": "ESM / 1年",
   "my-balance": "資産状況",

@@ -111,7 +111,7 @@
   "plant-lp-tokens-desc": "  LP 토큰을 예치하고 추가 ESM 및 ESG 보상을받습니다.",
   "active-farms": "활성 유동성 풀",
   "unable-to-load-farms": "일시적으로 유동성 풀을 불러올 수 없습니다.",
-  "sushi-vested-notice": "⚠️ SUSHI 보상의 2/3는 6개월 동안 묶여 있기 때문에, 1/3은 즉시 인출할 수 있지만 나머지는 6개월 후에 가능합니다.",
+  "reward-fee-notice": "⚠️ 수확시 ESM / ESG 보상의 5 %는 Aragon DAO에서 관리하는 EasySwap 개발 기금으로 전달됩니다.",
   "tokens-needed-for-farming-notice": "농사 시작을 위해서는 {{symbol}} 토큰이 필요합니다. LP 토큰을 획득하기 위해 유동성 예치를 시작하세요.",
   "sushi-per-year": "ESM / 년",
   "my-balance": "나의 잔액",

@@ -108,7 +108,7 @@
   "plant-lp-tokens-desc": "质押你的LP凭证获得额外ESM和ESG奖励",
   "active-farms": "活跃矿池",
   "unable-to-load-farms": "暂时无法加载矿池",
-  "sushi-vested-notice": "⚠️ 您的SUSHI奖励有1/3可以立即收获，剩余2/3将在锁仓6个月后发放",
+  "reward-fee-notice": "⚠️ ESM 및 ESG 보상의 5 %는 Aragon DAO에서 관리하는 EasySwap 개발 기금으로 전달됩니다.",
   "tokens-needed-for-farming-notice": "您需要一些{{symbol}}代币才能开始挖矿，请添加流动性以获得LP凭证",
   "sushi-per-year": "ESM / 年",
   "my-balance": "我的结余",

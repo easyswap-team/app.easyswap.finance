@@ -108,7 +108,7 @@
   "plant-lp-tokens-desc": "Déposez vos tokens LP pour récolter des tokens ESM et ESG.",
   "active-farms": "Farms",
   "unable-to-load-farms": "Les fermes (farms) n’ont malheureusement pas pu être chargées. Merci de réessayer ultérieurement.",
-  "sushi-vested-notice": "⚠️ 2/3 des récompenses SUSHI sont immobilisées pour 6 mois. Vous pouvez cependant récolter le 1/3 restant quand vous le souhaitez.",
+  "reward-fee-notice": "⚠️ À la récolte, 5% de vos récompenses ESM / ESG iront au fonds de développement EasySwap géré par Aragon DAO",
   "tokens-needed-for-farming-notice": "Vous devez disposer du token {{symbol}} pour commencer à farmer. Ajoutez des liquidités pour générer le token LP nécessaire.",
   "sushi-per-year": "ESM / an",
   "my-balance": "Mon solde",

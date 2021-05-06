@@ -75,7 +75,7 @@ const Farming = () => {
             <Border />
             <Deposit state={state} />
             <DepositInfo state={state} />
-            <Notice text={t("sushi-vested-notice")} clear={true} style={{ marginTop: Spacing.normal }} />
+            <Notice text={t("reward-fee-notice")} clear={true} style={{ marginTop: Spacing.normal }} />
         </View>
     );
 };
