@@ -322,7 +322,7 @@ const PairPriceInfo = ({ state }: { state: AddLiquidityState }) => {
     const disabled = isEmptyValue(state.fromAmount) || isEmptyValue(state.toAmount);
     const price =
         state.pair && state.fromToken && state.fromSymbol && state.toSymbol
-            ? state.pair.priceOf(convertToken(state.fromToken))
+            ? state.pair.priceOf(convertToken(state.fromToken)).toFixed(8)
             : undefined;
     const symbol = state.fromSymbol + "-" + state.toSymbol;
     return (
