@@ -44,6 +44,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
     const onSelectToken = t => props.onChangeSymbol(t.symbol);
     const onUnselectToken = () => props.onChangeSymbol("");
     const { border } = useStyles();
+    const t = useTranslation();
     const onAddToken = async (t: Token) => {
         await addCustomToken(t);
         setSearch("");
