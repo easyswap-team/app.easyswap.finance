@@ -88,7 +88,7 @@ const useFarmingState: (myPools: boolean) => FarmingState = myPools => {
     }, [state.selectedLPToken, state.amount, signer]);
 
     const onWithdraw = useCallback(async () => {
-        if (state.selectedLPToken?.id && state.amount && signer) {
+        if (state.selectedLPToken?.hasOwnProperty('id') && state.amount && signer) {
             setWithdrawing(true);
             try {
                 const amount = parseBalance(state.amount, state.selectedLPToken.decimals);
