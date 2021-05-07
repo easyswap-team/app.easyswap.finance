@@ -76,7 +76,7 @@ const TokenSelect: FC<TokenSelectProps> = props => {
                             tokensContent()
                         :
                             <View style={{ paddingVertical: 30, ...border() }}>
-                                <Text style={{ fontSize: 16, textAlign: 'center' }}>First, select a token to Sell</Text>
+                                <Text style={{ fontSize: 16, textAlign: 'center' }}>{t("select-sell-token")}</Text>
                             </View>
                     :
                         tokensContent()

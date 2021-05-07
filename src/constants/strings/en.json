@@ -29,6 +29,7 @@
   "token-to-sell": "Token To Sell",
   "token-to-add": "Token To Add",
   "token-to-buy": "Token To Buy",
+  "select-sell-token": "First, select a token to Sell",
   "amount": "Amount",
   "token-not-supported-in-beta": "This token is not supported in beta.",
   "maximum-allowed-amount-in-beta": "Maximum allowed amount in beta is {{amount}} {{symbol}} (≈ 10 ETH).",

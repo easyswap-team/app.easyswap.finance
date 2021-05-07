@@ -29,6 +29,7 @@
   "token-to-add": "Token para agregar",
   "token-to-buy": "Token para comprar",
   "amount": "La cantidad",
+  "select-sell-token": "Primero, seleccione un token para vender",
   "token-not-supported-in-beta": "Este token no es compatible con la versión beta..",
   "maximum-allowed-amount-in-beta": "La cantidad máxima permitida en beta es {{amount}} {{symbol}} (≈ 10 ETH).",
   "minimum-price": "El precio mínimo",

@@ -28,6 +28,7 @@
   "token-to-sell": "Token à vendre",
   "token-to-add": "Token à ajouter",
   "token-to-buy": "Token à acheter",
+  "select-sell-token": "Tout d'abord, sélectionnez un jeton à vendre",
   "amount": "Quantité",
   "token-not-supported-in-beta": "Ce token n’est malheureusement pas disponible sur la version Beta.",
   "maximum-allowed-amount-in-beta": "Le montant maximum des ordres est fixé à {{amount}} {{symbol}} (≈ 10 ETH) pour la version Beta.",
