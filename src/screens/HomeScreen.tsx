@@ -259,7 +259,6 @@ const LPTokenItem = (props: LPTokenItemProps) => {
                 </Text>
             </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <TokenValue token={props.token} disabled={props.disabled} style={{ textAlign: 'right', width: '80%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}} />
                 <FlexView style={{paddingTop: 5}}>
                     <TokenAmount token={props.token} amount={props.token.amountDeposited} disabled={props.disabled} />
                 </FlexView>
