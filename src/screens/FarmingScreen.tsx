@@ -48,7 +48,7 @@ const FarmingScreen = () => {
             {IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
             <Container>
                 {!IS_DESKTOP && <FarmingSubMenu scrollTop={scrollTop} />}
-                <Content style={{marginTop: 90}}>
+                <Content style={{ marginTop: 90 }}>
                     <Title text={t("plant-lp-tokens")} />
                     <Text light={true}>{t("plant-lp-tokens-desc")}</Text>
                     <Farming />
@@ -92,18 +92,18 @@ const TokenItem: FC<LPTokenItemProps> = props => {
     const getSymbols = () => {
         let symbols = ''
 
-        if(props.token.tokenA && props.token.tokenB) {
+        if (props.token.tokenA && props.token.tokenB) {
             symbols = `${props.token.tokenA.symbol}-${props.token.tokenB.symbol}`
         }
-        else if(props.token.symbol) {
+        else if (props.token.symbol) {
             symbols = props.token.symbol
         }
-        
+
         return symbols
     }
 
     const getLogos = () => {
-        if(props.token.tokenA && props.token.tokenB) {
+        if (props.token.tokenA && props.token.tokenB) {
             return (
                 <>
                     <TokenLogo token={props.token.tokenA} small={true} replaceWETH={true} />
@@ -111,31 +111,31 @@ const TokenItem: FC<LPTokenItemProps> = props => {
                 </>
             )
         }
-        else if(props.token.symbol) {
+        else if (props.token.symbol) {
             return <TokenLogo token={props.token} small={true} replaceWETH={true} style={{ top: 5, left: 10 }} />
         }
     }
-    
+
     return (
         <Selectable
             selected={props.selected}
             onPress={onPress}
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
             <FlexView style={{
-                    alignItems: "center",
-                    paddingBottom: 20,
-                    paddingTop: 20,
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                    background: tokenBg,
-                    borderRadius: 8
-                }}
+                alignItems: "center",
+                paddingBottom: 20,
+                paddingTop: 20,
+                paddingLeft: 10,
+                paddingRight: 10,
+                background: tokenBg,
+                borderRadius: 8
+            }}
             >
-                <View style={{alignSelf: 'flex-start'}}>
+                <View style={{ alignSelf: 'flex-start' }}>
                     {getLogos()}
                 </View>
-                <View style={{flexDirection: 'column', marginLeft: Spacing.normal}}>
-                    {props.token.type && <Text style={{fontSize: 12, color: textLight, paddingBottom: 5}}>{props.token.type}</Text>}
+                <View style={{ flexDirection: 'column', marginLeft: Spacing.normal }}>
+                    {props.token.type && <Text style={{ fontSize: 12, color: textLight, paddingBottom: 5 }}>{props.token.type}</Text>}
                     <Text medium={true} caption={true}>
                         {getSymbols()}
                     </Text>
@@ -157,24 +157,27 @@ const TokenItem: FC<LPTokenItemProps> = props => {
 
 const Deposit = ({ state }: { state: FarmingState }) => {
     const t = useTranslation();
-    if (!state.selectedLPToken) {
-        return <Heading text={t("amount")} disabled={true} />;
+    if (state.selectedLPToken) {
+        return (
+            <View>
+                <Heading text={state.selectedLPToken.symbol + " " + t("amount")} />
+                {state.selectedLPToken.balance.isZero() ? (
+                    <AddLiquidityNotice state={state} />
+                ) : (
+                    <TokenInput
+                        token={state.selectedLPToken}
+                        amount={state.amount}
+                        onAmountChanged={state.setAmount}
+                        autoFocus={IS_DESKTOP}
+                    />
+                )}
+            </View>
+        )
+        return
     }
-    return (
-        <View>
-            <Heading text={state.selectedLPToken.symbol + " " + t("amount")} />
-            {state.selectedLPToken.balance.isZero() ? (
-                <AddLiquidityNotice state={state} />
-            ) : (
-                <TokenInput
-                    token={state.selectedLPToken}
-                    amount={state.amount}
-                    onAmountChanged={state.setAmount}
-                    autoFocus={IS_DESKTOP}
-                />
-            )}
-        </View>
-    );
+    else {
+        return null
+    }
 };
 
 const AddLiquidityNotice = ({ state }: { state: FarmingState }) => {
@@ -203,30 +206,36 @@ const DepositInfo = ({ state }: { state: FarmingState }) => {
     const sushiPerYear = disabled
         ? 0
         : parseBalance(state.amount)
-              .mul(state.selectedLPToken!.sushiRewardedPerYear!)
-              .div(pow10(18));
-    return (
-        <InfoBox>
-            <AmountMeta amount={formatBalance(sushiPerYear, 18, 8)} suffix={t("sushi-per-year")} disabled={disabled} />
-            <Meta
-                label={t("my-balance")}
-                text={formatBalance(state.selectedLPToken?.balance || 0)}
-                disabled={!state.selectedLPToken}
-            />
-            <Meta
-                label={t("total-value-locked")}
-                text={formatUSD(state.selectedLPToken?.totalValueUSD || 0)}
-                disabled={!state.selectedLPToken}
-            />
-            <Meta
-                label={t("annual-percentage-yield")}
-                text={formatPercentage(state.selectedLPToken?.apy || 0)}
-                suffix={"%"}
-                disabled={!state.selectedLPToken}
-            />
-            <DepositControls state={state} />
-        </InfoBox>
-    );
+            .mul(state.selectedLPToken!.sushiRewardedPerYear!)
+            .div(pow10(18));
+
+    if (state.selectedLPToken && sushiPerYear) {
+        return (
+            <InfoBox>
+                <AmountMeta amount={formatBalance(sushiPerYear, 18, 8)} suffix={t("sushi-per-year")} disabled={disabled} />
+                <Meta
+                    label={t("my-balance")}
+                    text={formatBalance(state.selectedLPToken?.balance || 0)}
+                    disabled={!state.selectedLPToken}
+                />
+                <Meta
+                    label={t("total-value-locked")}
+                    text={formatUSD(state.selectedLPToken?.totalValueUSD || 0)}
+                    disabled={!state.selectedLPToken}
+                />
+                <Meta
+                    label={t("annual-percentage-yield")}
+                    text={formatPercentage(state.selectedLPToken?.apy || 0)}
+                    suffix={"%"}
+                    disabled={!state.selectedLPToken}
+                />
+                <DepositControls state={state} />
+            </InfoBox>
+        )
+    }
+    else {
+        return null
+    }
 };
 
 const DepositControls = ({ state }: { state: FarmingState }) => {
