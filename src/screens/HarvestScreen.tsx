@@ -194,14 +194,20 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
 
     return (
         <InfoBox>
-            <AmountMeta
-                amount={sushi ? formatBalance(sushi) : ""}
-                suffix={"ESM"}
-            />
-            <AmountMeta
-                amount={sushiEsg ? formatBalance(sushiEsg) : ""}
-                suffix={"ESG"}
-            />
+            {
+                sushi.toString() !== '0' &&
+                    <AmountMeta
+                        amount={sushi ? formatBalance(sushi) : ""}
+                        suffix={"ESM"}
+                    />
+            }
+            {
+                sushiEsg.toString() !== '0' &&
+                    <AmountMeta
+                        amount={sushiEsg ? formatBalance(sushiEsg) : ""}
+                        suffix={"ESG"}
+                    />
+            }
             <Meta label={t("deposited-lp-token")} text={total ? formatBalance(total) : ""} disabled={disabled} />
             <WithdrawControls state={state} />
         </InfoBox>
