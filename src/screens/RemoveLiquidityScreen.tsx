@@ -51,7 +51,7 @@ const RemoveLiquidityScreen = () => {
             {IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
             <Container>
                 {!IS_DESKTOP && <LiquiditySubMenu scrollTop={scrollTop} />}
-                <Content style={{marginTop: 90}}>
+                <Content style={{ marginTop: 90 }}>
                     <Title text={t("remove-liquidity")} />
                     <Text light={true}>{t("remove-liquidity-desc")}</Text>
                     <RemoveLiquidity />
@@ -67,20 +67,20 @@ const RemoveLiquidity = () => {
     const { chainId } = useContext(EthersContext);
     const t = useTranslation();
     const state = useRemoveLiquidityState();
-    const {pathTokenAdress} = useHelper()
+    const { pathTokenAdress } = useHelper()
 
     useEffect(() => {
-        if(state.lpTokens) {
+        if (state.lpTokens) {
             const opendToken = state.lpTokens.find(token => token.address === pathTokenAdress)
 
-            if(opendToken && !tokenChanged) {
+            if (opendToken && !tokenChanged) {
                 state.setSelectedLPToken(opendToken)
             }
         }
     }, [state, pathTokenAdress])
 
     if (chainId !== 56) return <ChangeNetwork />;
-    
+
     return (
         <View style={{ marginTop: Spacing.large }}>
             <LPTokenSelect
@@ -190,16 +190,20 @@ export const LPTokenOutputItem = (props: {
 const AmountInput = ({ state }: { state: RemoveLiquidityState }) => {
     const t = useTranslation();
     if (!state.selectedLPToken /* || !state.outputToken*/) {
-        return <Heading text={t("amount-of-tokens")} disabled={true} />;
+        return null;
     }
-    return (
-        <TokenInput
-            title={t("amount-of-tokens")}
-            token={state.selectedLPToken}
-            amount={state.amount}
-            onAmountChanged={state.setAmount}
-        />
-    );
+    else {
+        return (
+            <>
+                <TokenInput
+                    title={t("amount-of-tokens")}
+                    token={state.selectedLPToken}
+                    amount={state.amount}
+                    onAmountChanged={state.setAmount}
+                />
+            </>
+        );
+    }
 };
 
 const AmountInfo = ({ state }: { state: RemoveLiquidityState }) => {
@@ -214,6 +218,11 @@ const AmountInfo = ({ state }: { state: RemoveLiquidityState }) => {
             return formatBalance(amount.add(deduct(amount, FEE)), state.toToken.decimals);
         }
     }, [state.outputToken, state.fromToken, state.toToken, state.fromAmount, state.toAmount]);
+
+    if(!state.fromAmount || !state.toAmount || state.fromAmount === '0.0' || state.toAmount === '0.0') {
+        return null
+    }
+    
     return (
         <InfoBox>
             {(state.outputToken === state.fromToken || state.outputToken === state.toToken) && (

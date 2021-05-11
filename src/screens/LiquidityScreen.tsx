@@ -180,7 +180,7 @@ const ToTokenSelect = ({ state }: { state: AddLiquidityState }) => {
 const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     if (!state.fromSymbol || !state.toSymbol) {
-        return <Heading text={t("amount-of-tokens")} disabled={true} />;
+        return null
     }
     const onAmountChanged = (newAmount: string) => {
         state.setFromAmount(newAmount);
@@ -250,6 +250,11 @@ const FirstProviderInfo = ({ state }: { state: AddLiquidityState }) => {
         parseBalance(state.fromAmount, state.fromToken!.decimals)
     ).toString(8);
     /*const zap = state.mode === "zapper";*/
+    
+    if(noAmount) {
+        return null
+    }
+
     return (
         <View>
             {/*{!zap && (*/}
@@ -325,15 +330,21 @@ const PairPriceInfo = ({ state }: { state: AddLiquidityState }) => {
             ? state.pair.priceOf(convertToken(state.fromToken)).toFixed(8)
             : undefined;
     const symbol = state.fromSymbol + "-" + state.toSymbol;
-    return (
-        <InfoBox>
-            <AmountMeta amount={lpTokenAmount} suffix={symbol} disabled={disabled} />
-            <Meta text={fromAmount?.toFixed()} label={state.fromSymbol || t("1st-token")} disabled={disabled} />
-            <Meta text={toAmount?.toFixed()} label={state.toSymbol || t("2nd-token")} disabled={disabled} />
-            <PriceMeta state={state} price={price} disabled={!state.fromSymbol || !state.toSymbol} />
-            <Controls state={state} />
-        </InfoBox>
-    );
+
+    if(disabled) {
+        return null
+    }
+    else {
+        return (
+            <InfoBox>
+                <AmountMeta amount={lpTokenAmount} suffix={symbol} disabled={disabled} />
+                <Meta text={fromAmount?.toFixed()} label={state.fromSymbol || t("1st-token")} disabled={disabled} />
+                <Meta text={toAmount?.toFixed()} label={state.toSymbol || t("2nd-token")} disabled={disabled} />
+                <PriceMeta state={state} price={price} disabled={!state.fromSymbol || !state.toSymbol} />
+                <Controls state={state} />
+            </InfoBox>
+        );
+    }
 };
 
 const useAmountCalculator = (state: AddLiquidityState) => {

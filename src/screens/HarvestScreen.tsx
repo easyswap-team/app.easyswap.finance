@@ -165,7 +165,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
 const Withdraw = ({ state }: { state: FarmingState }) => {
     const t = useTranslation();
     if (!state.selectedLPToken) {
-        return <Heading text={t("amount")} disabled={true} />;
+        return null
     }
     // This enables MAX button
     const token = {
@@ -187,6 +187,10 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     const sushi = total && amount.lte(total) ? state.selectedLPToken!.pendingEsm : null;
     const sushiEsg = total && amount.lte(total) ? state.selectedLPToken!.pendingEsg : null;
     const disabled = !state.pair && !state.selectedLPToken;
+
+    if(disabled) {
+        return null
+    }
 
     return (
         <InfoBox>
