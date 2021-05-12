@@ -248,6 +248,11 @@ const TradeInfo = ({ state }: { state: SwapState }) => {
         (state.orderType === "limit" && isETH(state.fromToken)) ||
         (!state.loading && !state.trade);
     const onGetKeth = useLinker("https://faucet.kovan.network/", "", "_blank");
+
+    if(disabled) {
+        return null
+    }
+
     return (
         <InfoBox>
             {state.orderType === "limit" ? (
@@ -284,8 +289,8 @@ const WrapInfo = ({ state }: { state: SwapState }) => {
 
 const SwapInfo = ({ state, disabled }: { state: SwapState; disabled: boolean }) => {
     const t = useTranslation();
-    const amount = state.trade?.outputAmount?.toFixed();
-    const price = state.trade?.executionPrice?.toFixed();
+    const amount = +state.trade?.outputAmount?.toFixed(8);
+    const price = +state.trade?.executionPrice?.toFixed(8);
     const impact = state.trade?.priceImpact?.toFixed(2);
     return (
         <View>

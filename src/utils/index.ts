@@ -9,7 +9,7 @@ export const WETH = {
     56: new Token(ChainId.BSC, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
 };
 
-export const formatUSD = (value: number, maxFraction = 0) => {
+export const formatUSD = (value: number, maxFraction = 2) => {
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -30,7 +30,7 @@ export const formatPercentage = (value: number, maxFraction = 2) => {
     return formatted;
 };
 
-export const formatBalance = (value: ethers.BigNumberish, decimals = 18, maxFraction = 0) => {
+export const formatBalance = (value: ethers.BigNumberish, decimals = 18, maxFraction = 8) => {
     const formatted = ethers.utils.formatUnits(value, decimals);
     if (maxFraction > 0) {
         const split = formatted.split(".");

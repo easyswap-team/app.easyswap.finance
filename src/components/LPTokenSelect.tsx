@@ -87,7 +87,7 @@ const EmptyList = ({ text }: { text: string }) => {
 
 export const LPTokenItem: FC<LPTokenItemProps> = props => {
     const { textMedium, textLight, tokenBg } = useColors();
-    const balance = formatBalance(props.token.balance, props.token.decimals, 6);
+    const balance = formatBalance(props.token.balance, props.token.decimals, 8);
     const onPress = useCallback(() => {
         if(props.setTokenChanged) {
             props.setTokenChanged(true)

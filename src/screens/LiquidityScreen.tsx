@@ -190,11 +190,18 @@ const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
             state.setToAmount(isEmptyValue(toAmount) ? "" : toAmount);
         }
     };
+
+    let amount = +state.fromAmount || ''
+
+    if(state.fromAmount) {
+        amount = +amount.toFixed(8)
+    }
+
     return (
         <TokenInput
             title={/*state.mode === "zapper" ? t("amount-of-", { symbol: state.fromSymbol }) :*/ t("amount-of-tokens")}
             token={state.fromToken}
-            amount={state.fromAmount}
+            amount={amount}
             onAmountChanged={onAmountChanged}
             hideMaxButton={state.loading && !state.pair}
         />
@@ -211,10 +218,16 @@ const ToTokenInput = ({ state }: { state: AddLiquidityState }) => {
             state.setFromAmount(isEmptyValue(fromAmount) ? "" : fromAmount);
         }
     };
+    let amount = +state.toAmount || ''
+
+    if(state.toAmount) {
+        amount = +amount.toFixed(8)
+    }
+
     return (
         <TokenInput
             token={state.toToken}
-            amount={state.toAmount}
+            amount={amount}
             onAmountChanged={onAmountChanged}
             hideMaxButton={state.loading && !state.pair}
         />
@@ -338,8 +351,8 @@ const PairPriceInfo = ({ state }: { state: AddLiquidityState }) => {
         return (
             <InfoBox>
                 <AmountMeta amount={lpTokenAmount} suffix={symbol} disabled={disabled} />
-                <Meta text={fromAmount?.toFixed()} label={state.fromSymbol || t("1st-token")} disabled={disabled} />
-                <Meta text={toAmount?.toFixed()} label={state.toSymbol || t("2nd-token")} disabled={disabled} />
+                <Meta text={+fromAmount?.toFixed(8)} label={state.fromSymbol || t("1st-token")} disabled={disabled} />
+                <Meta text={+toAmount?.toFixed(8)} label={state.toSymbol || t("2nd-token")} disabled={disabled} />
                 <PriceMeta state={state} price={price} disabled={!state.fromSymbol || !state.toSymbol} />
                 <Controls state={state} />
             </InfoBox>

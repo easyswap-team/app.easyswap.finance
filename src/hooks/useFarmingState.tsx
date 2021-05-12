@@ -64,11 +64,11 @@ const useFarmingState: (myPools: boolean) => FarmingState = myPools => {
             const tokenAAmount = state.pair.involvesToken(tokenA)
                 ? state.pair.getLiquidityValue(tokenA, totalSupply, lpTokenAmount)
                 : null;
-            state.setFromAmount(tokenAAmount?.toFixed() || "");
+            state.setFromAmount(+tokenAAmount?.toFixed(8) || "");
             const tokenBAmount = state.pair.involvesToken(tokenA)
                 ? state.pair.getLiquidityValue(tokenB, totalSupply, lpTokenAmount)
                 : null;
-            state.setToAmount(tokenBAmount?.toFixed() || "");
+            state.setToAmount(+tokenBAmount?.toFixed(8) || "");
         }
     }, [state.pair, state.selectedLPToken]);
 

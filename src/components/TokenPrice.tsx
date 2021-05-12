@@ -14,7 +14,7 @@ export interface TokenPriceProps {
 const TokenPrice: FC<TokenPriceProps> = props => {
     return (
         <Text note={true} fontWeight={"light"} disabled={props.disabled} style={props.style}>
-            {formatUSD(props.token.priceUSD || 0, 4)}
+            {formatUSD(props.token.priceUSD || 0, 2)}
         </Text>
     );
 };

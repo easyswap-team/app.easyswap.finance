@@ -69,7 +69,7 @@ const HomeScreen = ({navigation}) => {
                                 <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15, ...borderBottom()}}>
                                     {darkMode ? <PortfolioDarkIcon /> : <PortfolioIcon />}
                                     <Title
-                                        text={loading ? t("fetching") : formatUSD(totalValue, 4)}
+                                        text={loading ? t("fetching") : formatUSD(totalValue, 2)}
                                         fontWeight={"light"}
                                         disabled={loading}
                                         style={{ fontSize: IS_DESKTOP ? 25 : 24, marginBottom: 0, marginLeft: 15 }}
