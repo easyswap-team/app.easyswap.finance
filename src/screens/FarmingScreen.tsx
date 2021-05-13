@@ -207,7 +207,6 @@ const DepositInfo = ({ state }: { state: FarmingState }) => {
         ? 0
         : parseBalance(state.amount)
             .mul(state.selectedLPToken!.sushiRewardedPerYear!)
-            .div(pow10(18));
 
     if (state.selectedLPToken && sushiPerYear) {
         return (
