@@ -28,7 +28,7 @@
   "token-to-sell": "出售代币",
   "token-to-add": "要添加的令牌",
   "token-to-buy": "购买代币",
-  "select-sell-token": "首先，選擇要出售的代幣",
+  "select-sell-token": "请选择第一个令牌",
   "amount": "数量",
   "token-not-supported-in-beta": "Beta版暂不支持此代币",
   "maximum-allowed-amount-in-beta": "Beta版允许的最大金额为 {{amount}} {{symbol}}（≈10 ETH）.",

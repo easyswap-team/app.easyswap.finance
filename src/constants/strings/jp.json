@@ -28,7 +28,7 @@
   "token-to-sell": "売るトークン",
   "token-to-add": "追加するトークン",
   "token-to-buy": "買うトークン",
-  "select-sell-token": "まず、販売するトークンを選択します",
+  "select-sell-token": "最初のトークンを選択してください",
   "amount": "数量",
   "token-not-supported-in-beta": "このトークンはベータ版ではサポートしていません。",
   "maximum-allowed-amount-in-beta": "ベータ版で許可される最大数量は {{amount}} {{symbol}} (≈ 10 ETH)です。",
