@@ -195,14 +195,14 @@ const WithdrawInfo = ({ state }: { state: FarmingState }) => {
     return (
         <InfoBox>
             {
-                sushi.toString() !== '0' &&
+                sushi?.toString() !== '0' &&
                     <AmountMeta
                         amount={sushi ? formatBalance(sushi) : ""}
                         suffix={"ESM"}
                     />
             }
             {
-                sushiEsg.toString() !== '0' &&
+                sushiEsg?.toString() !== '0' &&
                     <AmountMeta
                         amount={sushiEsg ? formatBalance(sushiEsg) : ""}
                         suffix={"ESG"}
