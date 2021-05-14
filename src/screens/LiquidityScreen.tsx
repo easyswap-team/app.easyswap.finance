@@ -191,17 +191,12 @@ const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
         }
     };
 
-    let amount = +state.fromAmount || ''
-
-    if(state.fromAmount) {
-        amount = +amount.toFixed(8)
-    }
 
     return (
         <TokenInput
             title={/*state.mode === "zapper" ? t("amount-of-", { symbol: state.fromSymbol }) :*/ t("amount-of-tokens")}
             token={state.fromToken}
-            amount={amount}
+            amount={state.fromAmount}
             onAmountChanged={onAmountChanged}
             hideMaxButton={state.loading && !state.pair}
         />
@@ -218,16 +213,11 @@ const ToTokenInput = ({ state }: { state: AddLiquidityState }) => {
             state.setFromAmount(isEmptyValue(fromAmount) ? "" : fromAmount);
         }
     };
-    let amount = +state.toAmount || ''
-
-    if(state.toAmount) {
-        amount = +amount.toFixed(8)
-    }
 
     return (
         <TokenInput
             token={state.toToken}
-            amount={amount}
+            amount={state.toAmount}
             onAmountChanged={onAmountChanged}
             hideMaxButton={state.loading && !state.pair}
         />
