@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Image, View } from "react-native";
+import { View, Text } from "react-native";
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { IS_DESKTOP, Spacing } from "../../constants/dimension";
@@ -16,7 +16,23 @@ const ConnectWallet = () => {
     const { darkMode } = useContext(GlobalContext);
     const { shadow } = useStyles();
     const metaMask = window.ethereum?.isMetaMask || false;
-    const source = darkMode ? require("../../../assets/metamask-dark.png") : require("../../../assets/metamask.png")
+    const { textDark, textLight } = useColors();
+
+    const linkTerms = <a href='https://docs.easyswap.finance/legal/easyswap-protocol-terms-of-service' >
+        <Text style={{ 
+        color: "#4373EE",
+    }}>Terms of Service</Text></a>
+    const linkProtocol = <a href='https://docs.easyswap.finance/legal/easyswap-protocol-disclaimer' ><Text style={{ 
+        color: "#4373EE",
+    }}>EasySwap protocol disclaimer</Text></a>
+
+    const disclamer = <Text style={{ 
+        margin: Spacing.normal, 
+        fontSize: 14, 
+        justifyContent: "center",
+        color: darkMode ? textDark : textLight,
+    }}>By connecting a wallet, you agree to EasySwap Labs’ {linkTerms} and acknowledge that you have read and understand the {linkProtocol}.</Text>
+
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <View style={{
@@ -34,10 +50,8 @@ const ConnectWallet = () => {
                     borderRadius: 12,
                     ...shadow()
                 }}>
-                <Image
-                    source={source}
-                    style={{ width: 148, height: 143, marginBottom: Spacing.normal }}
-                />
+          
+                { disclamer }
                 {window.ethereum && <ConnectButton />}
                 <WalletConnectButton />
             </View>
