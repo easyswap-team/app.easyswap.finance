@@ -104,7 +104,6 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
                     tokenA: result[0].tokenA,
                     tokenB: result[0].tokenB,
                     balance: ethers.BigNumber.from(balances[i] || 0),
-                    // totalSupply: getContract("ERC20", pool.address, provider).totalSupply()
                 }
 
                 return poolData;
@@ -113,7 +112,6 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
                 const poolData = {
                     ...pool,
                     balance: ethers.BigNumber.from(balances[i] || 0),
-                    // totalSupply: getContract("ERC20", pool.address, provider).totalSupply()
                 }
 
                 return poolData;
