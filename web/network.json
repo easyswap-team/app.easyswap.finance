@@ -6,9 +6,9 @@
         "alchemyUrl": "http://localhost:8546"
     },
     "56": {
-        "alchemyUrl": "https://app.easyswap.finance/api/",
-        "tokens": "https://app.easyswap.finance/api/api/tokens/",
-        "farmPools": "https://app.easyswap.finance/api/api/farms/",
-        "tokenPrice": "https://app.easyswap.finance/api/api/price/"
+        "alchemyUrl": "https://app.easyswap.finance/api/rpc",
+        "tokens": "https://app.easyswap.finance/api/tokens/",
+        "farmPools": "https://app.easyswap.finance/api/farms/",
+        "tokenPrice": "https://app.easyswap.finance/api/price/"
     }
 }
