@@ -9,7 +9,7 @@ export default interface LPToken extends Token {
     amountDeposited?: ethers.BigNumber;
     pendingEsm?: ethers.BigNumber;
     pendingEsg?: ethers.BigNumber;
-    sushiRewardedPerYear?: ethers.BigNumber;
+    esmRewardPerYearPerToken?: ethers.BigNumber;
     apy?: number;
     totalValueUSD?: number;
     multiplier?: number;

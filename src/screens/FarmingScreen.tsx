@@ -202,11 +202,11 @@ const AddLiquidityNotice = ({ state }: { state: FarmingState }) => {
 
 const DepositInfo = ({ state }: { state: FarmingState }) => {
     const t = useTranslation();
-    const disabled = isEmptyValue(state.amount) || !state.selectedLPToken?.sushiRewardedPerYear;
+    const disabled = isEmptyValue(state.amount) || !state.selectedLPToken?.esmRewardPerYearPerToken;
     const sushiPerYear = disabled
         ? 0
         : parseBalance(state.amount)
-            .mul(state.selectedLPToken!.sushiRewardedPerYear!)
+            .mul(state.selectedLPToken!.esmRewardPerYearPerToken!)
 
     if (state.selectedLPToken && sushiPerYear) {
         return (

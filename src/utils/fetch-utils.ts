@@ -104,7 +104,6 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
                     tokenA: result[0].tokenA,
                     tokenB: result[0].tokenB,
                     balance: ethers.BigNumber.from(balances[i] || 0),
-                    totalSupply: parseBalance(String(pool.totalSupply), 18)
                 }
 
                 return poolData;
@@ -113,7 +112,6 @@ export const fetchPools = async (account: string, tokens: Token[], provider: eth
                 const poolData = {
                     ...pool,
                     balance: ethers.BigNumber.from(balances[i] || 0),
-                    totalSupply: parseBalance(String(pool.totalSupply), 18)
                 }
 
                 return poolData;
@@ -150,7 +148,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                     amountDeposited: myStake.amountDeposited,
                     pendingEsm: myStake.pendingEsm,
                     pendingEsg: myStake.pendingEsg,
-                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                    totalSupply: await getContract("ERC20", pool.address, provider).totalSupply()
                 };
             }
             else if(pool.type === 'ESM Token') {
@@ -160,7 +158,7 @@ export const fetchMyPools = async (account: string, tokens: Token[], provider: e
                     amountDeposited: myStake.amountDeposited,
                     pendingEsm: myStake.pendingEsm,
                     pendingEsg: myStake.pendingEsg,
-                    totalSupply: parseBalance(String(pool.totalSupply), 18)
+                    totalSupply: await getContract("ERC20", pool.address, provider).totalSupply()
                 };
             }
         } catch (e) {
