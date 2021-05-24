@@ -20,6 +20,7 @@
   "farms": "Farms",
   "you-dont-have-assets": "You don't have any matching asset.",
   "new-order": "Exchange",
+  "select-tokens": "Select a token to Sell & Buy",
   "new-order-desc": "Swap now or place a limit order with a desired price.",
   "order-type": "Order Type",
   "market-order": "Market Order",
