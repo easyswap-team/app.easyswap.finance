@@ -120,7 +120,7 @@ const TokenItem: FC<LPTokenItemProps> = props => {
         <Selectable
             selected={props.selected}
             onPress={onPress}
-            containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
+            containerStyle={{ marginBottom: '5px' }}>
             <FlexView style={{
                 alignItems: "center",
                 paddingBottom: 20,
