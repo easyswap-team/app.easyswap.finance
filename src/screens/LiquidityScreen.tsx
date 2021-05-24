@@ -191,7 +191,6 @@ const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
         }
     };
 
-
     return (
         <TokenInput
             title={/*state.mode === "zapper" ? t("amount-of-", { symbol: state.fromSymbol }) :*/ t("amount-of-tokens")}
