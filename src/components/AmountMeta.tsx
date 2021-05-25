@@ -25,7 +25,7 @@ const AmountMeta: FC<AmountMetaProps> = props => {
                 borderBottom: `1px solid ${border}`
             }}
         >
-            {props.disabled ? t("n/a") : props.amount ? props.amount + " " + (props.suffix || "") : t("fetching")}
+            {props.disabled ? t("n/a") : props.amount ? props.amount + " " + (props.suffix || "") : t("n/a")}
         </Text>
     );
 };
