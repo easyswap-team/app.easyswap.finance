@@ -170,7 +170,7 @@ const AmountInput = ({ state }: { state: SwapState }) => {
             <>
                 <Heading text={t("amount")} />
                 <View style={{ paddingVertical: 30, ...border() }}>
-                    <Text style={{ fontSize: 16, textAlign: 'center' }}>Select a token to Sell & Buy</Text>
+                    <Text style={{ fontSize: 16, textAlign: 'center' }}>{t("select-tokens")}</Text>
                 </View>
             </>
         );
