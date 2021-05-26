@@ -102,8 +102,8 @@ export const LPTokenItem: FC<LPTokenItemProps> = props => {
             containerStyle={{ marginBottom: ITEM_SEPARATOR_HEIGHT }}>
             <FlexView style={{
                     alignItems: "center",
-                    paddingBottom: 20,
-                    paddingTop: 20,
+                    paddingBottom: 19,
+                    paddingTop: 19,
                     paddingLeft: 10,
                     paddingRight: 10,
                     background: tokenBg,

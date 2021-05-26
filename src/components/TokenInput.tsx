@@ -43,24 +43,32 @@ const TokenInput: FC<TokenInputProps> = props => {
     return (
         <View>
             {props.title && <Heading text={props.title} />}
-            <View>
-                <Input
-                    label={props.label}
-                    value={props.amount}
-                    onChangeText={onChangeText}
-                    placeholder={"0.0"}
-                    keyboardType={"numeric"}
-                    autoFocus={props.autoFocus || false}
-                    inputStyle={{ marginHorizontal: Spacing.tiny }}
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    labelStyle={{ fontFamily: "light", height: props.label ? "auto" : 0 }}
-                    containerStyle={{
-                        ...border(),
-                        paddingHorizontal: Spacing.tiny,
-                        paddingTop: 15,
-                        paddingBottom: 2
-                    }}
-                />
+            <View style={{     display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexGrow: '1', maxWidth: '85%' }}>
+                    <Input
+                        label={props.label}
+                        value={props.amount}
+                        onChangeText={onChangeText}
+                        placeholder={"0.0"}
+                        keyboardType={"decimal-pad"}
+                        autoFocus={props.autoFocus || false}
+                        inputStyle={{ marginHorizontal: Spacing.tiny }}
+                        inputContainerStyle={{ borderBottomWidth: 0 }}
+                        labelStyle={{ fontFamily: "light", height: props.label ? "auto" : 0 }}
+                        style={{ overflow: 'hidden', textOverflow: 'ellipsis', }}
+                        containerStyle={{
+                            // ...border(),
+                            border: '1px solid rgb(222, 222, 222)',
+                            borderBottomLeftRadius: '8px',
+                            borderBottomRightRadius: '0px',
+                            borderTopLeftRadius: '8px',
+                            borderTopRightRadius: '0px',
+                            paddingHorizontal: Spacing.tiny,
+                            paddingTop: 15,
+                            paddingBottom: 2
+                        }}
+                    />
+                </View>
                 {props.token?.balance?.gt(0) && !props.hideMaxButton && (
                     <MaxButton
                         token={props.token}
@@ -83,11 +91,22 @@ const MaxButton = (props: { token: Token; updateAmount; maxButtonText?: string }
                 const fee = pow10(16);
                 balance = balance.gt(fee) ? balance.sub(fee) : ethers.constants.Zero;
             }
-            props.updateAmount(formatBalance(balance, props.token.decimals));
+            let test = formatBalance(balance, props.token.decimals, 0)
+            props.updateAmount(formatBalance(balance, props.token.decimals, 0));
         }
     }, [props.token, props.updateAmount]);
     return (
-        <View style={{ position: "absolute", right: 12, bottom: Platform.OS === "web" ? 12 : 24 }}>
+        <View style={{
+            position: "relative",
+            border: '1px solid rgb(222, 222, 222)',
+            borderBottomLeftRadius: '0px',
+            borderBottomRightRadius: '8px',
+            borderTopLeftRadius: '0px',
+            borderTopRightRadius: '8px',
+            paddingTop: '10px',
+            paddingBottom: '10px',
+            height: '61px'
+        }}>
             <Button
                 type={"clear"}
                 size={"small"}
